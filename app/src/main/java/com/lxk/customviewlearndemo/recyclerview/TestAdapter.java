@@ -1,14 +1,18 @@
 package com.lxk.customviewlearndemo.recyclerview;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.lxk.customviewlearndemo.R;
 
 import java.util.List;
 
@@ -33,13 +37,15 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.ViewHolder> {
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         createCount++;
         Log.e(TAG, "onCreateViewHolder: createViewCount = " + createCount);
-        return new ViewHolder(LayoutInflater.from(mContext).inflate(android.R.layout.simple_list_item_1, parent, false));
+        return new ViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_test, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Log.e(TAG, "onBindViewHolder: position = " + position);
         holder.tv.setText(mDatas.get(position));
+        holder.itemView.setBackgroundColor(position % 2 == 0 ? Color.RED : Color.BLUE);
+        holder.pic.setImageResource(position % 2 == 0 ? R.drawable.img1 : R.drawable.img2);
     }
 
 
@@ -51,10 +57,12 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView tv;
+        private ImageView pic;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tv = itemView.findViewById(android.R.id.text1);
+            tv = itemView.findViewById(R.id.text);
+            pic = itemView.findViewById(R.id.pic);
         }
     }
 }

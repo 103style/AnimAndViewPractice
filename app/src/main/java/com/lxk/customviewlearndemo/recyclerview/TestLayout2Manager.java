@@ -219,6 +219,6 @@ public class TestLayout2Manager extends RecyclerView.LayoutManager {
      * 滑动之后 recyclerview 内容的显示范围
      */
     private Rect getVisibleArea() {
-        return new Rect(getPaddingLeft(), getPaddingTop() + mScrollHeight, getWidth() + getPaddingRight(), getUsableHeight() + mScrollHeight);
+        return new Rect(getPaddingLeft(), getPaddingTop() + mScrollHeight, getWidth() + getPaddingRight(), getUsableHeight() - mScrollHeight);
     }
 }
