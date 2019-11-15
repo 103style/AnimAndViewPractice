@@ -1,6 +1,7 @@
 package com.lxk.customviewlearndemo.recyclerview;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,24 +17,31 @@ import java.util.List;
  * @date 2019/11/14 16:43
  */
 public class TestAdapter extends RecyclerView.Adapter<TestAdapter.ViewHolder> {
+    private static final String TAG = "TestAdapter";
     private Context mContext;
     private List<String> mDatas;
+    private int createCount;
 
     public TestAdapter(Context mContext, List<String> mDatas) {
         this.mContext = mContext;
         this.mDatas = mDatas;
+        createCount = 0;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        createCount++;
+        Log.e(TAG, "onCreateViewHolder: createViewCount = " + createCount);
         return new ViewHolder(LayoutInflater.from(mContext).inflate(android.R.layout.simple_list_item_1, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Log.e(TAG, "onBindViewHolder: position = " + position);
         holder.tv.setText(mDatas.get(position));
     }
+
 
     @Override
     public int getItemCount() {
