@@ -27,7 +27,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
 //        recyclerView.setLayoutManager(layoutManager);
         recyclerView.setLayoutManager(new TestLayoutManager());
         recyclerView.setAdapter(getAdapter());
-        recyclerView.addItemDecoration(new TestItemDecoration());
+//        recyclerView.addItemDecoration(new TestItemDecoration());
     }
 
     private RecyclerView.Adapter getAdapter() {
