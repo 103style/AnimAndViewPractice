@@ -45,4 +45,10 @@ public class TestRecyclerView extends RecyclerView {
         }
         return order;
     }
+
+    @Override
+    public boolean fling(int velocityX, int velocityY) {
+        int flingX = (int) (velocityX * 0.40f);
+        return super.fling(flingX, velocityY);
+    }
 }

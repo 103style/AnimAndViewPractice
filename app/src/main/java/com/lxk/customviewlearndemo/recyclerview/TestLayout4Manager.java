@@ -185,6 +185,22 @@ public class TestLayout4Manager extends RecyclerView.LayoutManager {
 
         child.setScaleX(radio);
         child.setScaleY(radio);
+
+        int pos = getPosition(child);
+        int centerPos = getCenterPosition();
+        if (pos + 1 == centerPos) {
+            child.setRotationY(30);
+        } else if (pos == centerPos) {
+            child.setRotationY(0);
+        } else if (pos - 2 == centerPos) {
+            child.setRotationY(-60);
+        } else if (pos + 2 == centerPos) {
+            child.setRotationY(60);
+        } else if (pos - 1 == centerPos) {
+            child.setRotationY(-30);
+        }
+
+
     }
 
     private float computeScale(int x) {
