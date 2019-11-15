@@ -3,7 +3,6 @@ package com.lxk.customviewlearndemo.recyclerview;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lxk.customviewlearndemo.R;
@@ -24,7 +23,8 @@ public class RecyclerViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recyclerview);
         recyclerView = findViewById(R.id.rv_test);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+//        recyclerView.setLayoutManager(layoutManager);
         recyclerView.setLayoutManager(new TestLayoutManager());
         recyclerView.setAdapter(getAdapter());
         recyclerView.addItemDecoration(new TestItemDecoration());

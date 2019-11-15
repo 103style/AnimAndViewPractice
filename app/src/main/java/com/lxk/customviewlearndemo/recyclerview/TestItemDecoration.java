@@ -19,6 +19,7 @@ public class TestItemDecoration extends RecyclerView.ItemDecoration {
 
     private Paint mPaint;
 
+
     public TestItemDecoration() {
         mPaint = new Paint();
         mPaint.setColor(Color.RED);
@@ -26,8 +27,8 @@ public class TestItemDecoration extends RecyclerView.ItemDecoration {
 
     @Override
     public void onDraw(@NonNull Canvas c, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
-        super.onDraw(c, parent, state);
         Log.e(TAG, "onDraw: ");
+        c.save();
         int cCount = parent.getChildCount();
         RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
         if (layoutManager == null) {
@@ -36,15 +37,17 @@ public class TestItemDecoration extends RecyclerView.ItemDecoration {
         for (int i = 0; i < cCount; i++) {
             View child = parent.getChildAt(i);
             int left = layoutManager.getLeftDecorationWidth(child);
-            int cy = child.getTop() + child.getHeight() / 2;
-            c.drawCircle(left / 2, cy, left / 2, mPaint);
-            c.drawLine(child.getLeft(), child.getBottom(), child.getRight(), child.getBottom(), mPaint);
+            int x = left / 2;
+            int y = child.getTop() + child.getHeight() / 2;
+            int radius = Math.min(left, child.getHeight()) / 2;
+            c.drawCircle(x, y, radius, mPaint);
+            c.drawLine(0, child.getBottom(), child.getRight(), child.getBottom(), mPaint);
         }
+        c.restore();
     }
 
     @Override
     public void onDrawOver(@NonNull Canvas c, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
-        super.onDrawOver(c, parent, state);
         Log.e(TAG, "onDrawOver: ");
     }
 
@@ -53,7 +56,6 @@ public class TestItemDecoration extends RecyclerView.ItemDecoration {
         super.getItemOffsets(outRect, view, parent, state);
         Log.e(TAG, "getItemOffsets: ");
         outRect.bottom = 10;
-        outRect.left = 50;
-        outRect.right = 50;
+        outRect.left = 100;
     }
 }
