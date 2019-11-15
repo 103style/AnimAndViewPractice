@@ -25,7 +25,8 @@ public class RecyclerViewActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.rv_test);
 //        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
 //        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setLayoutManager(new TestLayoutManager());
+//        recyclerView.setLayoutManager(new TestLayoutManager());
+        recyclerView.setLayoutManager(new TestLayout2Manager());
         recyclerView.setAdapter(getAdapter());
 //        recyclerView.addItemDecoration(new TestItemDecoration());
     }
