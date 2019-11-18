@@ -24,6 +24,7 @@ public class TestLayout4Manager extends RecyclerView.LayoutManager {
     private SparseBooleanArray mHasAttachedItems = new SparseBooleanArray();
 
     private int offsetX, startX;
+    private float M_MAX_ROTATION_Y = 30.0f;
 
     @Override
     public LayoutParams generateDefaultLayoutParams() {
@@ -69,6 +70,7 @@ public class TestLayout4Manager extends RecyclerView.LayoutManager {
             //addView后一定要measure，先measure再layout
             measureChildWithMargins(view, 0, 0);
             layoutDecorated(view, rect.left, rect.top, rect.right, rect.bottom);
+            handleChildView(childView, rect.left - offsetX - mScrollWidth);
         }
 
         //如果所有子View的高度和没有填满RecyclerView的高度，
@@ -179,28 +181,28 @@ public class TestLayout4Manager extends RecyclerView.LayoutManager {
         return pos;
     }
 
-
     private void handleChildView(View child, int moveX) {
         float radio = computeScale(moveX);
 
         child.setScaleX(radio);
         child.setScaleY(radio);
 
-        int pos = getPosition(child);
-        int centerPos = getCenterPosition();
-        if (pos + 1 == centerPos) {
-            child.setRotationY(30);
-        } else if (pos == centerPos) {
-            child.setRotationY(0);
-        } else if (pos - 2 == centerPos) {
-            child.setRotationY(-60);
-        } else if (pos + 2 == centerPos) {
-            child.setRotationY(60);
-        } else if (pos - 1 == centerPos) {
-            child.setRotationY(-30);
+        float rotation = computeRotationY(moveX);
+        child.setRotationY(rotation);
+
+    }
+
+    private float computeRotationY(int x) {
+        float rotationY;
+        rotationY = -M_MAX_ROTATION_Y * x / offsetX;
+        if (Math.abs(rotationY) > M_MAX_ROTATION_Y) {
+            if (rotationY > 0) {
+                rotationY = M_MAX_ROTATION_Y;
+            } else {
+                rotationY = -M_MAX_ROTATION_Y;
+            }
         }
-
-
+        return rotationY;
     }
 
     private float computeScale(int x) {
@@ -208,5 +210,24 @@ public class TestLayout4Manager extends RecyclerView.LayoutManager {
         if (scale < 0) scale = 0;
         if (scale > 1) scale = 1;
         return scale;
+    }
+
+    public double calculateDistance(int velocityX, double distance) {
+        int extra = mScrollWidth % offsetX;
+        double realDistance;
+        if (velocityX > 0) {
+            if (distance < offsetX) {
+                realDistance = offsetX - extra;
+            } else {
+                realDistance = distance - distance % offsetX - extra;
+            }
+        } else {
+            if (distance < offsetX) {
+                realDistance = extra;
+            } else {
+                realDistance = distance - distance % offsetX + extra;
+            }
+        }
+        return realDistance;
     }
 }
