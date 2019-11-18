@@ -35,9 +35,11 @@ public class RecyclerViewActivity extends AppCompatActivity {
 
     private RecyclerView.Adapter getAdapter() {
         List<String> datas = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 20; i++) {
             datas.add(String.valueOf(i + 1));
         }
-        return new TestAdapter(this, datas);
+        TestAdapter adapter = new TestAdapter(this, datas);
+        return adapter;
     }
+
 }
