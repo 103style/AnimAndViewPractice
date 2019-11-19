@@ -30,7 +30,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
 //        recyclerView.setLayoutManager(new TestLayout3Manager());
         recyclerView.setLayoutManager(new TestLayout4Manager());
         recyclerView.setAdapter(getAdapter());
-//        recyclerView.addItemDecoration(new TestItemDecoration());
+        recyclerView.addItemDecoration(new TestItemDecoration());
     }
 
     private RecyclerView.Adapter getAdapter() {

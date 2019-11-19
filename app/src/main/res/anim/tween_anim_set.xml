@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?><!-- @author https://github.com/103style
+     @date 2019/11/19 15:24 -->
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="2000"
+    android:interpolator="@android:anim/accelerate_decelerate_interpolator"
+    android:shareInterpolator="false">
+
+    <!-- 大家可以下面删除相关的插值器试试 -->
+
+    <alpha
+        android:fromAlpha="0.1"
+        android:interpolator="@android:anim/linear_interpolator"
+        android:repeatCount="2"
+        android:repeatMode="restart"
+        android:toAlpha="1" />
+    <rotate
+        android:fromDegrees="0"
+        android:interpolator="@android:anim/accelerate_decelerate_interpolator"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:repeatCount="2"
+        android:repeatMode="restart"
+        android:toDegrees="360" />
+
+    <!--android:interpolator="@android:anim/cycle_interpolator"-->
+    <scale
+        android:fromXScale="0.1"
+        android:fromYScale="0.1"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:repeatCount="2"
+        android:repeatMode="reverse"
+        android:toXScale="1.5"
+        android:toYScale="1.5" />
+
+    <translate
+        android:fromXDelta="-100"
+        android:fromYDelta="-100"
+        android:interpolator="@android:anim/bounce_interpolator"
+        android:repeatCount="2"
+        android:repeatMode="reverse"
+        android:toXDelta="100"
+        android:toYDelta="100" />
+</set>
+
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+    <!--<set xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--    android:interpolator="@[package:]anim/interpolator_resource"-->
+    <!--    android:shareInterpolator=["true" | "false"] >-->
+    <!--    <alpha-->
+    <!--        android:fromAlpha="float"-->
+    <!--        android:toAlpha="float" />-->
+    <!--    <scale-->
+    <!--        android:fromXScale="float"-->
+    <!--        android:fromYScale="float"-->
+    <!--        android:pivotX="float"-->
+    <!--        android:pivotY="float"-->
+    <!--        android:toXScale="float"-->
+    <!--        android:toYScale="float" />-->
+    <!--    <translate-->
+    <!--        android:fromXDelta="float"-->
+    <!--        android:fromYDelta="float"-->
+    <!--        android:toXDelta="float"-->
+    <!--        android:toYDelta="float" />-->
+    <!--    <rotate-->
+    <!--        android:fromDegrees="float"-->
+    <!--        android:pivotX="float"-->
+    <!--        android:pivotY="float"-->
+    <!--        android:toDegrees="float" />-->
+    <!--    <set>-->
+    <!--        ...-->
+    <!--    </set>-->
+    <!--</set>-->
+
+    <!--doc: https://developer.android.com/guide/topics/resources/animation-resource.html#Tween-->
+
+    <!--android:duration           动画的时间-->
+    <!--android:interpolator       插值器-->
+    <!--android:shareInterpolator  是否共享插值器-->
+    <!--从Animation类继承的属性:-->
+    <!--android:duration           动画持续时间，以毫秒为单位 -->
+    <!--android:fillAfter          如果设置为true，控件动画结束时，将保持动画最后时的状态-->
+    <!--android:fillBefore         如果设置为true,控件动画结束时，还原到开始动画前的状态-->
+    <!--android:fillEnabled        与android:fillBefore 效果相同，都是在动画结束时，将控件还原到初始化状态-->
+    <!--android:repeatCount        重复次数-->
+    <!--android:repeatMode         重复类型，有reverse和restart两个值，
+                                     reverse表示倒序回放，
+                                     restart表示重新放一遍，必须与repeatCount一起使用才能看到效果。
+                                     因为这里的意义是重复的类型，即回放时的动作。-->
+    <!--android:interpolator       设定插值器，其实就是指定的动作效果-->
+
+

@@ -3,6 +3,7 @@ package com.lxk.customviewlearndemo.recyclerview;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.Rect;
 import android.util.Log;
 import android.view.View;
@@ -23,6 +24,7 @@ public class TestItemDecoration extends RecyclerView.ItemDecoration {
     public TestItemDecoration() {
         mPaint = new Paint();
         mPaint.setColor(Color.RED);
+        mPaint.setStyle(Paint.Style.STROKE);
     }
 
     @Override
@@ -41,7 +43,13 @@ public class TestItemDecoration extends RecyclerView.ItemDecoration {
             int y = child.getTop() + child.getHeight() / 2;
             int radius = Math.min(left, child.getHeight()) / 2;
             c.drawCircle(x, y, radius, mPaint);
-            c.drawLine(0, child.getBottom(), child.getRight(), child.getBottom(), mPaint);
+            Path p = new Path();
+            p.moveTo(child.getLeft(), child.getTop());
+            p.lineTo(child.getRight(), child.getTop());
+            p.lineTo(child.getRight(), child.getBottom());
+            p.lineTo(child.getLeft(), child.getBottom());
+            p.close();
+            c.drawPath(p, mPaint);
         }
         c.restore();
     }
@@ -56,6 +64,8 @@ public class TestItemDecoration extends RecyclerView.ItemDecoration {
         super.getItemOffsets(outRect, view, parent, state);
         Log.e(TAG, "getItemOffsets: ");
         outRect.bottom = 10;
-        outRect.left = 100;
+        outRect.top = 10;
+        outRect.right = 10;
+        outRect.left = 10;
     }
 }
