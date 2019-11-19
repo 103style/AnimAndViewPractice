@@ -16,7 +16,6 @@ import com.lxk.customviewlearndemo.R;
  */
 public class AnimationXmlActivity extends AppCompatActivity implements View.OnClickListener {
 
-
     private Button show;
 
     @Override
@@ -52,6 +51,8 @@ public class AnimationXmlActivity extends AppCompatActivity implements View.OnCl
                 break;
             case R.id.bt_set:
                 animId = R.anim.tween_anim_set;
+                break;
+            default:
                 break;
         }
 

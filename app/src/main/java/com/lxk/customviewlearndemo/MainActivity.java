@@ -6,6 +6,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.lxk.customviewlearndemo.anim.AnimationCodeActivity;
 import com.lxk.customviewlearndemo.anim.AnimationXmlActivity;
 import com.lxk.customviewlearndemo.recyclerview.RecyclerViewActivity;
 
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 c = AnimationXmlActivity.class;
                 break;
             case R.id.animation_code:
+                c = AnimationCodeActivity.class;
                 break;
             case R.id.animator:
                 break;
