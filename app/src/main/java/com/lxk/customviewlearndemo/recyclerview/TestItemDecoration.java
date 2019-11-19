@@ -25,6 +25,7 @@ public class TestItemDecoration extends RecyclerView.ItemDecoration {
         mPaint = new Paint();
         mPaint.setColor(Color.RED);
         mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setStrokeWidth(10);
     }
 
     @Override

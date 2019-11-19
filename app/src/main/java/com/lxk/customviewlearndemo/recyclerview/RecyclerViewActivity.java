@@ -1,8 +1,12 @@
 package com.lxk.customviewlearndemo.recyclerview;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.accessibility.AccessibilityViewCommand;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lxk.customviewlearndemo.R;
@@ -14,32 +18,75 @@ import java.util.List;
  * @author https://github.com/103style
  * @date 2019/11/14 16:29
  */
-public class RecyclerViewActivity extends AppCompatActivity {
+public class RecyclerViewActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private RecyclerView recyclerView;
+    private RecyclerView rv;
+    private TestRecyclerView cRv;
+    private TestItemDecoration itemDecoration = new TestItemDecoration();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recyclerview);
-        recyclerView = findViewById(R.id.rv_test);
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-//        recyclerView.setLayoutManager(layoutManager);
-//        recyclerView.setLayoutManager(new TestLayoutManager());
-//        recyclerView.setLayoutManager(new TestLayout2Manager());
-//        recyclerView.setLayoutManager(new TestLayout3Manager());
-        recyclerView.setLayoutManager(new TestLayout4Manager());
-        recyclerView.setAdapter(getAdapter());
-        recyclerView.addItemDecoration(new TestItemDecoration());
+        rv = findViewById(R.id.rv_test);
+        cRv = findViewById(R.id.crv_test);
+        findViewById(R.id.linear_layout_manager).setOnClickListener(this);
+        findViewById(R.id.item_decoration).setOnClickListener(this);
+        findViewById(R.id.recycler_offset_children).setOnClickListener(this);
+        findViewById(R.id.recycler_layoutmanager).setOnClickListener(this);
+        findViewById(R.id.rv_3d).setOnClickListener(this);
     }
 
     private RecyclerView.Adapter getAdapter() {
         List<String> datas = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 50; i++) {
             datas.add(String.valueOf(i + 1));
         }
-        TestAdapter adapter = new TestAdapter(this, datas);
-        return adapter;
+        return new TestAdapter(this, datas);
     }
 
+    @Override
+    public void onClick(View v) {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        RecyclerView.LayoutManager layoutManager;
+        rv.setVisibility(View.GONE);
+        cRv.setVisibility(View.GONE);
+        switch (v.getId()) {
+            case R.id.item_decoration:
+                rv.removeItemDecoration(itemDecoration);
+                rv.addItemDecoration(itemDecoration);
+                layoutManager = new LinearLayoutManager(this);
+                rv.setLayoutManager(layoutManager);
+                rv.setVisibility(View.VISIBLE);
+                break;
+            case R.id.linear_layout_manager:
+                rv.removeItemDecoration(itemDecoration);
+                layoutManager = new LinearLayoutManager(this);
+                rv.setLayoutManager(layoutManager);
+                rv.setVisibility(View.VISIBLE);
+                break;
+            case R.id.recycler_offset_children:
+                layoutManager = new TestLayoutManager();
+                rv.setLayoutManager(layoutManager);
+                rv.setVisibility(View.VISIBLE);
+
+                break;
+            case R.id.recycler_layoutmanager:
+                layoutManager = new TestLayout3Manager();
+                rv.setLayoutManager(layoutManager);
+                rv.setVisibility(View.VISIBLE);
+                break;
+            case R.id.rv_3d:
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                layoutManager = new TestLayout4Manager();
+                cRv.setLayoutManager(layoutManager);
+                cRv.setVisibility(View.VISIBLE);
+                cRv.setAdapter(getAdapter());
+                break;
+            default:
+                break;
+        }
+        rv.setAdapter(getAdapter());
+
+    }
 }

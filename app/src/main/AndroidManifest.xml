@@ -19,10 +19,9 @@
 
         <activity android:name=".anim.AnimationXmlActivity" />
         <activity android:name=".anim.AnimationCodeActivity" />
-
         <activity
             android:name=".recyclerview.RecyclerViewActivity"
-            android:screenOrientation="landscape" />
+            android:configChanges="keyboardHidden|orientation|screenSize" />
 
     </application>
 

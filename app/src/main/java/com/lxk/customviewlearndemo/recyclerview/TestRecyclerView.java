@@ -28,14 +28,14 @@ public class TestRecyclerView extends RecyclerView {
         setChildrenDrawingOrderEnabled(true);
     }
 
-    public TestLayout4Manager getCoverFlowLayout() {
+    public TestLayout4Manager getTestLayoutManager() {
         return ((TestLayout4Manager) getLayoutManager());
     }
 
     @Override
     protected int getChildDrawingOrder(int childCount, int i) {
         //计算正在显示的所有Item的中间位置
-        int center = getCoverFlowLayout().getCenterPosition() - getCoverFlowLayout().getFirstVisiblePosition();
+        int center = getTestLayoutManager().getCenterPosition() - getTestLayoutManager().getFirstVisiblePosition();
         int order;
 
         if (i == center) {
@@ -51,7 +51,7 @@ public class TestRecyclerView extends RecyclerView {
     @Override
     public boolean fling(int velocityX, int velocityY) {
         int flingX = (int) (velocityX * 0.40f);
-        TestLayout4Manager manger = getCoverFlowLayout();
+        TestLayout4Manager manger = getTestLayoutManager();
         double distance = getSplineFlingDistance(flingX);
         double newDistance = manger.calculateDistance(velocityX,distance);
         int fixVelocityX = getVelocity(newDistance);
@@ -66,9 +66,6 @@ public class TestRecyclerView extends RecyclerView {
 
     /**
      * 根据松手后的滑动速度计算出fling的距离
-     *
-     * @param velocity
-     * @return
      */
     private double getSplineFlingDistance(int velocity) {
         final double l = getSplineDeceleration(velocity);
@@ -78,9 +75,6 @@ public class TestRecyclerView extends RecyclerView {
 
     /**
      * 根据距离计算出速度
-     *
-     * @param distance
-     * @return
      */
     private int getVelocity(double distance) {
         final double decelMinusOne = DECELERATION_RATE - 1.0;
