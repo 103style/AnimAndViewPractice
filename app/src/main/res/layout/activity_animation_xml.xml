@@ -1,46 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <Button
-        android:id="@+id/bt_translate"
-        style="@style/base_tv"
-        android:text="Translation" />
+    <com.lxk.customviewlearndemo.viewgroup.FlowLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/bt_rotate"
-        style="@style/base_tv"
-        android:layout_toEndOf="@+id/bt_translate"
-        android:text="Rotation" />
+        <Button
+            android:id="@+id/bt_translate"
+            style="@style/base_tv"
+            android:text="Translation" />
 
-    <Button
-        android:id="@+id/bt_alpha"
-        style="@style/base_tv"
-        android:layout_toEndOf="@+id/bt_rotate"
-        android:text="Alpha" />
+        <Button
+            android:id="@+id/bt_rotate"
+            style="@style/base_tv"
+            android:text="Rotation" />
 
-    <Button
-        android:id="@+id/bt_scale"
-        style="@style/base_tv"
-        android:layout_toEndOf="@+id/bt_alpha"
-        android:text="Scale" />
+        <Button
+            android:id="@+id/bt_alpha"
+            style="@style/base_tv"
+            android:text="Alpha" />
 
-    <Button
-        android:id="@+id/bt_set"
-        style="@style/base_tv"
-        android:layout_below="@+id/bt_translate"
-        android:text="Anim_Set" />
+        <Button
+            android:id="@+id/bt_scale"
+            style="@style/base_tv"
+            android:text="Scale" />
+
+        <Button
+            android:id="@+id/bt_set"
+            style="@style/base_tv"
+            android:layout_toEndOf="@+id/bt_scale"
+            android:text="Anim_Set" />
+
+    </com.lxk.customviewlearndemo.viewgroup.FlowLayout>
+
 
     <Button
         android:id="@+id/bt_demo"
         android:layout_width="320dp"
         android:layout_height="320dp"
-        android:layout_below="@+id/bt_set"
-        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
         android:background="@color/colorAccent"
         android:text="Demo view"
         android:textAllCaps="false"
         android:textColor="#FFFFFF" />
 
-</RelativeLayout>
+</LinearLayout>

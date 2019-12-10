@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.lxk.customviewlearndemo.viewgroup.FlowLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -11,20 +11,17 @@
     <Button
         android:id="@+id/animation_code"
         style="@style/base_tv"
-        android:layout_toEndOf="@+id/animation_xml"
         android:text="Animation_code" />
 
     <Button
         android:id="@+id/animator"
         style="@style/base_tv"
-        android:layout_toEndOf="@+id/animation_code"
         android:text="Animator" />
 
     <Button
         android:id="@+id/layout_manager_decoration"
         style="@style/base_tv"
-        android:layout_below="@+id/animation_xml"
         android:text="Layoutmanager and itemDecoration" />
 
 
-</RelativeLayout>
+</com.lxk.customviewlearndemo.viewgroup.FlowLayout>

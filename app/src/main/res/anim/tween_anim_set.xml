@@ -77,9 +77,9 @@
 
     <!--doc: https://developer.android.com/guide/topics/resources/animation-resource.html#Tween-->
 
-    <!--android:duration           动画的时间-->
     <!--android:interpolator       插值器-->
     <!--android:shareInterpolator  是否共享插值器-->
+
     <!--从Animation类继承的属性:-->
     <!--android:duration           动画持续时间，以毫秒为单位 -->
     <!--android:fillAfter          如果设置为true，控件动画结束时，将保持动画最后时的状态-->

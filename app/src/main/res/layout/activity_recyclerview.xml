@@ -1,50 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <Button
-        android:id="@+id/linear_layout_manager"
-        style="@style/base_tv"
-        android:text="Reset" />
+    <com.lxk.customviewlearndemo.viewgroup.FlowLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/item_decoration"
-        style="@style/base_tv"
-        android:layout_toEndOf="@+id/linear_layout_manager"
-        android:text="ItemDecoration" />
+        <Button
+            android:id="@+id/linear_layout_manager"
+            style="@style/base_tv"
+            android:text="Reset" />
 
-    <Button
-        android:id="@+id/recycler_offset_children"
-        style="@style/base_tv"
-        android:layout_toEndOf="@+id/item_decoration"
-        android:text="OffsetChildren" />
+        <Button
+            android:id="@+id/item_decoration"
+            style="@style/base_tv"
+            android:text="ItemDecoration" />
 
-    <Button
-        android:id="@+id/recycler_layoutmanager"
-        style="@style/base_tv"
-        android:layout_below="@+id/linear_layout_manager"
-        android:text="RecyclerType2" />
+        <Button
+            android:id="@+id/recycler_offset_children"
+            style="@style/base_tv"
+            android:text="OffsetChildren" />
 
-    <Button
-        android:id="@+id/rv_3d"
-        style="@style/base_tv"
-        android:layout_below="@+id/linear_layout_manager"
-        android:layout_toEndOf="@+id/recycler_layoutmanager"
-        android:text="3D Galley" />
+        <Button
+            android:id="@+id/recycler_layoutmanager"
+            style="@style/base_tv"
+            android:text="RecyclerType2" />
+
+        <Button
+            android:id="@+id/rv_3d"
+            style="@style/base_tv"
+            android:text="3D Galley" />
+
+    </com.lxk.customviewlearndemo.viewgroup.FlowLayout>
+
 
     <com.lxk.customviewlearndemo.recyclerview.TestRecyclerView
         android:id="@+id/crv_test"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/recycler_layoutmanager"
         android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_test"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/recycler_layoutmanager"
         android:visibility="gone" />
 
-</RelativeLayout>
+</LinearLayout>
