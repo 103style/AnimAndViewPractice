@@ -6,11 +6,8 @@ Anim and CustomView exercise Demo
 [gif dir](https://github.com/103style/CustomViewLearndemo/tree/master/gif)
 
 #### Anim
-* ![alpha.gif](https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/anim_xml/alpha.gif)
-* ![anim_set_xml.gif](https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/anim_xml/anim_set_xml.gif)
-* ![roration.gif](https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/anim_xml/roration.gif)
-* ![scale.gif](https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/anim_xml/scale.gif)
-* ![translation.gif](https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/anim_xml/translation.gif)
+<img src="https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/anim_xml/alpha.gif"  height="246" width="158"> <img src="https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/anim_xml/anim_set_xml.gif"  height="246" width="158"> <img src="https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/anim_xml/roration.gif"  height="246" width="158"> <img src="https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/anim_xml/scale.gif"  height="246" width="158"> <img src="https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/anim_xml/translation.gif"  height="246" width="158"> 
+
 
 #### RecyclerView
 * ![recyclerview.gif](https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/recyclerview/recyclerview.gif)
