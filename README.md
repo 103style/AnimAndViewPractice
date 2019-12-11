@@ -21,3 +21,8 @@ Anim and CustomView exercise Demo
 ![FlowAlignLayout.gif](https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/viewgroup/FlowAlignLayout.gif)
 
 ---
+
+#### Animator
+![Animator.gif](https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/animator/animator.gif)
+
+---
