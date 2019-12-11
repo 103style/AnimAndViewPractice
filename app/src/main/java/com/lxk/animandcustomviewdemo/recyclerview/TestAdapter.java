@@ -1,4 +1,4 @@
-package com.lxk.customviewlearndemo.recyclerview;
+package com.lxk.animandcustomviewdemo.recyclerview;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -12,7 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.lxk.customviewlearndemo.R;
+import com.lxk.animandcustomviewdemo.R;
 
 import java.util.List;
 

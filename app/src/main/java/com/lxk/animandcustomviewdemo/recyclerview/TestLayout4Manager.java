@@ -1,4 +1,4 @@
-package com.lxk.customviewlearndemo.recyclerview;
+package com.lxk.animandcustomviewdemo.recyclerview;
 
 import android.graphics.Rect;
 import android.util.SparseArray;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.lxk.customviewlearndemo">
+    package="com.lxk.animandcustomviewdemo">
 
     <application
         android:allowBackup="true"
@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="com.lxk.animandcustomviewdemo.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,10 +17,18 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".anim.AnimationXmlActivity" />
-        <activity android:name=".anim.AnimationCodeActivity" />
+        <activity android:name="com.lxk.animandcustomviewdemo.anim.AnimationXmlActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="com.lxk.animandcustomviewdemo.anim.AnimationCodeActivity" />
+
+        <activity android:name="com.lxk.animandcustomviewdemo.animator.AnimatorActivity" />
+
         <activity
-            android:name=".recyclerview.RecyclerViewActivity"
+            android:name="com.lxk.animandcustomviewdemo.recyclerview.RecyclerViewActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
 
     </application>

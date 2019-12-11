@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="FlowAlignLayout">
+        <attr name="align_type" format="enum">
+            <enum name="LEFT" value="0" />
+            <enum name="RIGHT" value="1" />
+            <enum name="CENTER" value="2" />
+            <enum name="SAME_GAP" value="3" />
+        </attr>
+    </declare-styleable>
+
+</resources>

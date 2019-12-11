@@ -1,8 +1,9 @@
-package com.lxk.customviewlearndemo.recyclerview;
+package com.lxk.animandcustomviewdemo.recyclerview;
 
 import android.graphics.Rect;
 import android.util.Log;
 import android.util.SparseArray;
+import android.util.SparseBooleanArray;
 import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,8 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
  * @author https://github.com/103style
  * @date 2019/11/14 17:00
  */
-public class TestLayoutManager extends RecyclerView.LayoutManager {
-    private static final String TAG = "TestLayoutManager";
+public class TestLayout2Manager extends RecyclerView.LayoutManager {
+    private static final String TAG = "TestLayout2Manager";
 
     /**
      * 当前recyclerview滑动的总距离
@@ -31,6 +32,10 @@ public class TestLayoutManager extends RecyclerView.LayoutManager {
      * 缓存每个item的位置
      */
     private SparseArray<Rect> mItemRects = new SparseArray<>();
+    /**
+     * 保存item是否在屏幕内显示
+     */
+    private SparseBooleanArray mHasAttachedItems = new SparseBooleanArray();
 
     @Override
     public RecyclerView.LayoutParams generateDefaultLayoutParams() {
@@ -42,6 +47,9 @@ public class TestLayoutManager extends RecyclerView.LayoutManager {
     @Override
     public void onLayoutChildren(RecyclerView.Recycler recycler, RecyclerView.State state) {
         Log.e(TAG, "onLayoutChildren: ");
+
+        mHasAttachedItems.clear();
+        mItemRects.clear();
 
         detachAndScrapAttachedViews(recycler);
         if (getItemCount() == 0) {
@@ -65,11 +73,11 @@ public class TestLayoutManager extends RecyclerView.LayoutManager {
 
         //所有item的总高度
         int offsetHeight = 0;
-
         //缓存每个item的宽高
         for (int i = 0; i < getItemCount(); i++) {
             Rect rect = new Rect(0, offsetHeight, mItemWidth, offsetHeight + mItemHeight);
             mItemRects.put(i, rect);
+            mHasAttachedItems.put(i, false);
             offsetHeight += mItemHeight;
         }
 
@@ -102,6 +110,10 @@ public class TestLayoutManager extends RecyclerView.LayoutManager {
 
     @Override
     public int scrollVerticallyBy(int dy, RecyclerView.Recycler recycler, RecyclerView.State state) {
+        if (getChildCount() <= 0) {
+            return dy;
+        }
+
         int travel = dy;
         if (mScrollHeight + dy < 0) {
             //如果滑动到最顶部
@@ -111,106 +123,102 @@ public class TestLayoutManager extends RecyclerView.LayoutManager {
             travel = mTotalHeight - getUsableHeight() - mScrollHeight;
         }
 
-        //移除离开屏幕的view  在空白处填充view
-        removeAndInsertView(recycler, travel);
+        //如果不需要滑动
+        if (travel == 0) {
+            return travel;
+        }
 
         //计算当前滑动的距离
         mScrollHeight += travel;
-        // 平移容器内的item
-        offsetChildrenVertical(-travel);
-        return dy;
-    }
+        //滑动之后 recyclerview 内容的显示范围
+        Rect visibleRect = getVisibleArea();
 
-
-    /**
-     * 移除离开屏幕的view  在空白处填充view
-     *
-     * @param travel >0 向上滑  <0 向下滑动
-     */
-    private void removeAndInsertView(RecyclerView.Recycler recycler, int travel) {
-        if (travel == 0) {
-            return;
-        }
-        //回收离开屏幕上下方的item
         for (int i = getChildCount() - 1; i >= 0; i--) {
             View child = getChildAt(i);
             if (child == null) {
                 continue;
             }
-            boolean needRemoveAndRecycle;
-            if (travel > 0) {
-                needRemoveAndRecycle = getDecoratedBottom(child) - travel < 0;
-            } else {
-                needRemoveAndRecycle = getDecoratedTop(child) + getPaddingBottom() - travel > getHeight();
-            }
-            if (needRemoveAndRecycle) {
+            int position = getPosition(child);
+            Rect rect = mItemRects.get(position);
+            if (!Rect.intersects(rect, visibleRect)) {
+                //移除不在屏幕内的数据
                 removeAndRecycleView(child, recycler);
+                mHasAttachedItems.put(position, false);
+            } else {
+                //新增数据填充空白区域
+                layoutDecoratedWithMargins(child, rect.left, rect.top - mScrollHeight, rect.right, rect.bottom - mScrollHeight);
+                mHasAttachedItems.put(i, true);
+                child.setTranslationX((10 * position) % child.getMeasuredWidth());
             }
         }
 
-        Rect visibleRect = getVisibleArea(travel);
+        //获取当前的屏幕可见区域的第一个和最后一个
+        View firstVisibleItem = getChildAt(0);
+        View lastVisibleItem = getChildAt(getChildCount() - 1);
+
+        if (firstVisibleItem == null || lastVisibleItem == null) {
+            return travel;
+        }
+
+        int offsetHeight = 0;
         //布局子View阶段
-        if (travel > 0) {
-            View lastView = getChildAt(getChildCount() - 1);
-            if (lastView == null) {
-                return;
-            }
+        if (travel >= 0) {
             //当前可见的最后一个位置的下一个开始
-            int minPos = getPosition(lastView) + 1;
+            int minPos = getPosition(firstVisibleItem);
             //依次填补空白区域
             for (int i = minPos; i < getItemCount(); i++) {
-                Rect rect = mItemRects.get(i);
-                if (Rect.intersects(visibleRect, rect)) {
-                    insertView(recycler, rect, false, i);
+                if (offsetHeight > getUsableHeight()) {
+                    mHasAttachedItems.put(i, false);
                 } else {
-                    break;
+                    insertView(recycler, visibleRect, false, i);
+                    offsetHeight += mItemRects.get(i).height();
                 }
             }
         } else {
-            View firstView = getChildAt(0);
-            if (firstView == null) {
-                return;
-            }
             //当前可见的开头位置的上一个开始
-            int maxPos = getPosition(firstView) - 1;
+            int maxPos = getPosition(lastVisibleItem);
             //依次填补空白区域
             for (int i = maxPos; i >= 0; i--) {
-                Rect rect = mItemRects.get(i);
-                if (Rect.intersects(visibleRect, rect)) {
-                    insertView(recycler, rect, true, i);
+                if (offsetHeight < getUsableHeight()) {
+                    insertView(recycler, visibleRect, true, i);
+                    offsetHeight += mItemRects.get(i).height();
                 } else {
-                    break;
+                    mHasAttachedItems.put(i, false);
                 }
             }
         }
+        return travel;
     }
+
 
     /**
      * 添加view
      *
      * @param recycler 回收管理器
-     * @param rect     item的位置
      * @param top      是否是顶部
-     * @param i        当前的位置
+     * @param pos      当前的位置
      */
-    private void insertView(RecyclerView.Recycler recycler, Rect rect, boolean top, int i) {
-        View child = recycler.getViewForPosition(i);
-        if (top) {
-            addView(child, 0);
-        } else {
-            addView(child);
+    private void insertView(RecyclerView.Recycler recycler, Rect visibleRect, boolean top, int pos) {
+        Rect rect = mItemRects.get(pos);
+        if (Rect.intersects(visibleRect, rect) && !mHasAttachedItems.get(pos)) {
+            View child = recycler.getViewForPosition(pos);
+            if (top) {
+                addView(child, 0);
+            } else {
+                addView(child);
+            }
+            measureChildWithMargins(child, 0, 0);
+            layoutDecorated(child, rect.left, rect.top - mScrollHeight, rect.right, rect.bottom - mScrollHeight);
+            child.setTranslationX((10 * getPosition(child)) % child.getMeasuredWidth());
+            mHasAttachedItems.put(pos, true);
         }
-        measureChildWithMargins(child, 0, 0);
-        layoutDecorated(child, rect.left, rect.top - mScrollHeight, rect.right, rect.bottom - mScrollHeight);
     }
 
 
     /**
      * 滑动之后 recyclerview 内容的显示范围
-     *
-     * @param travel 滑动距离
      */
-    private Rect getVisibleArea(int travel) {
-        return new Rect(getPaddingLeft(), getPaddingTop() + mScrollHeight + travel, getWidth() + getPaddingRight(), getUsableHeight() + mScrollHeight + travel);
+    private Rect getVisibleArea() {
+        return new Rect(getPaddingLeft(), getPaddingTop() + mScrollHeight, getWidth() + getPaddingRight(), getUsableHeight() - mScrollHeight);
     }
 }

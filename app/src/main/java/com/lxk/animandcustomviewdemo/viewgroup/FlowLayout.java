@@ -1,4 +1,4 @@
-package com.lxk.customviewlearndemo.viewgroup;
+package com.lxk.animandcustomviewdemo.viewgroup;
 
 import android.content.Context;
 import android.util.AttributeSet;

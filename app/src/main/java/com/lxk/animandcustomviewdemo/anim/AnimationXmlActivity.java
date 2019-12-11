@@ -1,4 +1,4 @@
-package com.lxk.customviewlearndemo.anim;
+package com.lxk.animandcustomviewdemo.anim;
 
 import android.os.Bundle;
 import android.view.View;
@@ -8,11 +8,13 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.lxk.customviewlearndemo.R;
+import com.lxk.animandcustomviewdemo.R;
 
 /**
  * @author https://github.com/103style
  * @date 2019/11/19 11:38
+ * <p>
+ * xml 实现补间动画
  */
 public class AnimationXmlActivity extends AppCompatActivity implements View.OnClickListener {
 

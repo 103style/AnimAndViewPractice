@@ -1,4 +1,4 @@
-package com.lxk.customviewlearndemo;
+package com.lxk.animandcustomviewdemo;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,9 +6,9 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.lxk.customviewlearndemo.anim.AnimationCodeActivity;
-import com.lxk.customviewlearndemo.anim.AnimationXmlActivity;
-import com.lxk.customviewlearndemo.recyclerview.RecyclerViewActivity;
+import com.lxk.animandcustomviewdemo.anim.AnimationCodeActivity;
+import com.lxk.animandcustomviewdemo.anim.AnimationXmlActivity;
+import com.lxk.animandcustomviewdemo.recyclerview.RecyclerViewActivity;
 
 /**
  * @author https://github.com/103style

@@ -1,15 +1,14 @@
-package com.lxk.customviewlearndemo.recyclerview;
+package com.lxk.animandcustomviewdemo.recyclerview;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.accessibility.AccessibilityViewCommand;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.lxk.customviewlearndemo.R;
+import com.lxk.animandcustomviewdemo.R;
 
 import java.util.ArrayList;
 import java.util.List;
