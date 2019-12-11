@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">CustomViewLearnDemo</string>
+    <string name="app_name">AnimAndCustomViewDemo</string>
     <string name="demo_view">Demo view</string>
 </resources>
