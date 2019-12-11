@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -32,6 +33,7 @@ public class AnimationXmlActivity extends AppCompatActivity implements View.OnCl
         findViewById(R.id.bt_scale).setOnClickListener(this);
         findViewById(R.id.bt_alpha).setOnClickListener(this);
         findViewById(R.id.bt_set).setOnClickListener(this);
+        findViewById(R.id.bt_demo).setOnClickListener(this);
     }
 
 
@@ -53,6 +55,9 @@ public class AnimationXmlActivity extends AppCompatActivity implements View.OnCl
                 break;
             case R.id.bt_set:
                 animId = R.anim.tween_anim_set;
+                break;
+            case R.id.bt_demo:
+                Toast.makeText(AnimationXmlActivity.this, "don't touch me!", Toast.LENGTH_SHORT).show();
                 break;
             default:
                 break;

@@ -11,9 +11,29 @@
         app:align_type="SAME_GAP">
 
         <Button
+            android:id="@+id/bt_reset"
+            style="@style/base_tv"
+            android:text="Reset" />
+
+        <Button
             android:id="@+id/bt_translate"
             style="@style/base_tv"
             android:text="Translation" />
+
+        <Button
+            android:id="@+id/bt_translate_with_reverse_interpolator"
+            style="@style/base_tv"
+            android:text="reverse interpolator " />
+
+        <Button
+            android:id="@+id/bt_evaluator_test"
+            style="@style/base_tv"
+            android:text="Evaluator test" />
+
+        <Button
+            android:id="@+id/bt_reserve_evaluator"
+            style="@style/base_tv"
+            android:text="Reverse Evaluator" />
 
         <Button
             android:id="@+id/bt_rotate"
@@ -33,15 +53,21 @@
         <Button
             android:id="@+id/bt_set"
             style="@style/base_tv"
+            android:layout_toEndOf="@+id/bt_scale"
             android:text="Anim_Set" />
 
     </com.lxk.animandcustomviewdemo.viewgroup.FlowAlignLayout>
 
 
+    <TextView
+        android:id="@+id/tv_show"
+        style="@style/base_tv"
+        android:text="num" />
+
     <Button
         android:id="@+id/bt_demo"
-        android:layout_width="320dp"
-        android:layout_height="320dp"
+        android:layout_width="240dp"
+        android:layout_height="240dp"
         android:layout_gravity="center_horizontal"
         android:background="@color/colorAccent"
         android:text="Demo view"

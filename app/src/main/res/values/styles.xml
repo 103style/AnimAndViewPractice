@@ -11,9 +11,9 @@
     <style name="base_tv">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:padding">8dp</item>
+        <item name="android:padding">4dp</item>
         <item name="android:textAllCaps">false</item>
-        <item name="android:layout_margin">8dp</item>
+        <item name="android:layout_margin">4dp</item>
         <item name="android:textColor">#FFFFFFFF</item>
         <item name="android:background">@color/colorPrimary</item>
     </style>

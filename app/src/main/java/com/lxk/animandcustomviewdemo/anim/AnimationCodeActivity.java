@@ -13,6 +13,7 @@ import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,7 +22,7 @@ import com.lxk.animandcustomviewdemo.R;
 /**
  * @author https://github.com/103style
  * @date 2019/11/19 16:40
- *
+ * <p>
  * 代码实现补间动画
  */
 public class AnimationCodeActivity extends AppCompatActivity implements View.OnClickListener {
@@ -40,6 +41,7 @@ public class AnimationCodeActivity extends AppCompatActivity implements View.OnC
         findViewById(R.id.bt_scale).setOnClickListener(this);
         findViewById(R.id.bt_alpha).setOnClickListener(this);
         findViewById(R.id.bt_set).setOnClickListener(this);
+        findViewById(R.id.bt_demo).setOnClickListener(this);
     }
 
     @Override
@@ -60,6 +62,9 @@ public class AnimationCodeActivity extends AppCompatActivity implements View.OnC
                 break;
             case R.id.bt_set:
                 animation = getAnimSet();
+                break;
+            case R.id.bt_demo:
+                Toast.makeText(AnimationCodeActivity.this, "don't touch me!", Toast.LENGTH_SHORT).show();
                 break;
             default:
                 break;
