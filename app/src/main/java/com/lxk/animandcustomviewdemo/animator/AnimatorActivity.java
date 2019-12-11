@@ -1,19 +1,21 @@
 package com.lxk.animandcustomviewdemo.animator;
 
 import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ArgbEvaluator;
 import android.animation.IntEvaluator;
+import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AccelerateInterpolator;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import com.lxk.animandcustomviewdemo.BaseClickActivity;
 import com.lxk.animandcustomviewdemo.R;
 import com.lxk.animandcustomviewdemo.animator.evaluator.ReverseEvaluator;
 import com.lxk.animandcustomviewdemo.animator.interpolator.ReverseInterpolator;
@@ -23,11 +25,10 @@ import com.lxk.animandcustomviewdemo.animator.interpolator.ReverseInterpolator;
  * @date 2019/12/10 14:33
  * 属性动画
  */
-public class AnimatorActivity extends AppCompatActivity implements View.OnClickListener {
+public class AnimatorActivity extends BaseClickActivity implements View.OnClickListener {
 
     private final String TAG = AnimatorActivity.class.getSimpleName();
     private Button show;
-    private TextView tvShow;
     private ViewGroup.LayoutParams layoutParams;
 
     @Override
@@ -35,19 +36,21 @@ public class AnimatorActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_animator);
 
-        tvShow = findViewById(R.id.tv_show);
         show = findViewById(R.id.bt_demo);
 
-        findViewById(R.id.bt_reset).setOnClickListener(this);
-        findViewById(R.id.bt_translate).setOnClickListener(this);
-        findViewById(R.id.bt_translate_with_reverse_interpolator).setOnClickListener(this);
-        findViewById(R.id.bt_evaluator_test).setOnClickListener(this);
-        findViewById(R.id.bt_reserve_evaluator).setOnClickListener(this);
-        findViewById(R.id.bt_rotate).setOnClickListener(this);
-        findViewById(R.id.bt_scale).setOnClickListener(this);
-        findViewById(R.id.bt_alpha).setOnClickListener(this);
-        findViewById(R.id.bt_set).setOnClickListener(this);
-        findViewById(R.id.bt_demo).setOnClickListener(this);
+        setClickListener(
+                R.id.bt_reset,
+                R.id.bt_translate,
+                R.id.bt_translate_with_reverse_interpolator,
+                R.id.bt_evaluator_test,
+                R.id.bt_reserve_evaluator,
+                R.id.bt_argb_evaluator,
+                R.id.bt_rotate,
+                R.id.bt_scale,
+                R.id.bt_alpha,
+                R.id.bt_set,
+                R.id.bt_demo
+        );
     }
 
     @Override
@@ -64,7 +67,7 @@ public class AnimatorActivity extends AppCompatActivity implements View.OnClickL
         switch (v.getId()) {
             case R.id.bt_reset:
                 show.setLayoutParams(layoutParams);
-                tvShow.setText("");
+                show.setText(getString(R.string.demo_view));
                 break;
             case R.id.bt_translate:
                 animator = getTranslateAnim();
@@ -78,14 +81,17 @@ public class AnimatorActivity extends AppCompatActivity implements View.OnClickL
             case R.id.bt_reserve_evaluator:
                 reverseEvaluator();
                 break;
+            case R.id.bt_argb_evaluator:
+                animator = getArgbAnim();
+                break;
             case R.id.bt_alpha:
-                animator = getAlphaAnim();
+                animator = getAlphaObjectAnim();
                 break;
             case R.id.bt_rotate:
-                animator = getRotateAnim();
+                animator = getRotateObjectAnim();
                 break;
             case R.id.bt_scale:
-                animator = getScaleAnim();
+                animator = getScaleObjectAnim();
                 break;
             case R.id.bt_set:
                 animator = getAnimSet();
@@ -122,10 +128,7 @@ public class AnimatorActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    /**
-     * 文字变化
-     */
-    private ValueAnimator getTvShowAnim() {
+    private ValueAnimator getTextUpdateAnim() {
         ValueAnimator valueAnimator = ValueAnimator.ofInt(0, 1000);
         valueAnimator.setDuration(2000);
         valueAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
@@ -133,7 +136,7 @@ public class AnimatorActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 Integer value = (Integer) animation.getAnimatedValue();
-                tvShow.setText(String.valueOf(value));
+                show.setText(String.valueOf(value));
             }
         });
         return valueAnimator;
@@ -141,16 +144,35 @@ public class AnimatorActivity extends AppCompatActivity implements View.OnClickL
 
     private void reverseEvaluator() {
         //返回从 1000 到 0 的Integer值
-        ValueAnimator animator = getTvShowAnim();
+        ValueAnimator animator = getTextUpdateAnim();
         animator.setEvaluator(new ReverseEvaluator());
         animator.start();
     }
 
     private void testEvaluator() {
         //返回从 0 到 1000 的Integer值
-        ValueAnimator animator = getTvShowAnim();
+        ValueAnimator animator = getTextUpdateAnim();
         animator.setEvaluator(new IntEvaluator());
         animator.start();
+    }
+
+    /**
+     * 颜色渐变
+     * 将属性动画对应的 0 - 1 转化为对应的颜色
+     */
+    private ValueAnimator getArgbAnim() {
+        ValueAnimator valueAnimator = ValueAnimator.ofInt(0x00000000, 0xFFFFFFFF, 0xFFD81B60);
+        valueAnimator.setDuration(2000);
+        valueAnimator.setEvaluator(new ArgbEvaluator());
+        valueAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                int curValue = (int) animation.getAnimatedValue();
+                show.setBackgroundColor(curValue);
+            }
+        });
+        return valueAnimator;
     }
 
     /**
@@ -183,29 +205,45 @@ public class AnimatorActivity extends AppCompatActivity implements View.OnClickL
     /**
      * 透明度变化
      */
-    private Animator getAlphaAnim() {
-        return null;
+    private Animator getAlphaObjectAnim() {
+        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(show, "alpha", 1, 0, 1);
+        objectAnimator.setDuration(2000);
+        objectAnimator.setRepeatCount(1);
+        objectAnimator.setRepeatMode(ValueAnimator.RESTART);
+        objectAnimator.setInterpolator(new AccelerateInterpolator());
+        return objectAnimator;
     }
 
     /**
      * 旋转
      */
-    private Animator getRotateAnim() {
-
-        return null;
+    private ObjectAnimator getRotateObjectAnim() {
+        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(show, "rotation", 0, 360);
+        objectAnimator.setDuration(2000);
+        objectAnimator.setInterpolator(new AccelerateInterpolator());
+        return objectAnimator;
     }
 
     /**
      * 放缩
      */
-    private Animator getScaleAnim() {
-        return null;
+    private Animator getScaleObjectAnim() {
+        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(show, "scaleX", 0, 3, 1);
+        objectAnimator.setDuration(2000);
+        return objectAnimator;
     }
 
     /**
      * 动画集合
      */
     private Animator getAnimSet() {
-        return null;
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.play(getRotateObjectAnim())
+                .with(getArgbAnim())
+                .with(getTextUpdateAnim())
+                .after(getTranslateWithInterpolatorAnim())
+                .before(getAlphaObjectAnim());
+        animatorSet.setDuration(5000);
+        return animatorSet;
     }
 }

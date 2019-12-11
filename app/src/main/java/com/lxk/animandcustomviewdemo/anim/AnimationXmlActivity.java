@@ -7,8 +7,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import com.lxk.animandcustomviewdemo.BaseClickActivity;
 import com.lxk.animandcustomviewdemo.R;
 
 /**
@@ -17,7 +16,7 @@ import com.lxk.animandcustomviewdemo.R;
  * <p>
  * xml 实现补间动画
  */
-public class AnimationXmlActivity extends AppCompatActivity implements View.OnClickListener {
+public class AnimationXmlActivity extends BaseClickActivity {
 
     private Button show;
 
@@ -28,14 +27,16 @@ public class AnimationXmlActivity extends AppCompatActivity implements View.OnCl
 
         show = findViewById(R.id.bt_demo);
 
-        findViewById(R.id.bt_translate).setOnClickListener(this);
-        findViewById(R.id.bt_rotate).setOnClickListener(this);
-        findViewById(R.id.bt_scale).setOnClickListener(this);
-        findViewById(R.id.bt_alpha).setOnClickListener(this);
-        findViewById(R.id.bt_set).setOnClickListener(this);
-        findViewById(R.id.bt_demo).setOnClickListener(this);
-    }
 
+        setClickListener(
+                R.id.bt_translate,
+                R.id.bt_rotate,
+                R.id.bt_scale,
+                R.id.bt_alpha,
+                R.id.bt_set,
+                R.id.bt_demo
+        );
+    }
 
     @Override
     public void onClick(View v) {

@@ -43,7 +43,7 @@
         android:layout_height="320dp"
         android:layout_gravity="center_horizontal"
         android:background="@color/colorAccent"
-        android:text="Demo view"
+        android:text="@string/demo_view"
         android:textAllCaps="false"
         android:textColor="#FFFFFF" />
 

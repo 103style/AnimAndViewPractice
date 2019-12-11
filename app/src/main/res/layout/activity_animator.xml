@@ -23,17 +23,26 @@
         <Button
             android:id="@+id/bt_translate_with_reverse_interpolator"
             style="@style/base_tv"
-            android:text="reverse interpolator " />
+            android:text="Reverse Interpolator " />
 
         <Button
             android:id="@+id/bt_evaluator_test"
             style="@style/base_tv"
-            android:text="Evaluator test" />
+            android:text="IntEvaluator" />
 
         <Button
             android:id="@+id/bt_reserve_evaluator"
             style="@style/base_tv"
             android:text="Reverse Evaluator" />
+
+        <Button
+            android:id="@+id/bt_argb_evaluator"
+            style="@style/base_tv"
+            android:text="ARGB Evaluator" />
+
+        <com.lxk.animandcustomviewdemo.animator.TestEvaluatorView
+            style="@style/base_tv"
+            android:text="CharEvaluatorTest" />
 
         <Button
             android:id="@+id/bt_rotate"
@@ -50,6 +59,11 @@
             style="@style/base_tv"
             android:text="Scale" />
 
+        <com.lxk.animandcustomviewdemo.animator.CustomPropertyAnimView
+            style="@style/base_tv"
+            android:text="CustomPropertyAnim" />
+
+
         <Button
             android:id="@+id/bt_set"
             style="@style/base_tv"
@@ -58,19 +72,13 @@
 
     </com.lxk.animandcustomviewdemo.viewgroup.FlowAlignLayout>
 
-
-    <TextView
-        android:id="@+id/tv_show"
-        style="@style/base_tv"
-        android:text="num" />
-
     <Button
         android:id="@+id/bt_demo"
         android:layout_width="240dp"
         android:layout_height="240dp"
         android:layout_gravity="center_horizontal"
         android:background="@color/colorAccent"
-        android:text="Demo view"
+        android:text="@string/demo_view"
         android:textAllCaps="false"
         android:textColor="#FFFFFF" />
 
