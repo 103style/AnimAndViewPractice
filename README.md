@@ -13,8 +13,8 @@ Anim and CustomView exercise Demo
 * ![translation.gif](https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/anim_xml/translation.gif)
 
 #### RecyclerView
-* ![recyclerview](https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/recyclerview/recyclerview.gif)
+* ![recyclerview.gif](https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/recyclerview/recyclerview.gif)
 * ![recyclerview3d.gif](https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/recyclerview/recyclerview3d.gif)
 
 #### FlowAlignLayout
-* ![FlowAlignLayout](https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/viewgroup/FlowAlignLayout.gif)
+* ![FlowAlignLayout.gif](https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/viewgroup/FlowAlignLayout.gif)
