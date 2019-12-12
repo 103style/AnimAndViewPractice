@@ -28,3 +28,8 @@ Anim and CustomView exercise Demo
 <img src="https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/animator/transaltion.gif"  height="255" width="155"> <img src="https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/animator/evaluator.gif"  height="255" width="155"> <img src="https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/animator/ObjectAnimator.gif"  height="255" width="155"> <img src="https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/animator/AnimatorSet.gif"  height="255" width="155"> 
 
 ---
+
+#### AnimatorXML
+<img src="https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/animator_xml/XmlAnimator.gif"  height="272" width="163"> <img src="https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/animator_xml/menuAnim.gif"  height="272" width="163"> 
+
+---
