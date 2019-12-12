@@ -12,13 +12,6 @@ Anim and CustomView exercise Demo
 
 ---
 
-#### RecyclerView
-![recyclerview.gif](https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/recyclerview/recyclerview.gif)
-
-![recyclerview3d.gif](https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/recyclerview/recyclerview3d.gif)
-
----
-
 #### FlowAlignLayout
 ![FlowAlignLayout.gif](https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/viewgroup/FlowAlignLayout.gif)
 
@@ -31,5 +24,13 @@ Anim and CustomView exercise Demo
 
 #### AnimatorXML
 <img src="https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/animator_xml/XmlAnimator.gif"  height="272" width="163"> <img src="https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/animator_xml/menuAnim.gif"  height="272" width="163"> 
+
+---
+
+
+#### RecyclerView
+![recyclerview.gif](https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/recyclerview/recyclerview.gif)
+
+![recyclerview3d.gif](https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/recyclerview/recyclerview3d.gif)
 
 ---
