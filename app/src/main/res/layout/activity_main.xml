@@ -6,27 +6,32 @@
 
     <Button
         android:id="@+id/animation_xml"
-        style="@style/base_tv"
+        style="@style/item_style"
         android:text="Animation_xml" />
 
     <Button
         android:id="@+id/animation_code"
-        style="@style/base_tv"
+        style="@style/item_style"
         android:text="Animation_code" />
 
     <Button
         android:id="@+id/animator"
-        style="@style/base_tv"
-        android:text="Animator" />
+        style="@style/item_style"
+        android:text="Animator_code" />
+
+    <Button
+        android:id="@+id/animator_xml"
+        style="@style/item_style"
+        android:text="Animator_xml" />
 
     <Button
         android:id="@+id/property_keyframe"
-        style="@style/base_tv"
+        style="@style/item_style"
         android:text="PropertyValuesHolder And KeyFrame" />
 
     <Button
         android:id="@+id/layout_manager_decoration"
-        style="@style/base_tv"
+        style="@style/item_style"
         android:text="LayoutManager and itemDecoration" />
 
 </LinearLayout>

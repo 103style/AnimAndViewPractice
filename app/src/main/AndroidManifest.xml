@@ -40,8 +40,13 @@
             android:screenOrientation="portrait" />
 
         <activity
+            android:name=".animator.AnimatorXmlActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name="com.lxk.animandcustomviewdemo.recyclerview.RecyclerViewActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
+
 
     </application>
 

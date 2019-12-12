@@ -7,6 +7,7 @@ import android.view.View;
 import com.lxk.animandcustomviewdemo.anim.AnimationCodeActivity;
 import com.lxk.animandcustomviewdemo.anim.AnimationXmlActivity;
 import com.lxk.animandcustomviewdemo.animator.AnimatorActivity;
+import com.lxk.animandcustomviewdemo.animator.AnimatorXmlActivity;
 import com.lxk.animandcustomviewdemo.animator.PropertyValuesHolderAndKeyFrameActivity;
 import com.lxk.animandcustomviewdemo.recyclerview.RecyclerViewActivity;
 
@@ -25,6 +26,7 @@ public class MainActivity extends BaseClickActivity {
                 R.id.animation_xml,
                 R.id.animation_code,
                 R.id.animator,
+                R.id.animator_xml,
                 R.id.property_keyframe,
                 R.id.layout_manager_decoration
         );
@@ -42,6 +44,9 @@ public class MainActivity extends BaseClickActivity {
                 break;
             case R.id.animator:
                 c = AnimatorActivity.class;
+                break;
+            case R.id.animator_xml:
+                c = AnimatorXmlActivity.class;
                 break;
             case R.id.property_keyframe:
                 c = PropertyValuesHolderAndKeyFrameActivity.class;

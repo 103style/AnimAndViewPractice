@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.lxk.animandcustomviewdemo.viewgroup.FlowAlignLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:align_type="CENTER">
+
+        <Button
+            android:id="@+id/bt_xml_alpha"
+            style="@style/base_tv"
+            android:text="AnimatorAlpha" />
+
+        <Button
+            android:id="@+id/bt_object_alpha"
+            style="@style/base_tv"
+            android:text="ObjectAnimatorAlpha" />
+
+        <Button
+            android:id="@+id/bt_object_color"
+            style="@style/base_tv"
+            android:text="ObjectAnimatorBgColor" />
+
+        <Button
+            android:id="@+id/bt_animator_set"
+            style="@style/base_tv"
+            android:text="AnimatorSet" />
+
+    </com.lxk.animandcustomviewdemo.viewgroup.FlowAlignLayout>
+
+
+    <FrameLayout
+        android:id="@+id/menu_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        android:padding="8dp">
+
+        <Button
+            android:id="@+id/bt_demo"
+            android:layout_width="320dp"
+            android:layout_height="320dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/colorAccent"
+            android:text="@string/demo_view"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@drawable/bg_orange_light" />
+
+        <Button
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@drawable/bg_blue_light" />
+
+        <Button
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@drawable/bg_red_light" />
+
+        <Button
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@drawable/bg_purple" />
+
+        <Button
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@drawable/bg_green_light" />
+
+        <Button
+            android:id="@+id/menu_switch"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@drawable/bg_color_primary" />
+    </FrameLayout>
+
+</LinearLayout>
