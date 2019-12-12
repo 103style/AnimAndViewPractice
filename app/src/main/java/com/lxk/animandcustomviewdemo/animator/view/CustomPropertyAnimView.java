@@ -11,7 +11,7 @@ import androidx.appcompat.widget.AppCompatButton;
 /**
  * @author https://github.com/103style
  * @date 2019/12/11 15:53
- * 自定义属性 的 属性动画 demo
+ * 验证 自定义属性 的 属性动画 demo
  */
 public class CustomPropertyAnimView extends AppCompatButton {
 

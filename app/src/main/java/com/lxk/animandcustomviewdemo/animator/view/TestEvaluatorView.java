@@ -13,6 +13,7 @@ import com.lxk.animandcustomviewdemo.animator.evaluator.CharEvaluator;
 /**
  * @author https://github.com/103style
  * @date 2019/12/11 15:53
+ * 自定义 TypeEvaluator 的测试demo
  */
 public class TestEvaluatorView extends AppCompatButton {
 

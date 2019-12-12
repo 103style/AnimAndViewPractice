@@ -21,9 +21,14 @@
             android:text="PropertyValuesHolder" />
 
         <Button
-            android:id="@+id/key_frame_test"
+            android:id="@+id/keyframe_test"
             style="@style/base_tv"
-            android:text="KeyFrame Test" />
+            android:text="Keyframe Test" />
+
+        <com.lxk.animandcustomviewdemo.animator.view.ObjectHolderView
+            android:id="@+id/keyframe_ofKeyframe_test"
+            style="@style/base_tv"
+            android:text="@string/keyframe_ofKeyframe_test" />
 
     </com.lxk.animandcustomviewdemo.viewgroup.FlowAlignLayout>
 
