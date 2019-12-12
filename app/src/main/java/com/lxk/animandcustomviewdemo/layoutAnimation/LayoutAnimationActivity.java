@@ -111,9 +111,9 @@ public class LayoutAnimationActivity extends BaseClickActivity {
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.slide_in_left);
         LayoutAnimationController animationController = new LayoutAnimationController(animation);
         animationController.setDelay(1);
-//        animationController.setOrder(LayoutAnimationController.ORDER_NORMAL);
+        animationController.setOrder(LayoutAnimationController.ORDER_NORMAL);
 //        animationController.setOrder(LayoutAnimationController.ORDER_REVERSE);
-        animationController.setOrder(LayoutAnimationController.ORDER_RANDOM);
+//        animationController.setOrder(LayoutAnimationController.ORDER_RANDOM);
         animationController.setInterpolator(new AccelerateInterpolator());
         return animationController;
     }
