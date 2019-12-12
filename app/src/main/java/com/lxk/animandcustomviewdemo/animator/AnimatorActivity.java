@@ -25,7 +25,7 @@ import com.lxk.animandcustomviewdemo.animator.interpolator.ReverseInterpolator;
  * @date 2019/12/10 14:33
  * 属性动画
  */
-public class AnimatorActivity extends BaseClickActivity implements View.OnClickListener {
+public class AnimatorActivity extends BaseClickActivity {
 
     private final String TAG = AnimatorActivity.class.getSimpleName();
     private Button show;

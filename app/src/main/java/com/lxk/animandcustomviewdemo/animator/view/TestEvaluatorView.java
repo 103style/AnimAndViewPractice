@@ -1,4 +1,4 @@
-package com.lxk.animandcustomviewdemo.animator;
+package com.lxk.animandcustomviewdemo.animator.view;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;

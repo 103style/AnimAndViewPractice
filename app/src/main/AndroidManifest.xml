@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.lxk.animandcustomviewdemo.MainActivity">
+        <activity
+            android:name="com.lxk.animandcustomviewdemo.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,15 +19,25 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.lxk.animandcustomviewdemo.anim.AnimationXmlActivity">
+        <activity
+            android:name="com.lxk.animandcustomviewdemo.anim.AnimationXmlActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
 
-        <activity android:name="com.lxk.animandcustomviewdemo.anim.AnimationCodeActivity" />
+        <activity
+            android:name="com.lxk.animandcustomviewdemo.anim.AnimationCodeActivity"
+            android:screenOrientation="portrait" />
 
-        <activity android:name="com.lxk.animandcustomviewdemo.animator.AnimatorActivity" />
+        <activity
+            android:name="com.lxk.animandcustomviewdemo.animator.AnimatorActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.lxk.animandcustomviewdemo.animator.PropertyValuesHolderAndKeyFrameActivity"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name="com.lxk.animandcustomviewdemo.recyclerview.RecyclerViewActivity"

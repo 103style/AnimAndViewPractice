@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.lxk.animandcustomviewdemo.viewgroup.FlowAlignLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:align_type="SAME_GAP">
+
+        <Button
+            android:id="@+id/property_values_holder_float"
+            style="@style/base_tv"
+            android:text="PropertyValuesHolder" />
+
+        <com.lxk.animandcustomviewdemo.animator.view.ObjectHolderView
+            android:id="@+id/property_values_holder_object"
+            style="@style/base_tv"
+            android:text="PropertyValuesHolder" />
+
+        <Button
+            android:id="@+id/key_frame_test"
+            style="@style/base_tv"
+            android:text="KeyFrame Test" />
+
+    </com.lxk.animandcustomviewdemo.viewgroup.FlowAlignLayout>
+
+    <ImageView
+        android:id="@+id/show"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:src="@mipmap/ic_launcher" />
+
+</LinearLayout>

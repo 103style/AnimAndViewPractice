@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">AnimAndCustomViewDemo</string>
     <string name="demo_view">Demo view</string>
+    <string name="test">你戳啥</string>
 </resources>

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.lxk.animandcustomviewdemo.viewgroup.FlowLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <Button
         android:id="@+id/animation_xml"
@@ -19,9 +20,13 @@
         android:text="Animator" />
 
     <Button
+        android:id="@+id/property_keyframe"
+        style="@style/base_tv"
+        android:text="PropertyValuesHolder And KeyFrame" />
+
+    <Button
         android:id="@+id/layout_manager_decoration"
         style="@style/base_tv"
-        android:text="Layoutmanager and itemDecoration" />
+        android:text="LayoutManager and itemDecoration" />
 
-
-</com.lxk.animandcustomviewdemo.viewgroup.FlowLayout>
+</LinearLayout>

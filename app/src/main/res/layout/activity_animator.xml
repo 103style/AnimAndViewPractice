@@ -40,7 +40,8 @@
             style="@style/base_tv"
             android:text="ARGB Evaluator" />
 
-        <com.lxk.animandcustomviewdemo.animator.TestEvaluatorView
+        <!-- 实现属性动画 -->
+        <com.lxk.animandcustomviewdemo.animator.view.TestEvaluatorView
             style="@style/base_tv"
             android:text="CharEvaluatorTest" />
 
@@ -59,10 +60,10 @@
             style="@style/base_tv"
             android:text="Scale" />
 
-        <com.lxk.animandcustomviewdemo.animator.CustomPropertyAnimView
+        <!-- 实现自定义属性动画 -->
+        <com.lxk.animandcustomviewdemo.animator.view.CustomPropertyAnimView
             style="@style/base_tv"
             android:text="CustomPropertyAnim" />
-
 
         <Button
             android:id="@+id/bt_set"
@@ -77,6 +78,7 @@
         android:layout_width="240dp"
         android:layout_height="240dp"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
         android:background="@color/colorAccent"
         android:text="@string/demo_view"
         android:textAllCaps="false"
