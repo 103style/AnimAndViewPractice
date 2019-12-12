@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- @author https://github.com/103style
+     @date 2019/12/12 17:05 -->
+
+<layoutAnimation xmlns:android="http://schemas.android.com/apk/res/android"
+    android:animation="@anim/slide_in_left"
+    android:animationOrder="normal"
+    android:delay="1" />
+
+
+    <!-- android:delay              每个 item 的动画开始延时，取值是 android:animation 所指定动画时长的倍数,
+                                    取值类型可以是float类型，也可以是百分数，默认是0.5 -->
+    <!-- android:animationOrder     viewGroup 中的控件动画开始顺序，取值有normal(正序)、reverse(倒序)、random(随机)-->
+    <!-- android:animation          每个 item 入场所要应用的动画。 -->

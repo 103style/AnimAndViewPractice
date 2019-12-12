@@ -4,10 +4,10 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.lxk.animandcustomviewdemo.BaseClickActivity;
 import com.lxk.animandcustomviewdemo.R;
 
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import java.util.List;
  * @author https://github.com/103style
  * @date 2019/11/14 16:29
  */
-public class RecyclerViewActivity extends AppCompatActivity implements View.OnClickListener {
+public class RecyclerViewActivity extends BaseClickActivity {
 
     private RecyclerView rv;
     private TestRecyclerView cRv;
@@ -29,11 +29,14 @@ public class RecyclerViewActivity extends AppCompatActivity implements View.OnCl
         setContentView(R.layout.activity_recyclerview);
         rv = findViewById(R.id.rv_test);
         cRv = findViewById(R.id.crv_test);
-        findViewById(R.id.linear_layout_manager).setOnClickListener(this);
-        findViewById(R.id.item_decoration).setOnClickListener(this);
-        findViewById(R.id.recycler_offset_children).setOnClickListener(this);
-        findViewById(R.id.recycler_layoutmanager).setOnClickListener(this);
-        findViewById(R.id.rv_3d).setOnClickListener(this);
+
+        setClickListener(
+                R.id.linear_layout_manager,
+                R.id.item_decoration,
+                R.id.recycler_offset_children,
+                R.id.recycler_layoutmanager,
+                R.id.rv_3d
+        );
     }
 
     private RecyclerView.Adapter getAdapter() {
@@ -58,23 +61,26 @@ public class RecyclerViewActivity extends AppCompatActivity implements View.OnCl
                 rv.setLayoutManager(layoutManager);
                 rv.setVisibility(View.VISIBLE);
                 break;
+
             case R.id.linear_layout_manager:
                 rv.removeItemDecoration(itemDecoration);
                 layoutManager = new LinearLayoutManager(this);
                 rv.setLayoutManager(layoutManager);
                 rv.setVisibility(View.VISIBLE);
                 break;
+
             case R.id.recycler_offset_children:
                 layoutManager = new TestLayoutManager();
                 rv.setLayoutManager(layoutManager);
                 rv.setVisibility(View.VISIBLE);
-
                 break;
+
             case R.id.recycler_layoutmanager:
                 layoutManager = new TestLayout3Manager();
                 rv.setLayoutManager(layoutManager);
                 rv.setVisibility(View.VISIBLE);
                 break;
+
             case R.id.rv_3d:
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                 layoutManager = new TestLayout4Manager();
@@ -82,6 +88,7 @@ public class RecyclerViewActivity extends AppCompatActivity implements View.OnCl
                 cRv.setVisibility(View.VISIBLE);
                 cRv.setAdapter(getAdapter());
                 break;
+
             default:
                 break;
         }

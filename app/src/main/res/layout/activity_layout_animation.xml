@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.lxk.animandcustomviewdemo.viewgroup.FlowAlignLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:align_type="CENTER">
+
+        <Button
+            android:id="@+id/bt_list_view_anim_attr"
+            style="@style/base_tv"
+            android:text="ListViewAnimIWithAttr" />
+
+        <Button
+            android:id="@+id/bt_list_view_anim_controller"
+            style="@style/base_tv"
+            android:text="ListViewAnimationController" />
+
+        <Button
+            android:id="@+id/bt_grid_view_anim_attr"
+            style="@style/base_tv"
+            android:text="GridViewAnimWithAttr" />
+
+        <Button
+            android:id="@+id/bt_grid_view_anim_controller"
+            style="@style/base_tv"
+            android:text="GridViewAnimationController" />
+
+    </com.lxk.animandcustomviewdemo.viewgroup.FlowAlignLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/lv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layoutAnimation="@anim/layout_animation_test"
+            android:visibility="gone" />
+
+        <ListView
+            android:id="@+id/lv_code"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+
+        <GridView
+            android:id="@+id/gv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layoutAnimation="@anim/grid_layout_animation_test"
+            android:numColumns="6"
+            android:visibility="gone" />
+
+        <GridView
+            android:id="@+id/gv_code"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:numColumns="6"
+            android:visibility="gone" />
+
+    </FrameLayout>
+
+
+</LinearLayout>
