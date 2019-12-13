@@ -44,6 +44,12 @@ Anim and CustomView exercise Demo
 
 <img src="https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/layoutanimation/listviewLayoutAnimation.gif"  height="272" width="163"> <img src="https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/layoutanimation/gridviewLayoutAnimation.gif"  height="272" width="163"> 
 
+
+[AnimateLayoutChangesActivity.java](https://github.com/103style/AnimAndCustomViewDemo/tree/master/app/src/main/java/com/lxk/animandcustomviewdemo/layoutAnimation/AnimateLayoutChangesActivity.java)
+
+<img src="https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/layoutanimation/defaultLayoutTransition.gif"  height="262" width="155"> <img src="https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/layoutanimation/updateLayoutTransition.gif"  height="262" width="155">
+
+
 ---
 
 #### RecyclerView
