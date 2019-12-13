@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- @author https://github.com/103style
+     @date 2019/12/13 10:54 -->
+
+<objectAnimator xmlns:android="http://schemas.android.com/apk/res/android"
+    android:propertyName="translationX"
+    android:valueFrom="0"
+    android:valueTo="-200"
+    android:valueType="floatType" />
+
+    <!--doc: https://developer.android.com/guide/topics/resources/animation-resource#Property -->
+
+    <!--<set
+        android:ordering=["together" | "sequentially"]                             播放顺序>-->
+
+
+    <!--<animator-->
+    <!--android:duration="int"                                                     动画持续时间，以毫秒为单位 -->
+    <!--android:valueFrom="float | int | color"                                    初始动化值 -->
+    <!--android:valueTo="float | int | color"                                      动画结束值 -->
+    <!--android:startOffset="int"                                                  动画激活延时 -->
+    <!--android:repeatCount="int"                                                  动画重复次数 -->
+    <!--android:repeatMode=["repeat" | "reverse"]                                  动画重复模式-->
+    <!--android:valueType=["intType" | "floatType" | "colorType" | "pathType"]     参数值类型-->
+    <!--android:interpolator                                                       设定插值器，其实就是指定的动作效果-->
+
+    <!--<objectAnimator-->
+    <!--android:propertyName="string"                                              属性名-->
+    <!--android:duration="int"                                                     动画持续时间，以毫秒为单位 -->
+    <!--android:valueFrom="float | int | color"                                    初始动化值 -->
+    <!--android:valueTo="float | int | color"                                      动画结束值 -->
+    <!--android:startOffset="int"                                                  动画激活延时 -->
+    <!--android:repeatCount="int"                                                  动画重复次数 -->
+    <!--android:repeatMode=["repeat" | "reverse"]                                  动画重复模式-->
+    <!--android:valueType=["intType" | "floatType" | "colorType" | "pathType"]     参数值类型-->
+    <!--android:interpolator                                                       设定插值器，其实就是指定的动作效果-->
+
+
+    <!--interpolator doc : https://developer.android.com/guide/topics/resources/animation-resource.html#Interpolators-->
+    <!--AccelerateDecelerateInterpolator:   @android:anim/accelerate_decelerate_interpolator
+                                            在动画开始与结束的地方速率改变比较慢，在中间的时候加速-->
+    <!--AccelerateInterpolator:             @android:anim/accelerate_interpolator
+                                            在动画开始的地方速率改变比较慢，然后开始加速-->
+    <!--AnticipateInterpolator:             @android:anim/anticipate_interpolator
+                                            开始的时候向后然后向前甩-->
+    <!--AnticipateOvershootInterpolator:    @android:anim/anticipate_overshoot_interpolator
+                                            开始的时候向后然后向前甩一定值后返回最后的值-->
+    <!--BounceInterpolator:                 @android:anim/bounce_interpolator
+                                            动画结束的时候弹起-->
+    <!--CycleInterpolator:                  @android:anim/cycle_interpolator
+                                            动画循环播放特定的次数，速率改变沿着正弦曲线-->
+    <!--DecelerateInterpolator:             @android:anim/decelerate_interpolator
+                                            在动画开始的地方快然后慢-->
+    <!--LinearInterpolator:                 @android:anim/linear_interpolator
+                                            以常量速率改变-->
+    <!--OvershootInterpolator:              @android:anim/overshoot_interpolator
+                                            向前甩一定值后再回到原来位置-->

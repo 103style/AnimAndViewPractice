@@ -9,6 +9,7 @@ import com.lxk.animandcustomviewdemo.anim.AnimationXmlActivity;
 import com.lxk.animandcustomviewdemo.animator.AnimatorActivity;
 import com.lxk.animandcustomviewdemo.animator.AnimatorXmlActivity;
 import com.lxk.animandcustomviewdemo.animator.PropertyValuesHolderAndKeyFrameActivity;
+import com.lxk.animandcustomviewdemo.layoutAnimation.AnimateLayoutChangesActivity;
 import com.lxk.animandcustomviewdemo.layoutAnimation.LayoutAnimationActivity;
 import com.lxk.animandcustomviewdemo.recyclerview.RecyclerViewActivity;
 
@@ -31,6 +32,7 @@ public class MainActivity extends BaseClickActivity {
                 R.id.animator_xml,
                 R.id.property_keyframe,
                 R.id.layout_anim,
+                R.id.layout_animate_changes,
                 R.id.layout_manager_decoration
         );
     }
@@ -59,6 +61,9 @@ public class MainActivity extends BaseClickActivity {
                 break;
             case R.id.layout_anim:
                 c = LayoutAnimationActivity.class;
+                break;
+            case R.id.layout_animate_changes:
+                c = AnimateLayoutChangesActivity.class;
                 break;
             default:
                 break;

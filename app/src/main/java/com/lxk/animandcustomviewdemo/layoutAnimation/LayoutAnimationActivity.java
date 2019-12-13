@@ -25,8 +25,8 @@ import java.util.List;
  */
 public class LayoutAnimationActivity extends BaseClickActivity {
 
-    private ListView listView, listViewCode;
-    private GridView gridView, gridViewCode;
+    private ListView listView, listViewController;
+    private GridView gridView, gridViewController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +45,9 @@ public class LayoutAnimationActivity extends BaseClickActivity {
 
     private void initView() {
         listView = findViewById(R.id.lv);
-        listViewCode = findViewById(R.id.lv_code);
+        listViewController = findViewById(R.id.lv_code);
         gridView = findViewById(R.id.gv);
-        gridViewCode = findViewById(R.id.gv_code);
+        gridViewController = findViewById(R.id.gv_code);
     }
 
     @Override
@@ -71,12 +71,11 @@ public class LayoutAnimationActivity extends BaseClickActivity {
         }
     }
 
-
     private void reset() {
         listView.setVisibility(View.GONE);
-        listViewCode.setVisibility(View.GONE);
+        listViewController.setVisibility(View.GONE);
         gridView.setVisibility(View.GONE);
-        gridViewCode.setVisibility(View.GONE);
+        gridViewController.setVisibility(View.GONE);
     }
 
     /**
@@ -98,10 +97,10 @@ public class LayoutAnimationActivity extends BaseClickActivity {
      * 每次点击 setAdapter 或者 adapter.notifyDataSetChanged 展示在可视区域的都会有动画
      */
     private void testListViewLayoutAnimController() {
-        listViewCode.setVisibility(View.VISIBLE);
+        listViewController.setVisibility(View.VISIBLE);
         ArrayAdapter<String> mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1, getData());
-        listViewCode.setLayoutAnimation(getLayoutAnimationController());
-        listViewCode.setAdapter(mAdapter);
+        listViewController.setLayoutAnimation(getLayoutAnimationController());
+        listViewController.setAdapter(mAdapter);
     }
 
     /**
@@ -142,15 +141,15 @@ public class LayoutAnimationActivity extends BaseClickActivity {
      * 通过代码设置, 每次点击 setAdapter 或者 adapter.notifyDataSetChanged 展示在可视区域的都会有动画
      */
     private void testGridLayoutAnimController() {
-        gridViewCode.setVisibility(View.VISIBLE);
+        gridViewController.setVisibility(View.VISIBLE);
 
-        gridViewCode.setLayoutAnimation(getGridLayoutAnimationController());
+        gridViewController.setLayoutAnimation(getGridLayoutAnimationController());
 
-        if (gridViewCode.getAdapter() == null) {
+        if (gridViewController.getAdapter() == null) {
             ArrayAdapter<String> mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1, getData());
-            gridViewCode.setAdapter(mAdapter);
+            gridViewController.setAdapter(mAdapter);
         } else {
-            ((BaseAdapter) (gridViewCode.getAdapter())).notifyDataSetChanged();
+            ((BaseAdapter) (gridViewController.getAdapter())).notifyDataSetChanged();
         }
     }
 
