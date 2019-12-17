@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * @author https://github.com/103style
  * @date 2019/12/10 15:06
- * 在FlowLayout的基础上添加 对其属性
+ * 在FlowLayout的基础上添加 对齐属性
  */
 public class FlowAlignLayout extends ViewGroup {
 
@@ -237,7 +237,6 @@ public class FlowAlignLayout extends ViewGroup {
         }
     }
 
-
     private void layoutWithSameCap() {
         int childIndex = 0;
         //布局的上边距的位置
@@ -275,7 +274,6 @@ public class FlowAlignLayout extends ViewGroup {
             top += lineHeight;
         }
     }
-
 
     @IntDef({LEFT, RIGHT, CENTER, SAME_GAP})
     @Retention(RetentionPolicy.SOURCE)
