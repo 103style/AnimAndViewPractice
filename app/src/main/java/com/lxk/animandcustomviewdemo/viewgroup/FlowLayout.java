@@ -89,8 +89,8 @@ public class FlowLayout extends ViewGroup {
         }
 
         //根据宽高的限制符 来设置对应的宽高
-        setMeasuredDimension((measureWidthMode == MeasureSpec.EXACTLY) ? measureWidth : width,
-                (measureHeightMode == MeasureSpec.EXACTLY) ? measureHeight : height);
+        setMeasuredDimension(measureWidthMode == MeasureSpec.EXACTLY ? measureWidth : width,
+                measureHeightMode == MeasureSpec.EXACTLY ? measureHeight : height);
     }
 
     @Override
