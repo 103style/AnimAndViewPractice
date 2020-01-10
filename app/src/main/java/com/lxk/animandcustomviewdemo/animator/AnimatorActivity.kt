@@ -133,7 +133,7 @@ class AnimatorActivity : BaseClickActivity() {
         valueAnimator.interpolator = AccelerateDecelerateInterpolator()
         valueAnimator.addUpdateListener { animation ->
             val curValue = animation.animatedValue as Int
-            show!!.setBackgroundColor(curValue)
+            show?.setBackgroundColor(curValue)
         }
         return valueAnimator
     }
