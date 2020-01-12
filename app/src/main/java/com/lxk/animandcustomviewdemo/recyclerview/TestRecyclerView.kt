@@ -11,34 +11,15 @@ import androidx.recyclerview.widget.RecyclerView
  * @author https://github.com/103style
  * @date 2020/1/12 17:28
  */
-class TestRecyclerView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : RecyclerView(context, attrs, defStyleAttr) {
+class TestRecyclerView @JvmOverloads constructor(context: Context,
+                                                 attrs: AttributeSet? = null,
+                                                 defStyleAttr: Int = 0)
+    : RecyclerView(context, attrs, defStyleAttr) {
 
     val testLayoutManager: TestLayout4Manager
         get() = layoutManager as TestLayout4Manager
 
-    private val mFlingFriction = ViewConfiguration.getScrollFriction()
-    private var mPhysicalCoeff = 0f
-
-    // g (m/s^2)
-    // inch/meter
-    // look and feel tuning
-    private val physicalCoeff: Float
-        get() {
-            if (mPhysicalCoeff == 0f) {
-                val ppi = this.resources.displayMetrics.density * 160.0f
-                mPhysicalCoeff = (SensorManager.GRAVITY_EARTH
-                        * 39.37f
-                        * ppi
-                        * 0.84f)
-            }
-            return mPhysicalCoeff
-        }
-
     init {
-        init()
-    }
-
-    private fun init() {
         isChildrenDrawingOrderEnabled = true
     }
 
@@ -71,6 +52,25 @@ class TestRecyclerView @JvmOverloads constructor(context: Context, attrs: Attrib
         return super.fling(flingX, velocityY)
     }
 
+
+    //------------惯性滑动START-----------------------
+    private val mFlingFriction = ViewConfiguration.getScrollFriction()
+    private var mPhysicalCoeff = 0f
+
+    // g (m/s^2)
+    // inch/meter
+    // look and feel tuning
+    private val physicalCoeff: Float
+        get() {
+            if (mPhysicalCoeff == 0f) {
+                val ppi = this.resources.displayMetrics.density * 160.0f
+                mPhysicalCoeff = (SensorManager.GRAVITY_EARTH
+                        * 39.37f
+                        * ppi
+                        * 0.84f)
+            }
+            return mPhysicalCoeff
+        }
 
     /**
      * 根据松手后的滑动速度计算出fling的距离
@@ -105,4 +105,5 @@ class TestRecyclerView @JvmOverloads constructor(context: Context, attrs: Attrib
         private val INFLEXION = 0.35f // Tension lines cross at (INFLEXION, 1)
         private val DECELERATION_RATE = (Math.log(0.78) / Math.log(0.9)).toFloat()
     }
+    //------------惯性滑动END-----------------------
 }
