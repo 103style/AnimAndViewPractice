@@ -23,14 +23,14 @@ class MainActivity : BaseClickActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setClickListener(
-                R.id.animation_xml,
-                R.id.animation_code,
-                R.id.animator,
-                R.id.animator_xml,
-                R.id.property_keyframe,
-                R.id.layout_anim,
-                R.id.layout_animate_changes,
-                R.id.layout_manager_decoration
+            R.id.animation_xml,
+            R.id.animation_code,
+            R.id.animator,
+            R.id.animator_xml,
+            R.id.property_keyframe,
+            R.id.layout_anim,
+            R.id.layout_animate_changes,
+            R.id.layout_manager_decoration
         )
     }
 
@@ -46,8 +46,6 @@ class MainActivity : BaseClickActivity() {
             R.id.layout_animate_changes -> AnimateLayoutChangesActivity::class.java
             else -> null
         }
-        if (c != null) {
-            startActivity(Intent(this, c))
-        }
+        c?.let { startActivity(Intent(this, c)) }
     }
 }

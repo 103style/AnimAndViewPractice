@@ -13,10 +13,11 @@ import androidx.appcompat.widget.AppCompatButton
  * @date 2020/1/10 16:56
  * 验证 自定义属性 的 属性动画 demo
  */
-class CustomPropertyAnimView @JvmOverloads constructor(context: Context,
-                                                       attrs: AttributeSet? = null,
-                                                       defStyleAttr: Int = androidx.appcompat.R.attr.buttonStyle)
-    : AppCompatButton(context, attrs, defStyleAttr) {
+class CustomPropertyAnimView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = androidx.appcompat.R.attr.buttonStyle
+) : AppCompatButton(context, attrs, defStyleAttr) {
 
     private var curText: Int = 0
 

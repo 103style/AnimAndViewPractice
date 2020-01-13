@@ -15,7 +15,9 @@ import com.lxk.animandcustomviewdemo.R
  * @author https://github.com/103style
  * @date  2020/1/10 15:04
  */
-class TestAdapter(private var mContext: Context, private var mData: ArrayList<String>?) : RecyclerView.Adapter<TestAdapter.ViewHolder>() {
+class TestAdapter(
+    private var mContext: Context, private var mData: ArrayList<String>?
+) : RecyclerView.Adapter<TestAdapter.ViewHolder>() {
     private val TAG: String = TestAdapter::class.java.name
     private var createCount: Int = 0
 

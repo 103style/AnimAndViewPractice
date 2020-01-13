@@ -10,10 +10,11 @@ import androidx.appcompat.widget.AppCompatButton
  * 测试验证 PropertyValuesHolder.ofObject
  * 测试属性为 CurText
  */
-class ObjectHolderView @JvmOverloads constructor(context: Context,
-                                                 attrs: AttributeSet? = null,
-                                                 defStyleAttr: Int = androidx.appcompat.R.attr.buttonStyle)
-    : AppCompatButton(context, attrs, defStyleAttr) {
+class ObjectHolderView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = androidx.appcompat.R.attr.buttonStyle
+) : AppCompatButton(context, attrs, defStyleAttr) {
 
     fun setCurText(text: String) {
         setText(text)

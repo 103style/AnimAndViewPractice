@@ -8,7 +8,11 @@ import android.view.ViewGroup
  * @author https://github.com/103style
  * @date 2020/1/12 17:34
  */
-class FlowLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : ViewGroup(context, attrs, defStyleAttr) {
+class FlowLayout @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : ViewGroup(context, attrs, defStyleAttr) {
 
     /**
      * 提取边距
@@ -74,8 +78,10 @@ class FlowLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet
         }
 
         //根据宽高的限制符 来设置对应的宽高
-        setMeasuredDimension(if (measureWidthMode == MeasureSpec.EXACTLY) measureWidth else width,
-                if (measureHeightMode == MeasureSpec.EXACTLY) measureHeight else height)
+        setMeasuredDimension(
+            if (measureWidthMode == MeasureSpec.EXACTLY) measureWidth else width,
+            if (measureHeightMode == MeasureSpec.EXACTLY) measureHeight else height
+        )
     }
 
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {

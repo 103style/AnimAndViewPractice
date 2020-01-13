@@ -39,8 +39,10 @@ class TestLayoutManager : RecyclerView.LayoutManager() {
 
     override fun generateDefaultLayoutParams(): RecyclerView.LayoutParams {
         Log.e(TAG, "generateDefaultLayoutParams: ")
-        return RecyclerView.LayoutParams(RecyclerView.LayoutParams.WRAP_CONTENT,
-                RecyclerView.LayoutParams.WRAP_CONTENT)
+        return RecyclerView.LayoutParams(
+            RecyclerView.LayoutParams.WRAP_CONTENT,
+            RecyclerView.LayoutParams.WRAP_CONTENT
+        )
     }
 
     override fun onLayoutChildren(recycler: RecyclerView.Recycler?, state: RecyclerView.State?) {
@@ -95,7 +97,11 @@ class TestLayoutManager : RecyclerView.LayoutManager() {
         return true
     }
 
-    override fun scrollVerticallyBy(dy: Int, recycler: RecyclerView.Recycler?, state: RecyclerView.State?): Int {
+    override fun scrollVerticallyBy(
+        dy: Int,
+        recycler: RecyclerView.Recycler?,
+        state: RecyclerView.State?
+    ): Int {
         var travel = dy
         if (mScrollHeight + dy < 0) {
             //如果滑动到最顶部
@@ -186,7 +192,13 @@ class TestLayoutManager : RecyclerView.LayoutManager() {
             addView(child)
         }
         measureChildWithMargins(child, 0, 0)
-        layoutDecorated(child, rect.left, rect.top - mScrollHeight, rect.right, rect.bottom - mScrollHeight)
+        layoutDecorated(
+            child,
+            rect.left,
+            rect.top - mScrollHeight,
+            rect.right,
+            rect.bottom - mScrollHeight
+        )
     }
 
 
@@ -196,7 +208,12 @@ class TestLayoutManager : RecyclerView.LayoutManager() {
      * @param travel 滑动距离
      */
     private fun getVisibleArea(travel: Int): Rect {
-        return Rect(paddingLeft, paddingTop + mScrollHeight + travel, width + paddingRight, usableHeight + mScrollHeight + travel)
+        return Rect(
+            paddingLeft,
+            paddingTop + mScrollHeight + travel,
+            width + paddingRight,
+            usableHeight + mScrollHeight + travel
+        )
     }
 
 

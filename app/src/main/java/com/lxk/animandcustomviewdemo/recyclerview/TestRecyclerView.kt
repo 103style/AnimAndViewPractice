@@ -11,10 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
  * @author https://github.com/103style
  * @date 2020/1/12 17:28
  */
-class TestRecyclerView @JvmOverloads constructor(context: Context,
-                                                 attrs: AttributeSet? = null,
-                                                 defStyleAttr: Int = 0)
-    : RecyclerView(context, attrs, defStyleAttr) {
+class TestRecyclerView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : RecyclerView(context, attrs, defStyleAttr) {
 
     val testLayoutManager: TestLayout4Manager
         get() = layoutManager as TestLayout4Manager
@@ -86,7 +87,8 @@ class TestRecyclerView @JvmOverloads constructor(context: Context,
      */
     private fun getVelocity(distance: Double): Int {
         val decelMinusOne = DECELERATION_RATE - 1.0
-        val aecel = Math.log(distance / (mFlingFriction * mPhysicalCoeff)) * decelMinusOne / DECELERATION_RATE
+        val aecel =
+            Math.log(distance / (mFlingFriction * mPhysicalCoeff)) * decelMinusOne / DECELERATION_RATE
         return Math.abs((Math.exp(aecel) * (mFlingFriction * mPhysicalCoeff) / INFLEXION).toInt())
     }
 

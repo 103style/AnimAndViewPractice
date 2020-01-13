@@ -13,7 +13,11 @@ import java.util.*
  * @date 2020/1/12 17:34
  * 在FlowLayout的基础上添加 对齐属性
  */
-class FlowAlignLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : ViewGroup(context, attrs, defStyleAttr) {
+class FlowAlignLayout @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : ViewGroup(context, attrs, defStyleAttr) {
     /**
      * 对其模式
      */
@@ -75,7 +79,8 @@ class FlowAlignLayout @JvmOverloads constructor(context: Context, attrs: Attribu
             val layoutParams = child.layoutParams as MarginLayoutParams
 
             val childWidth = child.measuredWidth + layoutParams.marginStart + layoutParams.marginEnd
-            val childHeight = child.measuredHeight + layoutParams.topMargin + layoutParams.bottomMargin
+            val childHeight =
+                child.measuredHeight + layoutParams.topMargin + layoutParams.bottomMargin
 
             if (lineWidth + childWidth > measureWidth) {
                 //当即将超出布局宽度时  这里当 childWidth >= measureWidth 也不会有影响
@@ -98,8 +103,10 @@ class FlowAlignLayout @JvmOverloads constructor(context: Context, attrs: Attribu
             }
         }
         //根据布局的宽高属性设置对应的宽高
-        setMeasuredDimension(if (getMode(widthMeasureSpec) == EXACTLY) measureWidth else contentWidth,
-                if (getMode(heightMeasureSpec) == EXACTLY) measureHeight else contentHeight)
+        setMeasuredDimension(
+            if (getMode(widthMeasureSpec) == EXACTLY) measureWidth else contentWidth,
+            if (getMode(heightMeasureSpec) == EXACTLY) measureHeight else contentHeight
+        )
     }
 
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {

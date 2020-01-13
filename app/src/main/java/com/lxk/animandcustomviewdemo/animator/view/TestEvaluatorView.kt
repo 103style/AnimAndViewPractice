@@ -15,9 +15,11 @@ import com.lxk.animandcustomviewdemo.animator.evaluator.CharEvaluator
  * @date 2020/1/10 17:10
  * 自定义 TypeEvaluator 的测试demo
  */
-class TestEvaluatorView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null,
-                                                  defStyleAttr: Int = androidx.appcompat.R.attr.buttonStyle)
-    : AppCompatButton(context, attrs, defStyleAttr) {
+class TestEvaluatorView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = androidx.appcompat.R.attr.buttonStyle
+) : AppCompatButton(context, attrs, defStyleAttr) {
 
     override fun performClick(): Boolean {
         //这里会去执行onclickListener
