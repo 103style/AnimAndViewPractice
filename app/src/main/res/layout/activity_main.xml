@@ -44,4 +44,10 @@
         style="@style/item_style"
         android:text="LayoutManager and itemDecoration" />
 
+
+    <Button
+        android:id="@+id/draw_api"
+        style="@style/item_style"
+        android:text="Draw API" />
+
 </com.lxk.animandcustomviewdemo.viewgroup.FlowAlignLayout>

@@ -12,6 +12,7 @@ import com.lxk.animandcustomviewdemo.animator.PropertyValuesHolderAndKeyFrameAct
 import com.lxk.animandcustomviewdemo.layoutAnimation.AnimateLayoutChangesActivity;
 import com.lxk.animandcustomviewdemo.layoutAnimation.LayoutAnimationActivity;
 import com.lxk.animandcustomviewdemo.recyclerview.RecyclerViewActivity;
+import com.lxk.animandcustomviewdemo.drawapi.DrawDemoActivity;
 
 /**
  * @author https://github.com/103style
@@ -33,7 +34,8 @@ public class MainActivity extends BaseClickActivity {
                 R.id.property_keyframe,
                 R.id.layout_anim,
                 R.id.layout_animate_changes,
-                R.id.layout_manager_decoration
+                R.id.layout_manager_decoration,
+                R.id.draw_api
         );
     }
 
@@ -64,6 +66,9 @@ public class MainActivity extends BaseClickActivity {
                 break;
             case R.id.layout_animate_changes:
                 c = AnimateLayoutChangesActivity.class;
+                break;
+            case R.id.draw_api:
+                c = DrawDemoActivity.class;
                 break;
             default:
                 break;
