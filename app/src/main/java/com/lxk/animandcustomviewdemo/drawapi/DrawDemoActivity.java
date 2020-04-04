@@ -6,7 +6,8 @@ import android.widget.FrameLayout;
 
 import com.lxk.animandcustomviewdemo.BaseClickActivity;
 import com.lxk.animandcustomviewdemo.R;
-import com.lxk.animandcustomviewdemo.drawapi.view.DrawApiBaseView;
+import com.lxk.animandcustomviewdemo.drawapi.view.DrawSimpleDemoView;
+import com.lxk.animandcustomviewdemo.drawapi.view.DrawTextAndPathDemoView;
 
 /**
  * @author https://github.com/103style
@@ -24,7 +25,8 @@ public class DrawDemoActivity extends BaseClickActivity {
         setContentView(R.layout.activity_ui_demo);
         group = findViewById(R.id.group);
         setClickListener(
-                R.id.base_api,
+                R.id.simple,
+                R.id.text_and_path,
                 R.id.group
         );
     }
@@ -33,8 +35,11 @@ public class DrawDemoActivity extends BaseClickActivity {
     public void onClick(View v) {
         View view = null;
         switch (v.getId()) {
-            case R.id.base_api:
-                view = new DrawApiBaseView(this);
+            case R.id.simple:
+                view = new DrawSimpleDemoView(this);
+                break;
+            case R.id.text_and_path:
+                view = new DrawTextAndPathDemoView(this);
                 break;
             case R.id.group:
                 clean();
