@@ -7,6 +7,8 @@ import android.widget.FrameLayout;
 import com.lxk.animandcustomviewdemo.BaseClickActivity;
 import com.lxk.animandcustomviewdemo.R;
 import com.lxk.animandcustomviewdemo.drawapi.view.CanvasChangeDemo;
+import com.lxk.animandcustomviewdemo.drawapi.view.DrawBezierPenView;
+import com.lxk.animandcustomviewdemo.drawapi.view.DrawBezierWaterView;
 import com.lxk.animandcustomviewdemo.drawapi.view.DrawSimpleDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.DrawTextAndPathDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.DrawTextDemoView;
@@ -33,6 +35,8 @@ public class DrawDemoActivity extends BaseClickActivity {
                 R.id.range,
                 R.id.canvas_change,
                 R.id.text,
+                R.id.bezier_pen,
+                R.id.bezier_water,
                 R.id.group
         );
     }
@@ -55,6 +59,12 @@ public class DrawDemoActivity extends BaseClickActivity {
                 break;
             case R.id.text:
                 view = new DrawTextDemoView(this);
+                break;
+            case R.id.bezier_pen:
+                view = new DrawBezierPenView(this);
+                break;
+              case R.id.bezier_water:
+                view = new DrawBezierWaterView(this);
                 break;
             case R.id.group:
                 clean();

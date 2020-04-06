@@ -34,6 +34,17 @@
             style="@style/item_style"
             android:text="Text" />
 
+        <Button
+            android:id="@+id/bezier_pen"
+            style="@style/item_style"
+            android:text="Bezier Pen" />
+
+
+        <Button
+            android:id="@+id/bezier_water"
+            style="@style/item_style"
+            android:text="Bezier Water" />
+
     </com.lxk.animandcustomviewdemo.viewgroup.FlowAlignLayout>
 
 
