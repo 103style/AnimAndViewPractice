@@ -6,6 +6,7 @@ import android.widget.FrameLayout;
 
 import com.lxk.animandcustomviewdemo.BaseClickActivity;
 import com.lxk.animandcustomviewdemo.R;
+import com.lxk.animandcustomviewdemo.drawapi.view.CanvasChangeDemo;
 import com.lxk.animandcustomviewdemo.drawapi.view.DrawSimpleDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.DrawTextAndPathDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.RangeDemo;
@@ -29,6 +30,7 @@ public class DrawDemoActivity extends BaseClickActivity {
                 R.id.simple,
                 R.id.text_and_path,
                 R.id.range,
+                R.id.canvas_change,
                 R.id.group
         );
     }
@@ -45,6 +47,9 @@ public class DrawDemoActivity extends BaseClickActivity {
                 break;
             case R.id.range:
                 view = new RangeDemo(this);
+                break;
+            case R.id.canvas_change:
+                view = new CanvasChangeDemo(this);
                 break;
             case R.id.group:
                 clean();

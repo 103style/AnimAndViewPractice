@@ -22,7 +22,10 @@
             style="@style/item_style"
             android:text="Range" />
 
-
+        <Button
+            android:id="@+id/canvas_change"
+            style="@style/item_style"
+            android:text="Canvas Change" />
 
     </com.lxk.animandcustomviewdemo.viewgroup.FlowAlignLayout>
 
