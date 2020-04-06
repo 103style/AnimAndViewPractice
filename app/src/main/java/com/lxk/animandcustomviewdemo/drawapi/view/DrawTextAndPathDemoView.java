@@ -36,7 +36,7 @@ public class DrawTextAndPathDemoView extends View {
         textPaint.setColor(Color.WHITE);
         //设置阴影
         textPaint.setShadowLayer(10, 15, 15, Color.BLACK);
-        textPaint.setTextSize(64);
+        textPaint.setTextSize(32);
 
         path = new Path();
     }
@@ -139,6 +139,27 @@ public class DrawTextAndPathDemoView extends View {
         canvas.drawPath(path, strokePaint);
         //在路径上绘制文字
         canvas.drawTextOnPath(text, path, offset, offset, textPaint);
+
+        //向左倾斜
+        textPaint.setTextSkewX(0.5f);
+        //设置下划线
+        textPaint.setUnderlineText(true);
+        canvas.drawText("向左倾斜+下划线", gapW, gapH * 17 / 2, textPaint);
+
+        //设置带有删除线效果
+        textPaint.setStrikeThruText(true);
+        //取消下划线
+        textPaint.setUnderlineText(false);
+        ////向右倾斜
+        textPaint.setTextSkewX(-0.5f);
+        canvas.drawText("向右倾斜+删除线", width / 2, gapH * 17 / 2, textPaint);
+
+        //去掉删除线效果
+        textPaint.setStrikeThruText(false);
+        textPaint.setTextScaleX(2);
+        textPaint.setTextSkewX(0);
+        canvas.drawText("横向拉伸2倍", gapW, gapH * 9, textPaint);
+
     }
 
 }

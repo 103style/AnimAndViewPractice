@@ -17,6 +17,12 @@
             style="@style/item_style"
             android:text="TextAndPath" />
 
+        <Button
+            android:id="@+id/range"
+            style="@style/item_style"
+            android:text="Range" />
+
+
 
     </com.lxk.animandcustomviewdemo.viewgroup.FlowAlignLayout>
 
