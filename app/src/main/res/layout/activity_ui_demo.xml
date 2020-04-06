@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <com.lxk.animandcustomviewdemo.viewgroup.FlowAlignLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:align_type="SAME_GAP">
 
         <Button
             android:id="@+id/simple"
@@ -26,6 +28,11 @@
             android:id="@+id/canvas_change"
             style="@style/item_style"
             android:text="Canvas Change" />
+
+        <Button
+            android:id="@+id/text"
+            style="@style/item_style"
+            android:text="Text" />
 
     </com.lxk.animandcustomviewdemo.viewgroup.FlowAlignLayout>
 
