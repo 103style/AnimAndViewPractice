@@ -9,6 +9,7 @@ import com.lxk.animandcustomviewdemo.R;
 import com.lxk.animandcustomviewdemo.drawapi.view.CanvasChangeDemo;
 import com.lxk.animandcustomviewdemo.drawapi.view.DrawBezierPenView;
 import com.lxk.animandcustomviewdemo.drawapi.view.DrawBezierWaterView;
+import com.lxk.animandcustomviewdemo.drawapi.view.DrawPathEffectDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.DrawSimpleDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.DrawTextAndPathDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.DrawTextDemoView;
@@ -39,6 +40,7 @@ public class DrawDemoActivity extends BaseClickActivity {
                 R.id.bezier_pen,
                 R.id.bezier_water,
                 R.id.cap_join,
+                R.id.path_effect,
                 R.id.group
         );
     }
@@ -70,6 +72,9 @@ public class DrawDemoActivity extends BaseClickActivity {
                 break;
             case R.id.cap_join:
                 view = new StrokeCapJoinDemoView(this);
+                break;
+            case R.id.path_effect:
+                view = new DrawPathEffectDemoView(this);
                 break;
             case R.id.group:
                 clean();

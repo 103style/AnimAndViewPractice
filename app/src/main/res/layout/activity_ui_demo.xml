@@ -49,6 +49,11 @@
             style="@style/item_style"
             android:text="Stroke Cap and Join" />
 
+        <Button
+            android:id="@+id/path_effect"
+            style="@style/item_style"
+            android:text="Path Effect" />
+
 
     </com.lxk.animandcustomviewdemo.viewgroup.FlowAlignLayout>
 
