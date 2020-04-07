@@ -62,7 +62,7 @@ public class DrawColorMatrixDemoView extends View {
         canvas.save();
         int translateX = gapW * 5 / 2;
         int translateY = gapH * 2;
-        //只原色的保留透明度和蓝色通道
+        //只保留透明度和蓝色通道
         fillPaint.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(new float[]{
                 0, 0, 0, 0, 0,//R
                 0, 0, 0, 0, 0,//G
@@ -83,7 +83,7 @@ public class DrawColorMatrixDemoView extends View {
         draw(canvas, rect, gapH, "绿色通道");
 
 
-        //只原色的保留透明度和红色通道
+        //只保留透明度和红色通道
         fillPaint.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix(new float[]{
                 1, 0, 0, 0, 0,//R
                 0, 0, 0, 0, 0,//G

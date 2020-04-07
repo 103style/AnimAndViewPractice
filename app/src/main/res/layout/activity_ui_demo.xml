@@ -59,6 +59,11 @@
             style="@style/item_style"
             android:text="Color Matrix" />
 
+        <Button
+            android:id="@+id/color_filter"
+            style="@style/item_style"
+            android:text="Color Filter" />
+
     </com.lxk.animandcustomviewdemo.viewgroup.FlowAlignLayout>
 
 

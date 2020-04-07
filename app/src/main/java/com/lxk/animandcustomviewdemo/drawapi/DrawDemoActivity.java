@@ -9,6 +9,7 @@ import com.lxk.animandcustomviewdemo.R;
 import com.lxk.animandcustomviewdemo.drawapi.view.CanvasChangeDemo;
 import com.lxk.animandcustomviewdemo.drawapi.view.DrawBezierPenView;
 import com.lxk.animandcustomviewdemo.drawapi.view.DrawBezierWaterView;
+import com.lxk.animandcustomviewdemo.drawapi.view.DrawColorFilterDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.DrawColorMatrixDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.DrawPathEffectDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.DrawSimpleDemoView;
@@ -43,6 +44,7 @@ public class DrawDemoActivity extends BaseClickActivity {
                 R.id.cap_join,
                 R.id.path_effect,
                 R.id.color_matrix,
+                R.id.color_filter,
                 R.id.group
         );
     }
@@ -80,6 +82,9 @@ public class DrawDemoActivity extends BaseClickActivity {
                 break;
             case R.id.color_matrix:
                 view = new DrawColorMatrixDemoView(this);
+                break;
+            case R.id.color_filter:
+                view = new DrawColorFilterDemoView(this);
                 break;
             case R.id.group:
                 clean();
