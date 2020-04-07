@@ -22,7 +22,9 @@ public class RangeDemo extends View {
     public RangeDemo(Context context) {
         super(context);
         fillPaint = initPaint(Paint.Style.FILL);
-        fillPaint.setTextSize(32);
+        float scale = getResources().getDisplayMetrics().density;
+        int size = (int) (14 * scale + 0.5f);
+        fillPaint.setTextSize(size);
         strokePaint = initPaint(Paint.Style.STROKE);
     }
 

@@ -9,6 +9,8 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.lxk.animandcustomviewdemo.drawapi.Utils;
+
 /**
  * @author https://github.com/103style
  * @date 2020/4/6 16:28
@@ -28,12 +30,9 @@ public class DrawBezierPenView extends View {
 
     public DrawBezierPenView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        strokePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        //设置画笔颜色
-        strokePaint.setColor(Color.RED);
-        //设置填充样式   Style.FILL/Style.FILL_AND_STROKE/Style.STROKE
-        strokePaint.setStyle(Paint.Style.STROKE);
-        strokePaint.setTextSize(64);
+        strokePaint = Utils.initPaint(context, Paint.Style.STROKE);
+        strokePaint.setStrokeWidth(Utils.doToPx(context, 1));
+        strokePaint.setTextSize(Utils.doToPx(context, 16));
     }
 
     @Override

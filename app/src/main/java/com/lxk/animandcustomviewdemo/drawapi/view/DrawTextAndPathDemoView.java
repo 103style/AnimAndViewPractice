@@ -9,6 +9,8 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.lxk.animandcustomviewdemo.drawapi.Utils;
+
 /**
  * @author https://github.com/103style
  * @date 2020/4/4 17:01
@@ -29,28 +31,18 @@ public class DrawTextAndPathDemoView extends View {
     public DrawTextAndPathDemoView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        fillPaint = initPaint(Paint.Style.FILL);
-        strokePaint = initPaint(Paint.Style.STROKE);
+        fillPaint = Utils.initPaint(context, Paint.Style.FILL);
+        strokePaint = Utils.initPaint(context, Paint.Style.STROKE);
 
-        textPaint = initPaint(Paint.Style.FILL);
+        textPaint = Utils.initPaint(context, Paint.Style.FILL);
         textPaint.setColor(Color.WHITE);
         //设置阴影
         textPaint.setShadowLayer(10, 15, 15, Color.BLACK);
-        textPaint.setTextSize(32);
+        textPaint.setTextSize(Utils.doToPx(context, 14));
 
         path = new Path();
     }
 
-    private Paint initPaint(Paint.Style style) {
-        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        //设置画笔颜色
-        paint.setColor(Color.RED);
-        //设置填充样式   Style.FILL/Style.FILL_AND_STROKE/Style.STROKE
-        paint.setStyle(style);
-        //设置画笔宽度
-        paint.setStrokeWidth(10);
-        return paint;
-    }
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {

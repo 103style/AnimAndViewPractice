@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
 
+import com.lxk.animandcustomviewdemo.drawapi.Utils;
+
 /**
  * @author https://github.com/103style
  * @date 2020/4/6 16:51
@@ -20,15 +22,15 @@ public class DrawBezierWaterView extends View {
     private Path mPath = new Path();
     private int width, height;
     private ValueAnimator valueAnimator;
+    //波的振幅
+    private int amplitude = 32;
 
     public DrawBezierWaterView(Context context) {
         super(context);
-        fillPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        fillPaint = Utils.initPaint(context, Paint.Style.FILL);
         //设置画笔颜色
         fillPaint.setColor(Color.LTGRAY);
-        //设置填充样式   Style.FILL/Style.FILL_AND_STROKE/Style.STROKE
-        fillPaint.setStyle(Paint.Style.FILL);
-        fillPaint.setStrokeWidth(6);
+        amplitude = Utils.doToPx(context, amplitude);
     }
 
     @Override
@@ -50,8 +52,7 @@ public class DrawBezierWaterView extends View {
         //—————————— 以下为示例  开发时不要在 onDraw中通过new创建对象 ——————————
         //重置path
         mPath.reset();
-        //波的振幅
-        int amplitude = 100;
+
         //左右偏移的距离
         int gap = 2 * r;
         //移动到坐标的偏移点

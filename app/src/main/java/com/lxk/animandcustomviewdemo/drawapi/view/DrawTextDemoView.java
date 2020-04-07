@@ -7,6 +7,8 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.lxk.animandcustomviewdemo.drawapi.Utils;
+
 /**
  * @author https://github.com/103style
  * @date 2020/4/6 15:43
@@ -25,11 +27,8 @@ public class DrawTextDemoView extends View {
 
     public DrawTextDemoView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        //设置画笔颜色
-        textPaint.setColor(Color.RED);
-        //设置填充样式   Style.FILL/Style.FILL_AND_STROKE/Style.STROKE
-        textPaint.setStyle(Paint.Style.FILL);
+        textPaint = Utils.initPaint(context, Paint.Style.FILL);
+        textPaint.setStrokeWidth(Utils.doToPx(context, 1));
     }
 
     @Override
@@ -50,7 +49,7 @@ public class DrawTextDemoView extends View {
         int gapW = width / 10;
         int gapH = height / 10;
 
-        textPaint.setTextSize(64);
+        textPaint.setTextSize(Utils.doToPx(getContext(),16));
 
         int baseX = 0, baseY = gapH * 5;
         String txt = "What a funny demo!";
@@ -83,7 +82,7 @@ public class DrawTextDemoView extends View {
         float centerY = top + (bottom - top) / 2;
         canvas.drawLine(baseX, centerY, width, centerY, textPaint);
 
-        textPaint.setTextSize(32);
+        textPaint.setTextSize(Utils.doToPx(getContext(),12));
         textPaint.setColor(Color.WHITE);
         fontMetrics = textPaint.getFontMetrics();
         canvas.drawText("fontMetrics.top = " + fontMetrics.top, baseX, gapH, textPaint);

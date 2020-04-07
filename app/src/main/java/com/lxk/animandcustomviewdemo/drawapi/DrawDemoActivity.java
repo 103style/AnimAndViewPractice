@@ -13,6 +13,7 @@ import com.lxk.animandcustomviewdemo.drawapi.view.DrawSimpleDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.DrawTextAndPathDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.DrawTextDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.RangeDemo;
+import com.lxk.animandcustomviewdemo.drawapi.view.StrokeCapJoinDemoView;
 
 /**
  * @author https://github.com/103style
@@ -37,6 +38,7 @@ public class DrawDemoActivity extends BaseClickActivity {
                 R.id.text,
                 R.id.bezier_pen,
                 R.id.bezier_water,
+                R.id.cap_join,
                 R.id.group
         );
     }
@@ -63,8 +65,11 @@ public class DrawDemoActivity extends BaseClickActivity {
             case R.id.bezier_pen:
                 view = new DrawBezierPenView(this);
                 break;
-              case R.id.bezier_water:
+            case R.id.bezier_water:
                 view = new DrawBezierWaterView(this);
+                break;
+            case R.id.cap_join:
+                view = new StrokeCapJoinDemoView(this);
                 break;
             case R.id.group:
                 clean();

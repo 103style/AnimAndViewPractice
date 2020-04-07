@@ -39,11 +39,16 @@
             style="@style/item_style"
             android:text="Bezier Pen" />
 
-
         <Button
             android:id="@+id/bezier_water"
             style="@style/item_style"
             android:text="Bezier Water" />
+
+        <Button
+            android:id="@+id/cap_join"
+            style="@style/item_style"
+            android:text="Stroke Cap and Join" />
+
 
     </com.lxk.animandcustomviewdemo.viewgroup.FlowAlignLayout>
 
