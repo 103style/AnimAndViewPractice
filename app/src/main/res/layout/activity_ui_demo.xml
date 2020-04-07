@@ -54,6 +54,10 @@
             style="@style/item_style"
             android:text="Path Effect" />
 
+        <Button
+            android:id="@+id/color_matrix"
+            style="@style/item_style"
+            android:text="Color Matrix" />
 
     </com.lxk.animandcustomviewdemo.viewgroup.FlowAlignLayout>
 
