@@ -15,6 +15,7 @@ import com.lxk.animandcustomviewdemo.drawapi.view.DrawPathEffectDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.DrawSimpleDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.DrawTextAndPathDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.DrawTextDemoView;
+import com.lxk.animandcustomviewdemo.drawapi.view.DrawXfermodeDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.RangeDemo;
 import com.lxk.animandcustomviewdemo.drawapi.view.StrokeCapJoinDemoView;
 
@@ -45,6 +46,7 @@ public class DrawDemoActivity extends BaseClickActivity {
                 R.id.path_effect,
                 R.id.color_matrix,
                 R.id.color_filter,
+                R.id.xfermode,
                 R.id.group
         );
     }
@@ -85,6 +87,9 @@ public class DrawDemoActivity extends BaseClickActivity {
                 break;
             case R.id.color_filter:
                 view = new DrawColorFilterDemoView(this);
+                break;
+            case R.id.xfermode:
+                view = new DrawXfermodeDemoView(this);
                 break;
             case R.id.group:
                 clean();
