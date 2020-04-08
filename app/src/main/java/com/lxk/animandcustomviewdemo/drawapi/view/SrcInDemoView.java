@@ -50,28 +50,15 @@ public class SrcInDemoView extends View {
         canvas.drawColor(Color.argb(128, 0, 0, 0));
 
         //—————————— 以下为示例  开发时不要在 onDraw中通过new创建对象 ——————————
-        //重置path
-        mPath.reset();
 
-        //左右偏移的距离
-        int gap = 2 * r;
-        //移动到坐标的偏移点
-        mPath.moveTo(-gap + dx, y);
-        for (int i = -gap; i <= getWidth() + gap; i += gap) {
-            //在 gap 的前一个 r距离 中间上方添加一个控制点
-            mPath.rQuadTo(r / 2, -amplitude, r, 0);
-            //在 gap 的后一个 r距离 中间下方添加一个控制点
-            mPath.rQuadTo(r / 2, amplitude, r, 0);
-        }
-        //组成闭合区间
-        mPath.lineTo(width, height);
-        mPath.lineTo(0, height);
-        mPath.close();
-        //绘制路径
+//--------------------------------------------------------------------------------------------------
+        //文字和水波纹效果
+
+        //获取水波纹path
+        update(y);
 
         String txt = "公众号 103Tech";
         fillPaint.setColor(Color.WHITE);
-
         //保持文字可见
         canvas.drawText(txt, (width - fillPaint.measureText(txt)) / 2, y, fillPaint);
 
@@ -90,8 +77,52 @@ public class SrcInDemoView extends View {
         fillPaint.setXfermode(null);
         canvas.restoreToCount(layerId);
 
+//--------------------------------------------------------------------------------------------------
+        //圆形 和 水波纹效果
+
+        //获取水波纹path
+        update(y * 2);
+
+        fillPaint.setColor(Color.WHITE);
+        canvas.drawCircle(width / 2, y * 2, height / 5, fillPaint);
+
+        //SRC_IN 保留 水波纹上  和 文字 相交 的地方
+        layerId = canvas.saveLayer(0, 0, width, height, fillPaint);
+
+        canvas.drawCircle(width / 2, y * 2, height / 5, fillPaint);
+        //参考 DrawXfermodeDemoView 中的 18 种模式
+        fillPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+
+        fillPaint.setColor(Color.GREEN);
+        canvas.drawPath(mPath, fillPaint);
+
+        fillPaint.setXfermode(null);
+        canvas.restoreToCount(layerId);
+
         startAnim();
     }
+
+
+    private void update(int y) {
+        //重置path
+        mPath.reset();
+
+        //左右偏移的距离
+        int gap = 2 * r;
+        //移动到坐标的偏移点
+        mPath.moveTo(-gap + dx, y);
+        for (int i = -gap; i <= getWidth() + gap; i += gap) {
+            //在 gap 的前一个 r距离 中间上方添加一个控制点
+            mPath.rQuadTo(r / 2, -amplitude, r, 0);
+            //在 gap 的后一个 r距离 中间下方添加一个控制点
+            mPath.rQuadTo(r / 2, amplitude, r, 0);
+        }
+        //组成闭合区间
+        mPath.lineTo(width, height);
+        mPath.lineTo(0, height);
+        mPath.close();
+    }
+
 
     private void startAnim() {
         if (valueAnimator == null) {
