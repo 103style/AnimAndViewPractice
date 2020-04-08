@@ -74,6 +74,11 @@
             style="@style/item_style"
             android:text="GuaGuaKa" />
 
+        <Button
+            android:id="@+id/src_in"
+            style="@style/item_style"
+            android:text="SrcInDemo" />
+
     </com.lxk.animandcustomviewdemo.viewgroup.FlowAlignLayout>
 
 

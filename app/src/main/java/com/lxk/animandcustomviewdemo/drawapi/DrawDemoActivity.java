@@ -17,6 +17,7 @@ import com.lxk.animandcustomviewdemo.drawapi.view.DrawTextAndPathDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.DrawTextDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.DrawXfermodeDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.RangeDemo;
+import com.lxk.animandcustomviewdemo.drawapi.view.SrcInDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.StrokeCapJoinDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.XfermodeGuaGuaKaView;
 
@@ -49,6 +50,7 @@ public class DrawDemoActivity extends BaseClickActivity {
                 R.id.color_filter,
                 R.id.xfermode,
                 R.id.guaguaka,
+                R.id.src_in,
                 R.id.group
         );
     }
@@ -95,6 +97,9 @@ public class DrawDemoActivity extends BaseClickActivity {
                 break;
             case R.id.guaguaka:
                 view = new XfermodeGuaGuaKaView(this);
+                break;
+            case R.id.src_in:
+                view = new SrcInDemoView(this);
                 break;
             case R.id.group:
                 clean();
