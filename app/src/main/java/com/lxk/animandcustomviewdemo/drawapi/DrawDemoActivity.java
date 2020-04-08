@@ -16,8 +16,9 @@ import com.lxk.animandcustomviewdemo.drawapi.view.DrawSimpleDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.DrawTextAndPathDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.DrawTextDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.DrawXfermodeDemoView;
+import com.lxk.animandcustomviewdemo.drawapi.view.QQDotDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.RangeDemo;
-import com.lxk.animandcustomviewdemo.drawapi.view.SrcInDemoView;
+import com.lxk.animandcustomviewdemo.drawapi.view.XfermodeSrcInDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.StrokeCapJoinDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.XfermodeGuaGuaKaView;
 
@@ -51,6 +52,7 @@ public class DrawDemoActivity extends BaseClickActivity {
                 R.id.xfermode,
                 R.id.guaguaka,
                 R.id.src_in,
+                R.id.qq_dot,
                 R.id.group
         );
     }
@@ -99,7 +101,10 @@ public class DrawDemoActivity extends BaseClickActivity {
                 view = new XfermodeGuaGuaKaView(this);
                 break;
             case R.id.src_in:
-                view = new SrcInDemoView(this);
+                view = new XfermodeSrcInDemoView(this);
+                break;
+            case R.id.qq_dot:
+                view = new QQDotDemoView(this);
                 break;
             case R.id.group:
                 clean();

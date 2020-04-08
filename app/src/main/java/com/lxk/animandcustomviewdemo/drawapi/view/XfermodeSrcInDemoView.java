@@ -17,7 +17,7 @@ import com.lxk.animandcustomviewdemo.drawapi.Utils;
  * @author https://github.com/103style
  * @date 2020/4/8 14:40
  */
-public class SrcInDemoView extends View {
+public class XfermodeSrcInDemoView extends View {
     int r, y, dx;
     private Paint fillPaint;
     private Path mPath = new Path();
@@ -26,7 +26,8 @@ public class SrcInDemoView extends View {
     //波的振幅
     private int amplitude = 32;
 
-    public SrcInDemoView(Context context) {
+    //因为这边只是测试  所以只写了一个参数的构造方法， 各位按需重写
+    public XfermodeSrcInDemoView(Context context) {
         super(context);
         fillPaint = Utils.initPaint(context, Paint.Style.FILL);
         fillPaint.setTextSize(Utils.doToPx(context, 40));

@@ -19,6 +19,7 @@ public class RangeDemo extends View {
     private Paint fillPaint, strokePaint;
     private int width, height;
 
+    //因为这边只是测试  所以只写了一个参数的构造方法， 各位按需重写
     public RangeDemo(Context context) {
         super(context);
         fillPaint = initPaint(Paint.Style.FILL);

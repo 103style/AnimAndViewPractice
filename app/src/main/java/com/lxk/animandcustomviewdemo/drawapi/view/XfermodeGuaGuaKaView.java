@@ -33,6 +33,7 @@ public class XfermodeGuaGuaKaView extends View {
     private Region region;
     private int perX, perY;
 
+    //因为这边只是测试  所以只写了一个参数的构造方法， 各位按需重写
     public XfermodeGuaGuaKaView(Context context) {
         super(context);
         setLayerType(View.LAYER_TYPE_SOFTWARE, null);

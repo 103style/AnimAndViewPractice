@@ -24,6 +24,7 @@ public class DrawColorFilterDemoView extends View {
     private int width, height;
     private Bitmap bitmap;
 
+    //因为这边只是测试  所以只写了一个参数的构造方法， 各位按需重写
     public DrawColorFilterDemoView(Context context) {
         super(context);
         fillPaint = Utils.initPaint(context, Paint.Style.FILL);

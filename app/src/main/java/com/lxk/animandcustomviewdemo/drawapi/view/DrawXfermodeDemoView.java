@@ -23,6 +23,7 @@ public class DrawXfermodeDemoView extends View {
     private int width, height;
     private Bitmap src, dst;
 
+    //因为这边只是测试  所以只写了一个参数的构造方法， 各位按需重写
     public DrawXfermodeDemoView(Context context) {
         super(context);
         setLayerType(View.LAYER_TYPE_SOFTWARE, null);
