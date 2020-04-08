@@ -14,6 +14,8 @@ import com.lxk.animandcustomviewdemo.drawapi.Utils;
 /**
  * @author https://github.com/103style
  * @date 2020/4/7 20:19
+ * doc:https://blog.csdn.net/harvic880925/article/details/51264653
+ * doc:https://developer.android.com/reference/android/graphics/PorterDuff.Mode.html
  */
 public class DrawXfermodeDemoView extends View {
 

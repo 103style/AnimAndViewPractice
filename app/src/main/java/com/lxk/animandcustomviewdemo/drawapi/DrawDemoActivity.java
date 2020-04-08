@@ -18,6 +18,7 @@ import com.lxk.animandcustomviewdemo.drawapi.view.DrawTextDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.DrawXfermodeDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.RangeDemo;
 import com.lxk.animandcustomviewdemo.drawapi.view.StrokeCapJoinDemoView;
+import com.lxk.animandcustomviewdemo.drawapi.view.XfermodeGuaGuaKaView;
 
 /**
  * @author https://github.com/103style
@@ -47,6 +48,7 @@ public class DrawDemoActivity extends BaseClickActivity {
                 R.id.color_matrix,
                 R.id.color_filter,
                 R.id.xfermode,
+                R.id.guaguaka,
                 R.id.group
         );
     }
@@ -90,6 +92,9 @@ public class DrawDemoActivity extends BaseClickActivity {
                 break;
             case R.id.xfermode:
                 view = new DrawXfermodeDemoView(this);
+                break;
+            case R.id.guaguaka:
+                view = new XfermodeGuaGuaKaView(this);
                 break;
             case R.id.group:
                 clean();

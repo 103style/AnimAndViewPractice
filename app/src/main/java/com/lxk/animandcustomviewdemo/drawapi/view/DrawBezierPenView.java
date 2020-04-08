@@ -16,7 +16,7 @@ import com.lxk.animandcustomviewdemo.drawapi.Utils;
  * @date 2020/4/6 16:28
  */
 public class DrawBezierPenView extends View {
-    private Paint strokePaint;
+    private Paint strokePaint, textPaint;
     private Path mPath = new Path();
     private float mPreX, mPreY;
 
@@ -32,7 +32,9 @@ public class DrawBezierPenView extends View {
         super(context, attrs, defStyleAttr);
         strokePaint = Utils.initPaint(context, Paint.Style.STROKE);
         strokePaint.setStrokeWidth(Utils.doToPx(context, 1));
-        strokePaint.setTextSize(Utils.doToPx(context, 16));
+        textPaint = Utils.initPaint(context, Paint.Style.FILL);
+        textPaint.setTextSize(Utils.doToPx(context, 16));
+        textPaint.setColor(Color.WHITE);
     }
 
     @Override
@@ -75,12 +77,10 @@ public class DrawBezierPenView extends View {
         canvas.drawColor(Color.argb(128, 0, 0, 0));
         //—————————— 以下为示例  开发时不要在 onDraw中通过new创建对象 ——————————
 
-        strokePaint.setColor(Color.WHITE);
         String reset = "reset";
-        canvas.drawText(reset, strokePaint.measureText(reset) / 2, 100, strokePaint);
+        canvas.drawText(reset, strokePaint.measureText(reset) / 2, 100, textPaint);
         String hide = "hide";
-        canvas.drawText(hide, getMeasuredWidth() / 2 + strokePaint.measureText(hide) / 2, 100, strokePaint);
-        strokePaint.setColor(Color.RED);
+        canvas.drawText(hide, getMeasuredWidth() / 2 + strokePaint.measureText(hide) / 2, 100, textPaint);
         canvas.drawPath(mPath, strokePaint);
     }
 

@@ -69,6 +69,11 @@
             style="@style/item_style"
             android:text="Xfermode" />
 
+        <Button
+            android:id="@+id/guaguaka"
+            style="@style/item_style"
+            android:text="GuaGuaKa" />
+
     </com.lxk.animandcustomviewdemo.viewgroup.FlowAlignLayout>
 
 
