@@ -6,6 +6,8 @@ import android.widget.FrameLayout;
 
 import com.lxk.animandcustomviewdemo.BaseClickActivity;
 import com.lxk.animandcustomviewdemo.R;
+import com.lxk.animandcustomviewdemo.drawapi.view.BitmapShaderDemoView;
+import com.lxk.animandcustomviewdemo.drawapi.view.BitmapShaderModeDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.CanvasChangeDemo;
 import com.lxk.animandcustomviewdemo.drawapi.view.DrawBezierPenView;
 import com.lxk.animandcustomviewdemo.drawapi.view.DrawBezierWaterView;
@@ -18,9 +20,9 @@ import com.lxk.animandcustomviewdemo.drawapi.view.DrawTextDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.DrawXfermodeDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.QQDotDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.RangeDemo;
-import com.lxk.animandcustomviewdemo.drawapi.view.XfermodeSrcInDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.StrokeCapJoinDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.XfermodeGuaGuaKaView;
+import com.lxk.animandcustomviewdemo.drawapi.view.XfermodeSrcInDemoView;
 
 /**
  * @author https://github.com/103style
@@ -53,6 +55,8 @@ public class DrawDemoActivity extends BaseClickActivity {
                 R.id.guaguaka,
                 R.id.src_in,
                 R.id.qq_dot,
+                R.id.bitmap_shader_mode,
+                R.id.bitmap_shader_demo,
                 R.id.group
         );
     }
@@ -105,6 +109,12 @@ public class DrawDemoActivity extends BaseClickActivity {
                 break;
             case R.id.qq_dot:
                 view = new QQDotDemoView(this);
+                break;
+            case R.id.bitmap_shader_mode:
+                view = new BitmapShaderModeDemoView(this);
+                break;
+             case R.id.bitmap_shader_demo:
+                view = new BitmapShaderDemoView(this);
                 break;
             case R.id.group:
                 clean();
