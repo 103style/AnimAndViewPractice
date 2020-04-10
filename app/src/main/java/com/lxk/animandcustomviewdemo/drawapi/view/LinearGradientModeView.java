@@ -14,7 +14,7 @@ import com.lxk.animandcustomviewdemo.drawapi.Utils;
  * @author https://github.com/103style
  * @date 2020/4/10 15:31
  */
-public class LinearGradientDemoView extends View {
+public class LinearGradientModeView extends View {
     private Paint fillPaint, textPaint;
     private LinearGradient clamp, repeat, mirror;
     private int width, height;
@@ -22,7 +22,7 @@ public class LinearGradientDemoView extends View {
     private int gap, end, rectH, top;
 
     //因为这边只是测试  所以只写了一个参数的构造方法， 各位按需重写
-    public LinearGradientDemoView(Context context) {
+    public LinearGradientModeView(Context context) {
         super(context);
         fillPaint = Utils.initPaint(context, Paint.Style.FILL);
         textPaint = Utils.initPaint(context, Paint.Style.FILL);

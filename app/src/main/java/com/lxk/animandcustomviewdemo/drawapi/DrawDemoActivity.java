@@ -20,8 +20,10 @@ import com.lxk.animandcustomviewdemo.drawapi.view.DrawTextAndPathDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.DrawTextDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.DrawXfermodeDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.FlashTextView;
-import com.lxk.animandcustomviewdemo.drawapi.view.LinearGradientDemoView;
+import com.lxk.animandcustomviewdemo.drawapi.view.LinearGradientModeView;
 import com.lxk.animandcustomviewdemo.drawapi.view.QQDotDemoView;
+import com.lxk.animandcustomviewdemo.drawapi.view.RadialGradientDemoView;
+import com.lxk.animandcustomviewdemo.drawapi.view.RadialGradientModeView;
 import com.lxk.animandcustomviewdemo.drawapi.view.RangeDemo;
 import com.lxk.animandcustomviewdemo.drawapi.view.StrokeCapJoinDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.XfermodeGuaGuaKaView;
@@ -63,6 +65,8 @@ public class DrawDemoActivity extends BaseClickActivity {
                 R.id.bitmap_shader_avatar,
                 R.id.linear_gradient,
                 R.id.flash_text,
+                R.id.radial_gradient,
+                R.id.radial_gradient_demo,
                 R.id.group
         );
     }
@@ -126,10 +130,16 @@ public class DrawDemoActivity extends BaseClickActivity {
                 view = new BitmapShaderAvatarView(this);
                 break;
             case R.id.linear_gradient:
-                view = new LinearGradientDemoView(this);
+                view = new LinearGradientModeView(this);
                 break;
             case R.id.flash_text:
                 view = new FlashTextView(this);
+                break;
+            case R.id.radial_gradient:
+                view = new RadialGradientModeView(this);
+                break;
+            case R.id.radial_gradient_demo:
+                view = new RadialGradientDemoView(this);
                 break;
             case R.id.group:
                 clean();

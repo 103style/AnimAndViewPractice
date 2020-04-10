@@ -21,8 +21,10 @@ public class FlashTextView extends View {
     private Paint textPaint;
     private LinearGradient clamp;
     private Matrix matrix;
-    private int[] color = new int[]{Color.WHITE, Color.GREEN, Color.BLUE, Color.YELLOW};
-    private float[] pos = new float[]{0, 0.34f, 0.67f, 1.0f};
+    private int[] color = new int[]{Color.WHITE, Color.parseColor("#008577"),
+            Color.parseColor("#D81B60"),
+            Color.parseColor("#00574B"), Color.WHITE};
+    private float[] pos = new float[]{0, 0.1f, 0.5f, 0.9f, 1.0f};
     private ValueAnimator animator;
     private float dx;
 
@@ -58,7 +60,7 @@ public class FlashTextView extends View {
 
     private void startAnim(float width) {
         if (animator == null) {
-            animator = ValueAnimator.ofFloat(-width / 2, width / 2);
+            animator = ValueAnimator.ofFloat(-width, width);
             animator.setDuration(3000);
             animator.setRepeatCount(ValueAnimator.INFINITE);
             animator.setRepeatMode(ValueAnimator.RESTART);

@@ -102,12 +102,22 @@
         <Button
             android:id="@+id/linear_gradient"
             style="@style/item_style"
-            android:text="LinearGradient" />
+            android:text="LinearGradientMode" />
 
         <Button
             android:id="@+id/flash_text"
             style="@style/item_style"
             android:text="FlashText" />
+
+        <Button
+            android:id="@+id/radial_gradient"
+            style="@style/item_style"
+            android:text="RadialGradientMode" />
+
+        <Button
+            android:id="@+id/radial_gradient_demo"
+            style="@style/item_style"
+            android:text="水波纹按钮效果" />
 
     </com.lxk.animandcustomviewdemo.viewgroup.FlowAlignLayout>
 
