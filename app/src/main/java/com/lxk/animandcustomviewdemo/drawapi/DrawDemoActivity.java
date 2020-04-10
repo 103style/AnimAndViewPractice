@@ -19,6 +19,8 @@ import com.lxk.animandcustomviewdemo.drawapi.view.DrawSimpleDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.DrawTextAndPathDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.DrawTextDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.DrawXfermodeDemoView;
+import com.lxk.animandcustomviewdemo.drawapi.view.FlashTextView;
+import com.lxk.animandcustomviewdemo.drawapi.view.LinearGradientDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.QQDotDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.RangeDemo;
 import com.lxk.animandcustomviewdemo.drawapi.view.StrokeCapJoinDemoView;
@@ -59,6 +61,8 @@ public class DrawDemoActivity extends BaseClickActivity {
                 R.id.bitmap_shader_mode,
                 R.id.bitmap_shader_demo,
                 R.id.bitmap_shader_avatar,
+                R.id.linear_gradient,
+                R.id.flash_text,
                 R.id.group
         );
     }
@@ -120,6 +124,12 @@ public class DrawDemoActivity extends BaseClickActivity {
                 break;
             case R.id.bitmap_shader_avatar:
                 view = new BitmapShaderAvatarView(this);
+                break;
+            case R.id.linear_gradient:
+                view = new LinearGradientDemoView(this);
+                break;
+            case R.id.flash_text:
+                view = new FlashTextView(this);
                 break;
             case R.id.group:
                 clean();
