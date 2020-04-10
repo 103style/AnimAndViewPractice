@@ -6,6 +6,7 @@ import android.widget.FrameLayout;
 
 import com.lxk.animandcustomviewdemo.BaseClickActivity;
 import com.lxk.animandcustomviewdemo.R;
+import com.lxk.animandcustomviewdemo.drawapi.view.BitmapShaderAvatarView;
 import com.lxk.animandcustomviewdemo.drawapi.view.BitmapShaderDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.BitmapShaderModeDemoView;
 import com.lxk.animandcustomviewdemo.drawapi.view.CanvasChangeDemo;
@@ -57,6 +58,7 @@ public class DrawDemoActivity extends BaseClickActivity {
                 R.id.qq_dot,
                 R.id.bitmap_shader_mode,
                 R.id.bitmap_shader_demo,
+                R.id.bitmap_shader_avatar,
                 R.id.group
         );
     }
@@ -113,8 +115,11 @@ public class DrawDemoActivity extends BaseClickActivity {
             case R.id.bitmap_shader_mode:
                 view = new BitmapShaderModeDemoView(this);
                 break;
-             case R.id.bitmap_shader_demo:
+            case R.id.bitmap_shader_demo:
                 view = new BitmapShaderDemoView(this);
+                break;
+            case R.id.bitmap_shader_avatar:
+                view = new BitmapShaderAvatarView(this);
                 break;
             case R.id.group:
                 clean();
