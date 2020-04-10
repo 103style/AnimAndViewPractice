@@ -1,4 +1,21 @@
 # DrawApiDemo ScreenShot
+* sample
+* Text
+* TextAndPath
+* Range
+* CanvasChange
+* Bezier
+* Stroke CAP&JOIN
+* PathEffect
+* ColorMatrix
+* ColorFilter
+* Xfermode
+* QQ消息红点拖拽
+* BitmapShader
+* LinearGradient
+* RodialGradient
+
+
 
 
 ### sample
