@@ -103,8 +103,39 @@ public class BitmapShaderAvatarView extends View {
         path.lineTo(width / 2 + cos54, width / 2 + sin54);
         path.close();
         canvas.drawPath(path, fillPaint);
+        canvas.restore();
 
 
+        canvas.save();
+        canvas.translate(gap, translate * 2 + gap);
+
+        //爱心
+        //http://www.360doc.com/content/17/0819/14/44182525_680393802.shtml
+        //第 05点  例子中的 2 表示爱心上部宽度额一半    -2.14 表示 爱心下部分的高度
+        path.reset();
+        //爱心上部的公式
+        path.moveTo(0, width / 4);
+        float dx;
+        for (float i = 0; i <= width; i += 0.01f) {
+            //width/2 → 0 → width/2
+            dx = i > width / 2f ? (i - width / 2f) : (width / 2f - i);
+            path.lineTo(i, width / 4 - (float) Math.sqrt(width / 2f * dx - dx * dx));
+
+        }
+        path.lineTo(width, width / 4);
+        path.lineTo(0, width / 4);
+        float ty;
+        //爱心下部的公式
+        float dy = (float) (width * 3 / 4 / Math.sqrt(Math.sqrt(width / 2)));
+        for (float i = 0; i <= width; i += 0.01f) {
+            //width/2 → 0 → width/2
+            dx = i > width / 2f ? (i - width / 2f) : (width / 2f - i);
+            ty = width / 4f + (float) (dy * Math.sqrt(Math.sqrt(width / 2f) - Math.sqrt(dx)));
+            path.lineTo(i, ty);
+
+        }
+        path.lineTo(width, width / 4);
+        canvas.drawPath(path, fillPaint);
         canvas.restore();
     }
 
