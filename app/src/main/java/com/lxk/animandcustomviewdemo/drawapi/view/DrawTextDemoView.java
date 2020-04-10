@@ -49,7 +49,7 @@ public class DrawTextDemoView extends View {
         int gapW = width / 10;
         int gapH = height / 10;
 
-        textPaint.setTextSize(Utils.doToPx(getContext(),16));
+        textPaint.setTextSize(Utils.doToPx(getContext(),30));
 
         int baseX = 0, baseY = gapH * 5;
         String txt = "What a funny demo!";
@@ -82,7 +82,7 @@ public class DrawTextDemoView extends View {
         float centerY = top + (bottom - top) / 2;
         canvas.drawLine(baseX, centerY, width, centerY, textPaint);
 
-        textPaint.setTextSize(Utils.doToPx(getContext(),12));
+        textPaint.setTextSize(Utils.doToPx(getContext(),14));
         textPaint.setColor(Color.WHITE);
         fontMetrics = textPaint.getFontMetrics();
         canvas.drawText("fontMetrics.top = " + fontMetrics.top, baseX, gapH, textPaint);

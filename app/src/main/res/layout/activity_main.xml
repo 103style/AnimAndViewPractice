@@ -49,6 +49,6 @@
     <Button
         android:id="@+id/draw_api"
         style="@style/item_style"
-        android:text="Draw API" />
+        android:text="绘图相关api示例" />
 
 </com.lxk.animandcustomviewdemo.viewgroup.FlowAlignLayout>
