@@ -8,6 +8,7 @@ import com.lxk.animandcustomviewdemo.anim.AnimationXmlActivity
 import com.lxk.animandcustomviewdemo.animator.AnimatorActivity
 import com.lxk.animandcustomviewdemo.animator.AnimatorXmlActivity
 import com.lxk.animandcustomviewdemo.animator.PropertyValuesHolderAndKeyFrameActivity
+import com.lxk.animandcustomviewdemo.drawapi.DrawDemoActivity
 import com.lxk.animandcustomviewdemo.layoutAnimation.AnimateLayoutChangesActivity
 import com.lxk.animandcustomviewdemo.layoutAnimation.LayoutAnimationActivity
 import com.lxk.animandcustomviewdemo.recyclerview.RecyclerViewActivity
@@ -30,7 +31,8 @@ class MainActivity : BaseClickActivity() {
             R.id.property_keyframe,
             R.id.layout_anim,
             R.id.layout_animate_changes,
-            R.id.layout_manager_decoration
+            R.id.layout_manager_decoration,
+            R.id.draw_api
         )
     }
 
@@ -44,6 +46,7 @@ class MainActivity : BaseClickActivity() {
             R.id.layout_manager_decoration -> RecyclerViewActivity::class.java
             R.id.layout_anim -> LayoutAnimationActivity::class.java
             R.id.layout_animate_changes -> AnimateLayoutChangesActivity::class.java
+            R.id.draw_api -> DrawDemoActivity::class.java
             else -> null
         }
         c?.let { startActivity(Intent(this, c)) }
