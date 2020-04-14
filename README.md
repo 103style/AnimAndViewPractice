@@ -13,3 +13,7 @@ Anim and CustomView exercise Demo
 * [RecyclerView](https://github.com/103style/AnimAndCustomViewDemo/blob/master/recyclerview.md)
 
 * [DrawApi](https://github.com/103style/AnimAndCustomViewDemo/blob/master/drawapi.md)
+
+![home.jpg](https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/home.jpg)
+
+![drawapi.jpg](https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/drawapi.jpg)
