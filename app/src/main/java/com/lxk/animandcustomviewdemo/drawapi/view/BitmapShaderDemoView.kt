@@ -13,27 +13,25 @@ import com.lxk.animandcustomviewdemo.drawapi.Utils
  * @date 2020/4/12 22:24
  */
 class BitmapShaderDemoView @JvmOverloads constructor(
-        context: Context,
-        attr: AttributeSet? = null,
-        style: Int = 0) : View(context, attr, style) {
+    context: Context,
+    attr: AttributeSet? = null,
+    style: Int = 0
+) : View(context, attr, style) {
     private var bitmap: Bitmap? = null
     private var fillPaint: Paint = Utils.initPaint(context, Paint.Style.FILL)
     private var clamp: BitmapShader? = null
-    private var mWidth = 0
-    private var mHeight = 0
+
     private var x = 0
     private var y = 0
     private var radius = Utils.doToPx(context, 96)
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
-        mWidth = w
-        mHeight = h
 
         val temp = BitmapFactory.decodeResource(resources, R.drawable.mm)
         val matrix = Matrix()
         //扩大到铺满屏幕
-        val scaleX = mWidth * 1.0f / temp.width
+        val scaleX = width * 1.0f / temp.width
         matrix.setScale(scaleX, scaleX)
         bitmap = Bitmap.createBitmap(temp, 0, 0, temp.width, temp.height, matrix, true)
         clamp = BitmapShader(bitmap!!, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP)

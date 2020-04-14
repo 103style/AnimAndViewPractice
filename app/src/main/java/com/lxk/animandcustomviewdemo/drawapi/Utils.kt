@@ -10,7 +10,6 @@ import android.graphics.Paint
  */
 object Utils {
     @JvmStatic
-
     fun initPaint(context: Context, style: Paint.Style): Paint {
         val paint = Paint(Paint.ANTI_ALIAS_FLAG)
         //设置画笔颜色
@@ -23,8 +22,8 @@ object Utils {
     }
 
     @JvmStatic
-    fun doToPx(context: Context, value: Int): Int {
+    fun doToPx(context: Context, value: Int): Float {
         val scale = context.resources.displayMetrics.density
-        return (value * scale + 0.5f).toInt()
+        return (value * scale + 0.5f)
     }
 }

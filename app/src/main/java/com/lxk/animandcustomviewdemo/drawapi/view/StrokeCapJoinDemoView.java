@@ -22,7 +22,7 @@ public class StrokeCapJoinDemoView extends View {
         super(context);
         fillPaint = Utils.initPaint(context, Paint.Style.FILL);
         strokePaint = Utils.initPaint(context, Paint.Style.STROKE);
-        int size = Utils.doToPx(context, 12);
+        int size = (int) Utils.doToPx(context, 12);
         fillPaint.setStrokeWidth(size);
         fillPaint.setTextSize(size);
         strokePaint.setStrokeWidth(size);
