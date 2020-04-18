@@ -113,19 +113,20 @@ class AnimateLayoutChangesActivity : BaseClickActivity() {
         layoutTransition.setAnimator(LayoutTransition.CHANGE_APPEARING, changeAppearingAnim)
         layoutTransition.setAnimator(LayoutTransition.CHANGE_DISAPPEARING, changeDisappearingAnim)
 
+        val duration = 1000L
         //设置所有动画完成所需要的时长
         //setDuration(int transitionType, long duration) 对单个type设置时长
-        layoutTransition.setDuration(1000)
+        layoutTransition.setDuration(duration)
 
         //针对单个type设置插值器
         layoutTransition.setInterpolator(LayoutTransition.APPEARING, AccelerateInterpolator())
 
         //针对单个type设置动画延时
-        layoutTransition.setStartDelay(LayoutTransition.DISAPPEARING, 1000)
+        layoutTransition.setStartDelay(LayoutTransition.DISAPPEARING, 0)
 
         //设置单个item间的动画间隔的。
-        layoutTransition.setStagger(LayoutTransition.CHANGE_APPEARING, 1000)
-        layoutTransition.setStagger(LayoutTransition.CHANGE_DISAPPEARING, 1000)
+        layoutTransition.setStagger(LayoutTransition.CHANGE_APPEARING, duration / 2)
+        layoutTransition.setStagger(LayoutTransition.CHANGE_DISAPPEARING, duration / 2)
 
         animateLayoutChangeLayout!!.layoutTransition = layoutTransition
 

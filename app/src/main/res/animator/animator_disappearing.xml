@@ -5,7 +5,7 @@
 
 <objectAnimator xmlns:android="http://schemas.android.com/apk/res/android"
     android:propertyName="translationX"
-    android:valueFrom="0"
+    android:valueFrom="200"
     android:valueTo="-200"
     android:valueType="floatType" />
 
