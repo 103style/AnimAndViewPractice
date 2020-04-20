@@ -9,10 +9,11 @@ import com.lxk.animandcustomviewdemo.anim.AnimationXmlActivity;
 import com.lxk.animandcustomviewdemo.animator.AnimatorActivity;
 import com.lxk.animandcustomviewdemo.animator.AnimatorXmlActivity;
 import com.lxk.animandcustomviewdemo.animator.PropertyValuesHolderAndKeyFrameActivity;
+import com.lxk.animandcustomviewdemo.drawapi.DrawDemoActivity;
 import com.lxk.animandcustomviewdemo.layoutAnimation.AnimateLayoutChangesActivity;
 import com.lxk.animandcustomviewdemo.layoutAnimation.LayoutAnimationActivity;
+import com.lxk.animandcustomviewdemo.practice.PraticeDemoActivity;
 import com.lxk.animandcustomviewdemo.recyclerview.RecyclerViewActivity;
-import com.lxk.animandcustomviewdemo.drawapi.DrawDemoActivity;
 
 /**
  * @author https://github.com/103style
@@ -35,7 +36,8 @@ public class MainActivity extends BaseClickActivity {
                 R.id.layout_anim,
                 R.id.layout_animate_changes,
                 R.id.layout_manager_decoration,
-                R.id.draw_api
+                R.id.draw_api,
+                R.id.practice
         );
     }
 
@@ -69,6 +71,9 @@ public class MainActivity extends BaseClickActivity {
                 break;
             case R.id.draw_api:
                 c = DrawDemoActivity.class;
+                break;
+            case R.id.practice:
+                c = PraticeDemoActivity.class;
                 break;
             default:
                 break;

@@ -161,4 +161,14 @@ public class DrawDemoActivity extends BaseClickActivity {
     private void clean() {
         group.removeAllViews();
     }
+
+
+    @Override
+    public void onBackPressed() {
+        if (group.getChildCount() > 0) {
+            clean();
+        } else {
+            super.onBackPressed();
+        }
+    }
 }
