@@ -27,20 +27,45 @@ import java.util.Arrays;
  * PathMeasure
  */
 public class BiliBiliPathView extends View {
-
+    /**
+     * 透明头变化的结束值
+     */
     private final int MAX_ALPHA = 255;
+
     private Paint strokePaint;
+    /**
+     * 路径
+     */
     private Path path;
+    /**
+     * 手指滑动的上一个坐标
+     */
     private float preX, preY;
-    private float[] mLightPoints;
-    private float[] mDarkPoints;
-    private int mLightColor;
-    private int mDarkColor;
-    private int mPathColor;
+    /**
+     * 获取通过PathMeasure 获取对应进度的路径点集合
+     */
+    private float[] mLightPoints, mDarkPoints;
+    /**
+     * 对应的亮色 暗色 和 默认的 path路径颜色
+     */
+    private int mLightColor, mDarkColor, mPathColor;
+
+    /**
+     * 获取path对应的路径类
+     */
     private KeyFrames keyFrames;
-    private ValueAnimator valueAnimator;
-    private ValueAnimator alphaAnimator;
+
+    /**
+     * 进度变化 和 透明度变化 动画
+     */
+    private ValueAnimator progressAnimator, alphaAnimator;
+    /**
+     * 当前暗色路径的颜色 alpha值
+     */
     private int mAlpha = MAX_ALPHA;
+    /**
+     * 进度动画时长
+     */
     private long animDuration = 5000;
 
     public BiliBiliPathView(Context context) {
@@ -65,6 +90,8 @@ public class BiliBiliPathView extends View {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
+        //绘制初始路径
         int gap = getMeasuredWidth() / 8;
         path.moveTo(getMeasuredWidth() / 2, 0);
         path.rLineTo(0, getMeasuredHeight() / 2 - 2 * gap);
@@ -77,6 +104,7 @@ public class BiliBiliPathView extends View {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
+        //执行初始路径的进度变化动画
         doAnim();
     }
 
@@ -118,11 +146,11 @@ public class BiliBiliPathView extends View {
 
 
     private void startProgressAnim() {
-        if (valueAnimator == null) {
-            valueAnimator = ValueAnimator.ofFloat(0f, 2f);
-            valueAnimator.setInterpolator(new LinearInterpolator());
-            valueAnimator.setDuration(animDuration);
-            valueAnimator.addUpdateListener(animation -> {
+        if (progressAnimator == null) {
+            progressAnimator = ValueAnimator.ofFloat(0f, 2f);
+            progressAnimator.setInterpolator(new LinearInterpolator());
+            progressAnimator.setDuration(animDuration);
+            progressAnimator.addUpdateListener(animation -> {
                 float value = (float) animation.getAnimatedValue();
                 float lengthPer = 0.5f;
                 float start = value - lengthPer;
@@ -134,7 +162,7 @@ public class BiliBiliPathView extends View {
                 setLineProgress(start - lengthPer, start, false);
                 invalidate();
             });
-            valueAnimator.addListener(new Animator.AnimatorListener() {
+            progressAnimator.addListener(new Animator.AnimatorListener() {
                 @Override
                 public void onAnimationStart(Animator animation) {
 
@@ -157,7 +185,7 @@ public class BiliBiliPathView extends View {
                 }
             });
         }
-        valueAnimator.start();
+        progressAnimator.start();
     }
 
     private void startAlphaAnimator(long duration) {
@@ -172,10 +200,10 @@ public class BiliBiliPathView extends View {
 
 
     private boolean animIsRunning() {
-        if (valueAnimator == null) {
+        if (progressAnimator == null) {
             return false;
         }
-        return valueAnimator.isRunning();
+        return progressAnimator.isRunning();
     }
 
 
@@ -216,7 +244,7 @@ public class BiliBiliPathView extends View {
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         if (animIsRunning()) {
-            valueAnimator.cancel();
+            progressAnimator.cancel();
         }
     }
 
@@ -232,7 +260,7 @@ public class BiliBiliPathView extends View {
         /**
          * 依次保存 每个点 的 x、y 坐标
          */
-        float[] mPostionData;
+        float[] mPositionData;
 
         KeyFrames(Path path) {
             init(path);
@@ -245,7 +273,7 @@ public class BiliBiliPathView extends View {
             //根据精度获取点的个数
             numPoints = (int) (pathLength / PRECISION + 0.5f);
             //依次保存所有点的 x、y 值
-            mPostionData = new float[numPoints * 2];
+            mPositionData = new float[numPoints * 2];
 
             final float[] position = new float[2];
             int index = 0;
@@ -257,12 +285,12 @@ public class BiliBiliPathView extends View {
                 pathMeasure.getPosTan(distance, position, null);
 
                 //依次保存到mData中
-                mPostionData[index] = position[0];
-                mPostionData[index + 1] = position[1];
+                mPositionData[index] = position[0];
+                mPositionData[index + 1] = position[1];
 
                 index += 2;
             }
-            numPoints = mPostionData.length;
+            numPoints = mPositionData.length;
         }
 
         float getLegalValue(float v) {
@@ -304,7 +332,7 @@ public class BiliBiliPathView extends View {
 
             System.out.println(startIndex + "----" + endIndex);
             //根据起止点裁剪
-            return Arrays.copyOfRange(mPostionData, startIndex, endIndex);
+            return Arrays.copyOfRange(mPositionData, startIndex, endIndex);
         }
     }
 }
