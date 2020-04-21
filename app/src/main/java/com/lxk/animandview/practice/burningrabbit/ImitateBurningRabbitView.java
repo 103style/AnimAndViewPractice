@@ -17,27 +17,27 @@ import com.lxk.animandview.R;
  * <p>
  * 模仿燃兔的列表滑动效果
  */
-public class ImitateBurningRabbit extends ViewGroup implements NestedScrollingParent {
+public class ImitateBurningRabbitView extends ViewGroup implements NestedScrollingParent {
 
     private View topBarView, bottomBarView, closeBarView;
 
 
-    public ImitateBurningRabbit(Context context, AttributeSet attrs) {
+    public ImitateBurningRabbitView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initTypeArray(context, attrs);
     }
 
     private void initTypeArray(Context context, AttributeSet attrs) {
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ImitateBurningRabbit);
-        int resId = typedArray.getResourceId(R.styleable.ImitateBurningRabbit_top_bar_view, 0);
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ImitateBurningRabbitView);
+        int resId = typedArray.getResourceId(R.styleable.ImitateBurningRabbitView_top_bar_view, 0);
         if (resId != 0) {
             topBarView = LayoutInflater.from(context).inflate(resId, this, false);
         }
-        resId = typedArray.getResourceId(R.styleable.ImitateBurningRabbit_bottom_bar_view, 0);
+        resId = typedArray.getResourceId(R.styleable.ImitateBurningRabbitView_bottom_bar_view, 0);
         if (resId != 0) {
             bottomBarView = LayoutInflater.from(context).inflate(resId, this, false);
         }
-        resId = typedArray.getResourceId(R.styleable.ImitateBurningRabbit_close_bar_view, 0);
+        resId = typedArray.getResourceId(R.styleable.ImitateBurningRabbitView_close_bar_view, 0);
         if (resId != 0) {
             closeBarView = LayoutInflater.from(context).inflate(resId, this, false);
         }

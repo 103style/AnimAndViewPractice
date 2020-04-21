@@ -9,6 +9,7 @@ import com.lxk.animandview.R;
 import com.lxk.animandview.drawapi.view.BitmapShaderAvatarView;
 import com.lxk.animandview.drawapi.view.BitmapShaderDemoView;
 import com.lxk.animandview.drawapi.view.BitmapShaderModeDemoView;
+import com.lxk.animandview.drawapi.view.BlurMaskFilterDemoView;
 import com.lxk.animandview.drawapi.view.CanvasChangeDemo;
 import com.lxk.animandview.drawapi.view.DrawBezierPenView;
 import com.lxk.animandview.drawapi.view.DrawBezierWaterView;
@@ -25,6 +26,7 @@ import com.lxk.animandview.drawapi.view.QQDotDemoView;
 import com.lxk.animandview.drawapi.view.RadialGradientDemoView;
 import com.lxk.animandview.drawapi.view.RadialGradientModeView;
 import com.lxk.animandview.drawapi.view.RangeDemo;
+import com.lxk.animandview.drawapi.view.ShadeLayerDemoView;
 import com.lxk.animandview.drawapi.view.StrokeCapJoinDemoView;
 import com.lxk.animandview.drawapi.view.XfermodeGuaGuaKaView;
 import com.lxk.animandview.drawapi.view.XfermodeSrcInDemoView;
@@ -60,6 +62,8 @@ public class DrawDemoActivity extends BaseClickActivity {
                 R.id.guaguaka,
                 R.id.src_in,
                 R.id.qq_dot,
+                R.id.shade_layer,
+                R.id.blur_mask_filter,
                 R.id.bitmap_shader_mode,
                 R.id.bitmap_shader_demo,
                 R.id.bitmap_shader_avatar,
@@ -119,6 +123,12 @@ public class DrawDemoActivity extends BaseClickActivity {
                 break;
             case R.id.qq_dot:
                 view = new QQDotDemoView(this);
+                break;
+            case R.id.shade_layer:
+                view = new ShadeLayerDemoView(this);
+                break;
+               case R.id.blur_mask_filter:
+                view = new BlurMaskFilterDemoView(this);
                 break;
             case R.id.bitmap_shader_mode:
                 view = new BitmapShaderModeDemoView(this);

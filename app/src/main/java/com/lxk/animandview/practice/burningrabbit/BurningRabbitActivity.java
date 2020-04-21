@@ -15,7 +15,7 @@ import com.lxk.animandview.R;
 public class BurningRabbitActivity extends BaseClickActivity {
 
     private RecyclerView rvBack, rvFront;
-    private ImitateBurningRabbit imitateBurningRabbit;
+    private ImitateBurningRabbitView imitateBurningRabbit;
     private View frontLayout;
 
     @Override

@@ -85,6 +85,17 @@
             android:text="QQ红点拖拽效果" />
 
         <Button
+            android:id="@+id/shade_layer"
+            style="@style/item_style"
+            android:text="ShadeLayer" />
+
+        <Button
+            android:id="@+id/blur_mask_filter"
+            style="@style/item_style"
+            android:text="BlurMaskFilter" />
+
+
+        <Button
             android:id="@+id/bitmap_shader_mode"
             style="@style/item_style"
             android:text="Bitmap Shader Mode" />
