@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.lxk.animandcustomviewdemo.viewgroup.FlowAlignLayout
+    <com.lxk.animandview.viewgroup.FlowAlignLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:align_type="SAME_GAP">
@@ -15,7 +15,7 @@
             style="@style/base_tv"
             android:text="PropertyValuesHolder" />
 
-        <com.lxk.animandcustomviewdemo.animator.view.ObjectHolderView
+        <com.lxk.animandview.animator.view.ObjectHolderView
             android:id="@+id/property_values_holder_object"
             style="@style/base_tv"
             android:text="PropertyValuesHolder" />
@@ -25,12 +25,12 @@
             style="@style/base_tv"
             android:text="Keyframe Test" />
 
-        <com.lxk.animandcustomviewdemo.animator.view.ObjectHolderView
+        <com.lxk.animandview.animator.view.ObjectHolderView
             android:id="@+id/keyframe_ofKeyframe_test"
             style="@style/base_tv"
             android:text="@string/keyframe_ofKeyframe_test" />
 
-    </com.lxk.animandcustomviewdemo.viewgroup.FlowAlignLayout>
+    </com.lxk.animandview.viewgroup.FlowAlignLayout>
 
     <ImageView
         android:id="@+id/show"

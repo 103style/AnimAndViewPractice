@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.lxk.animandcustomviewdemo.viewgroup.FlowLayout
+    <com.lxk.animandview.viewgroup.FlowLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -33,10 +33,10 @@
             style="@style/base_tv"
             android:text="3D Galley" />
 
-    </com.lxk.animandcustomviewdemo.viewgroup.FlowLayout>
+    </com.lxk.animandview.viewgroup.FlowLayout>
 
 
-    <com.lxk.animandcustomviewdemo.recyclerview.TestRecyclerView
+    <com.lxk.animandview.recyclerview.TestRecyclerView
         android:id="@+id/crv_test"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

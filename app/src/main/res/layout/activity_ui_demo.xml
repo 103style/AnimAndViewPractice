@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.lxk.animandcustomviewdemo.viewgroup.FlowAlignLayout
+    <com.lxk.animandview.viewgroup.FlowAlignLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:align_type="SAME_GAP">
@@ -119,7 +119,7 @@
             style="@style/item_style"
             android:text="水波纹按钮效果" />
 
-    </com.lxk.animandcustomviewdemo.viewgroup.FlowAlignLayout>
+    </com.lxk.animandview.viewgroup.FlowAlignLayout>
 
 
     <FrameLayout

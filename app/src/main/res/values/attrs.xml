@@ -10,4 +10,11 @@
         </attr>
     </declare-styleable>
 
+
+    <declare-styleable name="ImitateBurningRabbit">
+        <attr name="top_bar_view" format="reference"/>
+        <attr name="bottom_bar_view" format="reference"/>
+        <attr name="close_bar_view" format="reference"/>
+    </declare-styleable>
+
 </resources>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.lxk.animandview.practice.burningrabbit.ImitateBurningRabbit xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ibr_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:bottom_bar_view="@layout/view_burning_rabbit_bottom_bar"
+    app:close_bar_view="@layout/view_burning_rabbit_close_bar">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_back"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+
+    <LinearLayout
+        android:id="@+id/front_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/view_burning_rabbit_top_bar" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_front"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+            app:spanCount="2" />
+
+    </LinearLayout>
+
+
+</com.lxk.animandview.practice.burningrabbit.ImitateBurningRabbit>

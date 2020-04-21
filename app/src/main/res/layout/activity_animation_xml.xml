@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.lxk.animandcustomviewdemo.viewgroup.FlowLayout
+    <com.lxk.animandview.viewgroup.FlowLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -34,7 +34,7 @@
             android:layout_toEndOf="@+id/bt_scale"
             android:text="Anim_Set" />
 
-    </com.lxk.animandcustomviewdemo.viewgroup.FlowLayout>
+    </com.lxk.animandview.viewgroup.FlowLayout>
 
 
     <Button

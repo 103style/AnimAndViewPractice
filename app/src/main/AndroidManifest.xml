@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.lxk.animandcustomviewdemo">
+    package="com.lxk.animandview">
 
     <application
         android:allowBackup="true"
@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.lxk.animandcustomviewdemo.MainActivity"
+            android:name=".MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,7 +20,7 @@
         </activity>
 
         <activity
-            android:name="com.lxk.animandcustomviewdemo.anim.AnimationXmlActivity"
+            android:name=".anim.AnimationXmlActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -28,15 +28,15 @@
         </activity>
 
         <activity
-            android:name="com.lxk.animandcustomviewdemo.anim.AnimationCodeActivity"
+            android:name=".anim.AnimationCodeActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.lxk.animandcustomviewdemo.animator.AnimatorActivity"
+            android:name=".animator.AnimatorActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.lxk.animandcustomviewdemo.animator.PropertyValuesHolderAndKeyFrameActivity"
+            android:name=".animator.PropertyValuesHolderAndKeyFrameActivity"
             android:screenOrientation="portrait" />
 
         <activity
@@ -56,11 +56,15 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".practice.PraticeDemoActivity"
+            android:name=".practice.PracticeDemoActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.lxk.animandcustomviewdemo.recyclerview.RecyclerViewActivity"
+            android:name=".practice.burningrabbit.BurningRabbitActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".recyclerview.RecyclerViewActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
 
     </application>

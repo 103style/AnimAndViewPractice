@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.lxk.animandcustomviewdemo.viewgroup.FlowAlignLayout
+    <com.lxk.animandview.viewgroup.FlowAlignLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:align_type="SAME_GAP">
@@ -41,7 +41,7 @@
             android:text="ARGB Evaluator" />
 
         <!-- 实现属性动画 -->
-        <com.lxk.animandcustomviewdemo.animator.view.TestEvaluatorView
+        <com.lxk.animandview.animator.view.TestEvaluatorView
             style="@style/base_tv"
             android:text="CharEvaluatorTest" />
 
@@ -61,7 +61,7 @@
             android:text="Scale" />
 
         <!-- 实现自定义属性动画 -->
-        <com.lxk.animandcustomviewdemo.animator.view.CustomPropertyAnimView
+        <com.lxk.animandview.animator.view.CustomPropertyAnimView
             style="@style/base_tv"
             android:text="CustomPropertyAnim" />
 
@@ -71,7 +71,7 @@
             android:layout_toEndOf="@+id/bt_scale"
             android:text="Anim_Set" />
 
-    </com.lxk.animandcustomviewdemo.viewgroup.FlowAlignLayout>
+    </com.lxk.animandview.viewgroup.FlowAlignLayout>
 
     <Button
         android:id="@+id/bt_demo"

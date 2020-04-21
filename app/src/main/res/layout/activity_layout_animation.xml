@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <com.lxk.animandcustomviewdemo.viewgroup.FlowAlignLayout
+    <com.lxk.animandview.viewgroup.FlowAlignLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:align_type="CENTER">
@@ -30,7 +30,7 @@
             style="@style/base_tv"
             android:text="GridViewAnimationController" />
 
-    </com.lxk.animandcustomviewdemo.viewgroup.FlowAlignLayout>
+    </com.lxk.animandview.viewgroup.FlowAlignLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
