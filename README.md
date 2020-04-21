@@ -1,6 +1,6 @@
-# AnimAndCustomViewDemo
+# AnimAndroidViewPratice
 
-Anim and CustomView exercise Demo
+Android Anim and View pratice Demo
 
 [Android自定义控件三部曲](https://blog.csdn.net/harvic880925/article/details/50995268) 的 学习记录
 
