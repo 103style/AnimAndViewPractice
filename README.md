@@ -1,4 +1,4 @@
-# AnimAndroidViewPratice
+# AnimAndViewPratice
 
 Android Anim and View pratice Demo
 
