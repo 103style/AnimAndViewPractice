@@ -1,6 +1,7 @@
 package com.lxk.animandview.practice.burningrabbit;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.lxk.animandview.drawapi.Utils;
  * @author xiaoke.luo@tcl.com 2020/4/21 16:58
  */
 public class RabbitAdapter extends RecyclerView.Adapter<RabbitAdapter.Holder> {
+    private static final String TAG = "RabbitAdapter";
 
     private Context context;
     private int count = 100;
@@ -38,24 +40,28 @@ public class RabbitAdapter extends RecyclerView.Adapter<RabbitAdapter.Holder> {
 
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
-        int color;
+        String color;
         ViewGroup.LayoutParams lp = holder.itemView.getLayoutParams();
-        switch (position % 3) {
+        switch (position % 4) {
             case 0:
-                lp.height = Utils.dpToPx(context, 72);
-                color = android.R.color.holo_blue_bright;
+                lp.height = Utils.dpToPx(context, 96);
+                color = "#ff00ddff";
                 break;
             case 1:
                 lp.height = Utils.dpToPx(context, 144);
-                color = android.R.color.holo_red_light;
+                color = "#ffffbb33";
                 break;
             case 2:
+                lp.height = Utils.dpToPx(context, 176);
+                color = "#FF3F51B5";
+                break;
+            case 3:
             default:
-                lp.height = Utils.dpToPx(context, 196);
-                color = android.R.color.holo_green_light;
+                lp.height = Utils.dpToPx(context, 224);
+                color = "#ff99cc00";
                 break;
         }
-        holder.itemView.setBackgroundColor(context.getResources().getColor(color));
+        holder.itemView.setBackgroundColor(Color.parseColor(color));
         if (back) {
             lp.height = Utils.dpToPx(context, 192);
         }

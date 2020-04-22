@@ -19,7 +19,6 @@
     </style>
 
     <style name="item_style" parent="base_tv">
-        <item name="android:padding">8dp</item>
         <item name="android:layout_margin">4dp</item>
         <item name="android:background">@color/colorAccent</item>
     </style>

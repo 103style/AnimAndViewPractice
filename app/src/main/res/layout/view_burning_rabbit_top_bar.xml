@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<View xmlns:android="http://schemas.android.com/apk/res/android"
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="192dp"
-    android:background="@android:color/holo_blue_dark" />
+    android:layout_height="72dp"
+    android:background="@color/colorAccent"
+    android:gravity="center"
+    android:padding="8dp"
+    android:text="Top bar"
+    android:textColor="@android:color/white"
+    android:textSize="14dp" />
 

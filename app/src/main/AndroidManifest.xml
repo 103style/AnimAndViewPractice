@@ -61,7 +61,8 @@
 
         <activity
             android:name=".practice.burningrabbit.BurningRabbitActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <activity
             android:name=".recyclerview.RecyclerViewActivity"
