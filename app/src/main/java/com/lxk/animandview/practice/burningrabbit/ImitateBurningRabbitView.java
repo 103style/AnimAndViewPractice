@@ -69,6 +69,7 @@ public class ImitateBurningRabbitView extends MarginLayoutParamsViewGroup implem
         topChildView = findViewById(R.id.top_view);
         if (topBarView != null) {
             addView(topBarView);
+            topBarView.setAlpha(0);
         }
         if (pullOutView != null) {
             addView(pullOutView);
@@ -204,6 +205,12 @@ public class ImitateBurningRabbitView extends MarginLayoutParamsViewGroup implem
         }
         super.scrollBy(x, y);
         layoutChildren();
+
+        if (topBarView != null) {
+            int h = topBarView.getMeasuredHeight();
+            float alpha = 1.0f * (getScrollY() - h) / h;
+            topBarView.setAlpha(alpha >= 1 ? 1.0f : alpha);
+        }
     }
 
     @Override
@@ -240,11 +247,11 @@ public class ImitateBurningRabbitView extends MarginLayoutParamsViewGroup implem
 
     @Override
     public boolean onNestedPreFling(@NonNull View target, float velocityX, float velocityY) {
-        return true;
+        return false;
     }
 
     @Override
     public boolean onNestedFling(@NonNull View target, float velocityX, float velocityY, boolean consumed) {
-        return true;
+        return false;
     }
 }

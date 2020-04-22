@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -52,12 +53,12 @@ public class RabbitAdapter extends RecyclerView.Adapter<RabbitAdapter.Holder> {
                 color = "#ffffbb33";
                 break;
             case 2:
-                lp.height = Utils.dpToPx(context, 176);
+                lp.height = Utils.dpToPx(context, 224);
                 color = "#FF3F51B5";
                 break;
             case 3:
             default:
-                lp.height = Utils.dpToPx(context, 224);
+                lp.height = Utils.dpToPx(context, 176);
                 color = "#ff99cc00";
                 break;
         }
@@ -66,6 +67,7 @@ public class RabbitAdapter extends RecyclerView.Adapter<RabbitAdapter.Holder> {
             lp.height = Utils.dpToPx(context, 192);
         }
         holder.itemView.setLayoutParams(lp);
+        ((TextView) holder.itemView).setText(String.valueOf(position));
 
     }
 
