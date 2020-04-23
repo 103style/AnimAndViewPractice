@@ -14,6 +14,16 @@ public interface IState {
          * 显示后面的视图的状态
          */
         int PULL_OUT = 2;
+
+        /**
+         * 拉出后面视图的过程中
+         */
+        int PULLING = 3;
+
+        /**
+         * 关闭后面的视图中
+         */
+        int CLOSING = 4;
     }
 
     interface MoveDirection {

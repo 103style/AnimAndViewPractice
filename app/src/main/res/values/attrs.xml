@@ -13,8 +13,10 @@
 
     <declare-styleable name="ImitateBurningRabbitView">
         <attr name="ibr_top_bar_view" format="reference" />
+        <attr name="ibr_top_view" format="reference" />
         <attr name="ibr_bottom_bar_view" format="reference" />
-        <attr name="ibr_pull_out_view" format="reference" />
+        <attr name="ibr_pull_out_bottom_view" format="reference" />
+        <attr name="ibr_pull_out_threshold" format="dimension" />
     </declare-styleable>
 
 </resources>

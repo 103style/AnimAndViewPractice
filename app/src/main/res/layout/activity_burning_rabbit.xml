@@ -6,8 +6,10 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="false"
     app:ibr_bottom_bar_view="@layout/view_burning_rabbit_bottom_bar"
-    app:ibr_pull_out_view="@layout/view_burning_rabbit_close_bar"
-    app:ibr_top_bar_view="@layout/view_burning_rabbit_top_bar">
+    app:ibr_pull_out_threshold="144dp"
+    app:ibr_pull_out_bottom_view="@layout/view_burning_rabbit_close_bar"
+    app:ibr_top_bar_view="@layout/view_burning_rabbit_top_bar"
+    app:ibr_top_view="@layout/view_burning_rabbit_top_view">
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -23,10 +25,5 @@
         app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
         app:spanCount="2" />
 
-    <View
-        android:id="@+id/top_view"
-        android:layout_width="match_parent"
-        android:layout_height="192dp"
-        android:background="@android:color/holo_red_light" />
 
 </com.lxk.animandview.practice.burningrabbit.ImitateBurningRabbitView>

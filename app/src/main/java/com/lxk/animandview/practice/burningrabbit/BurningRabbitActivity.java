@@ -38,15 +38,10 @@ public class BurningRabbitActivity extends BaseClickActivity {
             rvFront.scrollToPosition(0);
             rvBack.setVisibility(View.VISIBLE);
             rvFront.setVisibility(View.GONE);
-            imitateBurningRabbit.changeState(IState.ViewGroupState.PULL_OUT);
         });
 
-        imitateBurningRabbit.getPullOutView().setOnClickListener(v -> {
-            rvBack.scrollToPosition(0);
-            rvFront.scrollToPosition(0);
-            rvBack.setVisibility(View.GONE);
-            rvFront.setVisibility(View.VISIBLE);
-            imitateBurningRabbit.changeState(IState.ViewGroupState.NORMAL);
+        imitateBurningRabbit.getPullOutBottomView().setOnClickListener(v -> {
+            imitateBurningRabbit.doBackNormal();
         });
     }
 
