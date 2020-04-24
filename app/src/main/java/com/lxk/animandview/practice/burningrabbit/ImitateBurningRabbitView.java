@@ -3,7 +3,10 @@ package com.lxk.animandview.practice.burningrabbit;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
+import android.graphics.Region;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
@@ -49,6 +52,13 @@ public class ImitateBurningRabbitView extends MarginLayoutParamsViewGroup {
      * 通过属性配置的三个视图： 顶部的渐变视图、底部的视图、下拉frontChildView 显示的 关闭视图
      */
     private View topBarView, bottomBarView, pullOutBottomView;
+
+    /**
+     * backChildView 和 frontChildView 中间的视图
+     */
+    private View middleView;
+    private int middleViewColor;
+
     /**
      * 滑动速度测量
      */
@@ -82,6 +92,11 @@ public class ImitateBurningRabbitView extends MarginLayoutParamsViewGroup {
      * 是否是新的惯性滑动
      */
     private boolean isNewScroll;
+    private boolean isScrolling;
+
+    private boolean bottomClicked;
+
+    private OnClickListener onClickListener;
 
     public ImitateBurningRabbitView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -93,6 +108,7 @@ public class ImitateBurningRabbitView extends MarginLayoutParamsViewGroup {
     private void initAttrs(Context context, AttributeSet attrs) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ImitateBurningRabbitView);
         pulloutOffsetThreshold = typedArray.getDimensionPixelOffset(R.styleable.ImitateBurningRabbitView_ibr_pull_out_threshold, Utils.dpToPx(context, 32));
+        middleViewColor = typedArray.getColor(R.styleable.ImitateBurningRabbitView_ibr_middle_view_color, Color.WHITE);
         topBarView = getInflaterView(typedArray, R.styleable.ImitateBurningRabbitView_ibr_top_bar_view);
         topChildView = getInflaterView(typedArray, R.styleable.ImitateBurningRabbitView_ibr_top_view);
         bottomBarView = getInflaterView(typedArray, R.styleable.ImitateBurningRabbitView_ibr_bottom_bar_view);
@@ -119,8 +135,15 @@ public class ImitateBurningRabbitView extends MarginLayoutParamsViewGroup {
             case 0:
                 //第一个xml子view设置为 backChildView
                 backChildView = child;
-                break;
-            case 1:
+                if (child != null) {
+                    super.addView(child, index, params);
+                }
+                middleView = new View(getContext());
+                middleView.setLayoutParams(new MarginLayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+                middleView.setBackgroundColor(middleViewColor);
+                addConfigView(middleView, index);
+                return;
+            case 2:
                 //第二个xml子view设置为 frontChildView
                 frontChildView = child;
                 if (child != null) {
@@ -138,7 +161,6 @@ public class ImitateBurningRabbitView extends MarginLayoutParamsViewGroup {
             default:
                 throw new IllegalStateException("CoffinLayout child can't > 2");
         }
-        super.addView(child, index, params);
     }
 
     private void addConfigView(View view, int index) {
@@ -192,7 +214,7 @@ public class ImitateBurningRabbitView extends MarginLayoutParamsViewGroup {
             return;
         }
         MarginLayoutParams lp = (MarginLayoutParams) topChildView.getLayoutParams();
-        int top = lp.topMargin + mTopViewOffset;
+        int top = lp.topMargin;
         topChildView.layout(getLeft() + lp.leftMargin, top,
                 getRight() - lp.rightMargin,
                 top + topChildView.getMeasuredHeight());
@@ -214,8 +236,9 @@ public class ImitateBurningRabbitView extends MarginLayoutParamsViewGroup {
     }
 
     private void layoutBackAndFrontChildView() {
-        layoutXmlChildView(backChildView, mBackViewOffset + mTopViewHeight);
-        layoutXmlChildView(frontChildView, mFrontViewOffset + mTopViewHeight);
+        layoutXmlChildView(backChildView, 0);
+        layoutXmlChildView(frontChildView, Math.max(mTopViewHeight, mFrontViewOffset));
+        layoutXmlChildView(middleView, mTopViewHeight);
     }
 
     private void layoutXmlChildView(View view, int offset) {
@@ -230,7 +253,7 @@ public class ImitateBurningRabbitView extends MarginLayoutParamsViewGroup {
 
     private void layoutBottomBarAndPullOutView() {
         layoutBottomView(bottomBarView, isNormalState());
-        layoutBottomView(pullOutBottomView, !isNormalState());
+        layoutBottomView(pullOutBottomView, isPullOutState());
     }
 
     private boolean isNormalState() {
@@ -259,37 +282,33 @@ public class ImitateBurningRabbitView extends MarginLayoutParamsViewGroup {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        dispatchToChild(ev, bottomBarView, pullOutBottomView);
         return true;
-    }
-
-    private void dispatchToChild(MotionEvent ev, View... views) {
-        for (View view : views) {
-            if (view == null) {
-                return;
-            }
-            view.dispatchTouchEvent(ev);
-        }
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        if (isScrolling) {
+            return false;
+        }
         mVelocityTracker.addMovement(event);
         int y = (int) event.getY();
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 preY = y;
+                updateBottomClicked(event);
                 break;
             case MotionEvent.ACTION_MOVE:
                 if (isNormalState()) {
-                    offsetXmlView(frontChildView, y, true);
+                    offsetFront(y - preY);
                 } else if (isPullOutState()) {
-                    offsetXmlView(backChildView, y, false);
+                    offsetBack(y - preY);
                 }
+                preY = y;
                 //显示或者影藏top bar
                 changeTopBarState();
                 break;
             case MotionEvent.ACTION_UP:
+                updateBottomClicked(event);
             case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_OUTSIDE:
                 boolean isHandle = false;
@@ -297,12 +316,12 @@ public class ImitateBurningRabbitView extends MarginLayoutParamsViewGroup {
                     //检查 frontChildView 当前位置 是否需要改变状态
                     isHandle = checkoutFrontViewState();
                 }
-                if (!isHandle) {
-                    mVelocityTracker.computeCurrentVelocity(1000);
-                    mScroller.fling(0, 0, 0, (int) mVelocityTracker.getYVelocity(),
-                            0, 0, Integer.MIN_VALUE, Integer.MAX_VALUE);
-                    invalidate();
-                }
+//                if (!isHandle) {
+//                    mVelocityTracker.computeCurrentVelocity(1000);
+//                    mScroller.fling(0, 0, 0, (int) mVelocityTracker.getYVelocity() / 3,
+//                            0, 0, Integer.MIN_VALUE, Integer.MAX_VALUE);
+//                    invalidate();
+//                }
                 //标记状态
                 isBeingDragged = false;
                 break;
@@ -317,6 +336,7 @@ public class ImitateBurningRabbitView extends MarginLayoutParamsViewGroup {
             return false;
         }
         int top = frontChildView.getTop();
+        Log.e(TAG, "checkoutFrontViewState frontChildView.top = " + top);
         if (top > mTopViewHeight + pulloutOffsetThreshold) {
             doPullOut();
             return true;
@@ -328,81 +348,85 @@ public class ImitateBurningRabbitView extends MarginLayoutParamsViewGroup {
     }
 
     private void doPullOut() {
-        currentState = IState.ViewGroupState.PULLING;
-        //front view 需要滑动的距离
-        int offset = getBottom() + 100 - frontChildView.getTop();
+        isScrolling = true;
         isNewScroll = true;
+        //front view 需要滑动的距离
+        int offset = getBottom() - frontChildView.getTop();
         mScroller.startScroll(0, 0, 0, offset, ANIMATION_DURATION);
+        currentState = IState.ViewGroupState.PULLING;
+        setViewVisible(middleView, false);
+        setViewVisible(topBarView, false);
         invalidate();
         doViewStateChangeAnim(bottomBarView, true);
         doViewStateChangeAnim(pullOutBottomView, false);
+        hideTopBarAnim();
+        hideTopViewAnim();
     }
 
     public void doBackNormal() {
-        currentState = IState.ViewGroupState.CLOSING;
+        isScrolling = true;
+        isNewScroll = true;
         //front view 需要滑动的距离
         int offset = mTopViewHeight - frontChildView.getTop();
-        isNewScroll = true;
-        mScroller.startScroll(0, offset, 0, 0, ANIMATION_DURATION);
+        mScroller.startScroll(0, 0, 0, offset, ANIMATION_DURATION);
+        currentState = IState.ViewGroupState.CLOSING;
         invalidate();
-        doViewStateChangeAnim(pullOutBottomView, true);
+        setViewVisible(middleView, true);
+        setViewVisible(topBarView, true);
         doViewStateChangeAnim(bottomBarView, false);
+        doViewStateChangeAnim(pullOutBottomView, true);
+        showTopViewAnim();
     }
 
-
-    private void changeTopBarState() {
-        if (!isNormalState()) {
-            return;
-        }
-        mVelocityTracker.computeCurrentVelocity(1000);
-        float velocityY = mVelocityTracker.getYVelocity();
-        //根据手指滑动的速率和方向来判断是否要隐藏或显示TopBar
-        if (Math.abs(velocityY) > 4000 && topBarView != null) {
-            if (velocityY > 0) {
-                if (topBarView.getTranslationY() == -getViewSpaceHeight(topBarView)) {
-                    startValueAnimation(topBarView, -getViewSpaceHeight(topBarView), 0);
-                }
-            } else {
-                if (topBarView.getTranslationY() == 0) {
-                    startValueAnimation(topBarView, 0, -getViewSpaceHeight(topBarView));
-                }
-            }
-        }
-    }
-
-    private void offsetXmlView(View view, int y, boolean front) {
-        int offset = y - preY;
+    private void offsetBack(int offset) {
         int dy = -offset;
         boolean pullUp = offset < 0;
 
         offsetChildView(pullUp, offset);
-
-        if (view == null) {
+        if (backChildView == null) {
             return;
         }
 
-        int topGap = view.getTop() - getTop();
+        int topGap = backChildView.getTop() - getTop();
         if (pullUp) {
             if (topGap > 0) {
                 int t = Math.abs(offset) > topGap ? -topGap : offset;
-                view.offsetTopAndBottom(t);
+                backChildView.offsetTopAndBottom(t);
             } else {
-                view.scrollBy(0, dy);
+                backChildView.scrollBy(0, dy);
             }
         } else {
-            view.scrollBy(0, dy);
-            if (checkViewInContentTop(view)) {
-                view.offsetTopAndBottom(offset);
-                if (!front) {
-                    if (view.getTop() > mTopViewHeight) {
-                        view.offsetTopAndBottom(mTopViewHeight - view.getTop());
-                    }
-                }
+            if (!checkViewInContentTop(backChildView)) {
+                backChildView.scrollBy(0, dy);
             }
         }
-        preY = y;
+        mBackViewOffset = backChildView.getTop();
     }
 
+    private void offsetFront(int offset) {
+        int dy = -offset;
+        boolean pullUp = offset < 0;
+
+        offsetChildView(pullUp, offset);
+        if (frontChildView == null) {
+            return;
+        }
+        int topGap = frontChildView.getTop() - getTop();
+        if (pullUp) {
+            if (topGap > 0) {
+                int t = Math.abs(offset) > topGap ? -topGap : offset;
+                frontChildView.offsetTopAndBottom(t);
+            } else {
+                frontChildView.scrollBy(0, dy);
+            }
+        } else {
+            frontChildView.scrollBy(0, dy);
+            if (checkViewInContentTop(frontChildView)) {
+                frontChildView.offsetTopAndBottom(offset);
+            }
+        }
+        mFrontViewOffset = frontChildView.getTop();
+    }
 
     private boolean checkViewInContentTop(View view) {
         boolean res = view.getScrollY() == 0;
@@ -421,8 +445,9 @@ public class ImitateBurningRabbitView extends MarginLayoutParamsViewGroup {
     }
 
     private void offsetChildView(boolean pullUp, int offset) {
-        if (topChildView != null) {
-            if (pullUp) {
+        if (topChildView != null && isNormalState()) {
+            if (pullUp && frontChildView != null && frontChildView.getTop() <= mTopViewHeight) {
+                //上拉 并且 frontChild 已经和top child 连接在一起
                 topChildView.offsetTopAndBottom(offset);
             } else {
                 if (topChildView.getTop() < 0) {
@@ -431,44 +456,32 @@ public class ImitateBurningRabbitView extends MarginLayoutParamsViewGroup {
                 }
             }
         }
+        setTopBarAndMiddleViewAlpha();
     }
 
-
-//    private void offsetChildView(int offset) {
-//        if (!isFrontViewOpeningOrClosing() && frontChildView.getTop() < getTopChildViewLayoutHeight()) {
-//            //不是正在打开或关闭状态 并且  前面视图的 顶部 小于触发 拉出后面视图的高度
-//            int bottomViewOffset = offset / 2;//损失一半
-//            //判断越界
-//            if (backChildView.getTop() > getTop() || backChildView.getTop() + bottomViewOffset > getTop()) {
-//                bottomViewOffset = getTop() - backChildView.getTop();
-//            }
-//            //更新BottomView和HeaderView的位置
-//            mBackViewOffset += bottomViewOffset;
-//            backChildView.offsetTopAndBottom(bottomViewOffset);
-//            mTopViewOffset += bottomViewOffset;
-//            topChildView.offsetTopAndBottom(bottomViewOffset);
-////            mTransitionView.offsetTopAndBottom(-bottomViewOffset);
-//        }
-//        //更新棺材盖的位置
-//        mFrontViewOffset += offset;
-//        frontChildView.offsetTopAndBottom(offset);
-////        //更新TopBar的透明度
-////        float percent = (float) mLidViewOffset / (getBottom() - mLidOffset);
-////        mTransitionView.setAlpha(1F - percent);
-////        percent = (float) (mLidView.getTop() - mTopBar.getHeight()) / (mLidOffset - mTopBar.getHeight());
-////        if (percent > 1F) {
-////            percent = 1F;
-////        }
-////        if (percent < 0) {
-////            percent = 0;
-////        }
-////        setTopBarBackgroundAlpha(percent);
-//    }
+    private void setTopBarAndMiddleViewAlpha() {
+        if (!isNormalState()) {
+            return;
+        }
+        float percent = (frontChildView.getTop() - mTopViewHeight) * 0.5f / pulloutOffsetThreshold;
+        if (percent > 1F) {
+            percent = 1F;
+        }
+        if (percent < 0) {
+            percent = 0;
+        }
+        percent = 1F - percent;
+        if (middleView != null && middleView.getVisibility() == VISIBLE) {
+            middleView.setAlpha(percent);
+        }
+        if (topBarView != null) {
+            topBarView.setAlpha(percent);
+        }
+    }
 
     private boolean isFrontViewOpeningOrClosing() {
         return currentState == IState.ViewGroupState.PULLING || currentState == IState.ViewGroupState.CLOSING;
     }
-
 
     private void doViewStateChangeAnim(View view, boolean hide) {
         if (view == null) {
@@ -482,6 +495,53 @@ public class ImitateBurningRabbitView extends MarginLayoutParamsViewGroup {
         }
     }
 
+    private void changeTopBarState() {
+        if (!isNormalState()) {
+            return;
+        }
+        mVelocityTracker.computeCurrentVelocity(1000);
+        float velocityY = mVelocityTracker.getYVelocity();
+        //根据手指滑动的速率和方向来判断是否要隐藏或显示TopBar
+        if (Math.abs(velocityY) > 4000) {
+            if (velocityY > 0) {
+                showTopBarAnim();
+            } else {
+                hideTopBarAnim();
+            }
+        }
+    }
+
+    private void hideTopBarAnim() {
+        if (topBarView != null) {
+            if (topBarView.getTranslationY() == 0) {
+                startValueAnimation(topBarView, 0, -getViewSpaceHeight(topBarView));
+            }
+        }
+    }
+
+    private void showTopBarAnim() {
+        if (topBarView != null) {
+            if (topBarView.getTranslationY() == -getViewSpaceHeight(topBarView)) {
+                startValueAnimation(topBarView, -getViewSpaceHeight(topBarView), 0);
+            }
+        }
+    }
+
+    private void hideTopViewAnim() {
+        if (topChildView != null) {
+            if (topChildView.getTranslationY() == 0) {
+                startValueAnimation(topChildView, 0, -getViewSpaceHeight(topChildView));
+            }
+        }
+    }
+
+    private void showTopViewAnim() {
+        if (topChildView != null) {
+            if (topChildView.getTranslationY() == -getViewSpaceHeight(topChildView)) {
+                startValueAnimation(topChildView, -getViewSpaceHeight(topChildView), 0);
+            }
+        }
+    }
 
     /**
      * 执行动画
@@ -499,39 +559,84 @@ public class ImitateBurningRabbitView extends MarginLayoutParamsViewGroup {
         animator.start();
     }
 
+    private void setViewVisible(View view, boolean visible) {
+        if (view == null) {
+            return;
+        }
+        view.setVisibility(visible ? VISIBLE : GONE);
+        view.setAlpha(1F);
+    }
 
-    //    /**
-//     * 打断滚动动画
-//     */
-//    private void abortScrollerAnimation() {
-//        if (!mScroller.isFinished()) {
-//            mScroller.abortAnimation();
-//        }
-//    }
-//
+    private void updateBottomClicked(MotionEvent event) {
+        View view = null;
+        Region region = null;
+        if (isNormalState()) {
+            view = bottomBarView;
+            region = new Region(view.getLeft(), view.getTop() - getTop(),
+                    view.getRight(), view.getBottom() - getTop());
+        } else if (isPullOutState()) {
+            view = pullOutBottomView;
+            region = new Region(view.getLeft(), view.getTop() - getTop() - getViewSpaceHeight(view),
+                    view.getRight(), view.getBottom() - getTop() - getViewSpaceHeight(view));
+        }
+        if (view == null) {
+            return;
+        }
+        boolean res = region.contains((int) event.getX(), (int) event.getY());
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            bottomClicked = res;
+        } else if (event.getAction() == MotionEvent.ACTION_UP && bottomClicked) {
+            if (onClickListener != null && res) {
+                if (isPullOutState()) {
+                    onClickListener.pullOutViewClicked();
+                } else {
+                    onClickListener.bottomBarViewClicked();
+                }
+            }
+        }
+    }
+
+    public void setOnClickListener(OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
+    }
+
+    /**
+     * 打断滚动动画
+     */
+    private void abortScrollerAnimation() {
+        if (!mScroller.isFinished()) {
+            mScroller.abortAnimation();
+        }
+    }
+
     @Override
     public void computeScroll() {
         if (mScroller.computeScrollOffset()) {
+
+            setTopBarAndMiddleViewAlpha();
+
             int y = mScroller.getCurrY();
-            //是新的一轮则刷新offset
+            //是新的一轮则刷新offseta
             if (isNewScroll) {
                 isNewScroll = false;
                 mScrollOffset = y;
             }
             int offset = y - mScrollOffset;
             if (currentState == IState.ViewGroupState.PULLING) {
+                Log.e(TAG, "computeScroll frontChildView.top = " + frontChildView.getTop());
                 frontChildView.offsetTopAndBottom(offset);
             } else if (currentState == IState.ViewGroupState.CLOSING) {
                 frontChildView.offsetTopAndBottom(offset);
-            }else if (currentState == IState.ViewGroupState.PULL_OUT){
-                backChildView.scrollBy(0,-offset);
-            }else if (currentState == IState.ViewGroupState.NORMAL){
-                frontChildView.scrollBy(0,-offset);
+            } else if (currentState == IState.ViewGroupState.PULL_OUT) {
+                offsetBack(offset);
+            } else if (currentState == IState.ViewGroupState.NORMAL) {
+                offsetFront(offset);
             }
             mScrollOffset = y;
             invalidate();
 
             if (mScroller.isFinished()) {
+                isNewScroll = true;
                 //滚动结束, 更新状态
                 if (currentState == IState.ViewGroupState.PULLING) {
                     currentState = IState.ViewGroupState.PULL_OUT;
@@ -539,8 +644,26 @@ public class ImitateBurningRabbitView extends MarginLayoutParamsViewGroup {
                 } else if (currentState == IState.ViewGroupState.CLOSING) {
                     currentState = IState.ViewGroupState.NORMAL;
                     topChildView.offsetTopAndBottom(-topChildView.getTop());
+                    frontChildView.offsetTopAndBottom(mTopViewHeight - frontChildView.getTop());
                 }
+                mBackViewOffset = backChildView.getTop();
+                mFrontViewOffset = frontChildView.getTop();
+                isScrolling = false;
             }
         }
+    }
+
+    public void goFrontBottom() {
+        hideTopViewAnim();
+        if (frontChildView != null) {
+            mFrontViewOffset = -mTopViewHeight;
+            frontChildView.offsetTopAndBottom(mFrontViewOffset);
+        }
+    }
+
+    public interface OnClickListener {
+        void pullOutViewClicked();
+
+        void bottomBarViewClicked();
     }
 }

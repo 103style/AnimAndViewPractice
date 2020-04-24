@@ -14,6 +14,7 @@
     <declare-styleable name="ImitateBurningRabbitView">
         <attr name="ibr_top_bar_view" format="reference" />
         <attr name="ibr_top_view" format="reference" />
+        <attr name="ibr_middle_view_color" format="color" />
         <attr name="ibr_bottom_bar_view" format="reference" />
         <attr name="ibr_pull_out_bottom_view" format="reference" />
         <attr name="ibr_pull_out_threshold" format="dimension" />

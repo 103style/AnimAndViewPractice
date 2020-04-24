@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="false"
     app:ibr_bottom_bar_view="@layout/view_burning_rabbit_bottom_bar"
-    app:ibr_pull_out_threshold="144dp"
     app:ibr_pull_out_bottom_view="@layout/view_burning_rabbit_close_bar"
+    app:ibr_pull_out_threshold="144dp"
     app:ibr_top_bar_view="@layout/view_burning_rabbit_top_bar"
     app:ibr_top_view="@layout/view_burning_rabbit_top_view">
 

@@ -33,16 +33,18 @@ public class BurningRabbitActivity extends BaseClickActivity {
         rvBack.setAdapter(new RabbitAdapter(this, true));
         rvFront.setAdapter(new RabbitAdapter(this, false));
 
-        imitateBurningRabbit.getBottomBarView().setOnClickListener(v -> {
-            rvBack.scrollToPosition(0);
-            rvFront.scrollToPosition(0);
-            rvBack.setVisibility(View.VISIBLE);
-            rvFront.setVisibility(View.GONE);
-        });
+        imitateBurningRabbit.setOnClickListener(
+                new ImitateBurningRabbitView.OnClickListener() {
+                    @Override
+                    public void pullOutViewClicked() {
+                        imitateBurningRabbit.doBackNormal();
+                    }
 
-        imitateBurningRabbit.getPullOutBottomView().setOnClickListener(v -> {
-            imitateBurningRabbit.doBackNormal();
-        });
+                    @Override
+                    public void bottomBarViewClicked() {
+                        imitateBurningRabbit.goFrontBottom();
+                    }
+                });
     }
 
     @Override
@@ -58,10 +60,6 @@ public class BurningRabbitActivity extends BaseClickActivity {
         window.setFlags(
                 WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
                 WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        // Translucent navigation bar
-            /*window.setFlags(
-                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION,
-                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);*/
         //android 5.0以上的
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
