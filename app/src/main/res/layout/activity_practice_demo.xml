@@ -19,6 +19,11 @@
             style="@style/item_style"
             android:text="仿燃兔列表" />
 
+        <Button
+            android:id="@+id/arc_sliding"
+            style="@style/item_style"
+            android:text="圆弧滑动工具类" />
+
     </com.lxk.animandview.viewgroup.FlowAlignLayout>
 
 
