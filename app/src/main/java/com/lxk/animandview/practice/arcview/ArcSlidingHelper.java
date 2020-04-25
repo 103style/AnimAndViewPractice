@@ -47,7 +47,8 @@ public class ArcSlidingHelper {
     private OnSlideFinishListener mSlideFinishListener;
 
     private ArcSlidingHelper(Context context, int pivotX, int pivotY, OnSlidingListener listener) {
-        updateTargetParams(pivotX, pivotY);
+        mPivotX = pivotX;
+        mPivotY = pivotY;
         mListener = listener;
         mScroller = new Scroller(context);
         mScrollAvailabilityRatio = .3F;
@@ -61,8 +62,8 @@ public class ArcSlidingHelper {
     }
 
     public static int[] getCenterPoint(@NonNull View targetView) {
-        int width = targetView.getWidth();
-        int height = targetView.getHeight();
+        int width = targetView.getMeasuredWidth();
+        int height = targetView.getMeasuredHeight();
         //如果宽度为0，提示宽度无效，需要调用updatePivotX方法来设置x轴的旋转基点
         if (width == 0) {
             Log.e(TAG, "targetView width = 0! please invoke the updatePivotX(int) method to update the PivotX!", new RuntimeException());
@@ -210,9 +211,7 @@ public class ArcSlidingHelper {
         mVelocityTracker.addMovement(event);
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                if (!mScroller.isFinished()) {
-                    mScroller.abortAnimation();
-                }
+                abortAnimation();
                 break;
             case MotionEvent.ACTION_MOVE:
                 handleActionMove(x, y);
@@ -259,7 +258,10 @@ public class ArcSlidingHelper {
             //转换为角度
             float angle = (float) Math.toDegrees(Math.acos(cosAPB));
             if (!Float.isNaN(angle)) {
-                mListener.onSliding((isClockwiseScrolling = isClockwise(x, y)) ? angle : -angle);
+                isClockwiseScrolling = isClockwise(x, y);
+                angle = isClockwiseScrolling ? angle : -angle;
+                Log.e(TAG, "handleActionMove: angel = " + angle);
+                mListener.onSliding(angle);
             }
         }
     }
@@ -272,8 +274,9 @@ public class ArcSlidingHelper {
      * @return 是否顺时针
      */
     private boolean isClockwise(float x, float y) {
-        return (isShouldBeGetY = Math.abs(y - mPreY) > Math.abs(x - mPreX)) ?
-                x < mPivotX != y > mPreY : y < mPivotY == x > mPreX;
+        isShouldBeGetY = Math.abs(y - mPreY) > Math.abs(x - mPreX);
+
+        return isShouldBeGetY ? x < mPivotX != y > mPreY : y < mPivotY == x > mPreX;
     }
 
     private void startFling() {
