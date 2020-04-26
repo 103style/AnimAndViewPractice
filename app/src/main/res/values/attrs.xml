@@ -20,4 +20,30 @@
         <attr name="ibr_pull_out_threshold" format="dimension" />
     </declare-styleable>
 
+
+    <declare-styleable name="ArcLayoutView">
+        <!-- 旋转中心视图的类型 -->
+        <attr name="alv_center_view_type" format="enum">
+            <enum name="view" value="0" />
+            <enum name="color" value="1" />
+        </attr>
+        <!-- 旋转中心视图的的半径-->
+        <attr name="alv_center_radius" format="dimension" />
+        <!-- 旋转中心视图为 alv_center_view_type = color 的 颜色-->
+        <attr name="alv_center_color" format="color" />
+        <!-- 旋转中心视图为 alv_center_view_type = view 的 视图-->
+        <attr name="alv_center_layout_id" format="reference" />
+        <!-- 旋转中心视图 是否可以旋转-->
+        <attr name="alv_center_view_can_rotate" format="boolean" />
+
+        <!-- 旋转中心视图 在布局的位置-->
+        <attr name="alv_center_view_position" format="enum">
+            <enum name="bottom" value="0" />
+            <enum name="top" value="1" />
+        </attr>
+        <!-- 每一个item 距离中心点的偏移距离 -->
+        <attr name="alv_child_offset_dis_with_center" format="dimension" />
+
+    </declare-styleable>
+
 </resources>
