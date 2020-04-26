@@ -3,10 +3,13 @@ package com.lxk.animandview.practice;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 
 import com.lxk.animandview.BaseClickActivity;
 import com.lxk.animandview.R;
+import com.lxk.animandview.practice.arcview.ArcLayoutView;
 import com.lxk.animandview.practice.arcview.ArcSlidingTestView;
 import com.lxk.animandview.practice.burningrabbit.BurningRabbitActivity;
 import com.lxk.animandview.practice.view.BiliBiliPathView;
@@ -30,6 +33,7 @@ public class PracticeDemoActivity extends BaseClickActivity {
                 R.id.bilibili_path,
                 R.id.bruning_rabbit,
                 R.id.arc_sliding,
+                R.id.arc_layout,
                 R.id.group
         );
     }
@@ -47,6 +51,10 @@ public class PracticeDemoActivity extends BaseClickActivity {
             case R.id.arc_sliding:
                 view = new ArcSlidingTestView(this);
                 break;
+            case R.id.arc_layout:
+                view = new ArcLayoutView(this);
+                addTestView((ViewGroup) view);
+                break;
             case R.id.group:
                 clean();
                 break;
@@ -55,6 +63,14 @@ public class PracticeDemoActivity extends BaseClickActivity {
         }
         if (view != null) {
             showView(view);
+        }
+    }
+
+    private void addTestView(ViewGroup group) {
+        for (int i = 0; i < 10; i++) {
+            Button button = new Button(this);
+            button.setText("ArcLayout Test Item " + i);
+            group.addView(button);
         }
     }
 
