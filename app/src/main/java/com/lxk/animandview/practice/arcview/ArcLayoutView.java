@@ -111,6 +111,10 @@ public class ArcLayoutView extends ViewGroup implements ArcSlidingHelper.OnSlidi
      */
     private int centerViewGravity;
     /**
+     * 中心视图 centerViewGravity 不为 center 的偏移量
+     */
+    private int centerViewOffset;
+    /**
      * 子view的子view不跟随旋转
      */
     private boolean itemChildNoRotate;
@@ -139,6 +143,7 @@ public class ArcLayoutView extends ViewGroup implements ArcSlidingHelper.OnSlidi
         centerViewInBottom = pos == POS_BOTTOM;
         itemChildNoRotate = ta.getBoolean(R.styleable.ArcLayoutView_alv_item_child_no_rotate, false);
         centerViewGravity = ta.getInt(R.styleable.ArcLayoutView_alv_center_view_gravity, GRAVITY_CENTER);
+        centerViewOffset = ta.getDimensionPixelOffset(R.styleable.ArcLayoutView_alv_center_view_offset, DensityUtils.dpToPx(context, 32));
         centerViewRadius = ta.getDimensionPixelOffset(R.styleable.ArcLayoutView_alv_center_radius, DensityUtils.dpToPx(context, 32));
         centerViewType = ta.getInt(R.styleable.ArcLayoutView_alv_center_view_type, TYPE_COLOR);
         centerViewColor = ta.getColor(R.styleable.ArcLayoutView_alv_center_color, Color.CYAN);
@@ -276,29 +281,41 @@ public class ArcLayoutView extends ViewGroup implements ArcSlidingHelper.OnSlidi
         switch (centerViewGravity) {
             case GRAVITY_LEFT_CENTER:
                 y = getMeasuredHeight() / 2;
+                x += centerViewOffset;
                 break;
             case GRAVITY_LEFT_TOP:
+                x += centerViewOffset;
+                y += centerViewOffset;
                 break;
             case GRAVITY_LEFT_BOTTOM:
                 y = getMeasuredHeight();
+                x += centerViewOffset;
+                y -= centerViewOffset;
                 break;
             case GRAVITY_RIGHT_CENTER:
                 x = getMeasuredWidth();
                 y = getMeasuredHeight() / 2;
+                x -= centerViewOffset;
                 break;
             case GRAVITY_RIGHT_TOP:
                 x = getMeasuredWidth();
+                x -= centerViewOffset;
+                y += centerViewOffset;
                 break;
             case GRAVITY_RIGHT_BOTTOM:
                 x = getMeasuredWidth();
                 y = getMeasuredHeight();
+                x -= centerViewOffset;
+                y -= centerViewOffset;
                 break;
             case GRAVITY_MIDDLE_TOP:
                 x = getMeasuredWidth() / 2;
+                y += centerViewOffset;
                 break;
             case GRAVITY_MIDDLE_BOTTOM:
                 x = getMeasuredWidth() / 2;
                 y = getMeasuredHeight();
+                y -= centerViewOffset;
                 break;
             case GRAVITY_CENTER:
             default:

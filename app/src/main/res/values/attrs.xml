@@ -22,28 +22,26 @@
 
 
     <declare-styleable name="ArcLayoutView">
-        <!-- 旋转中心视图的类型 -->
+        <!-- 中心视图的类型 -->
         <attr name="alv_center_view_type" format="enum">
             <enum name="view" value="0" />
             <enum name="color" value="1" />
         </attr>
-        <!-- 旋转中心视图的的半径-->
+        <!-- 中心视图的的半径-->
         <attr name="alv_center_radius" format="dimension" />
-        <!-- 旋转中心视图为 alv_center_view_type = color 的 颜色-->
+        <!-- 中心视图为 alv_center_view_type = color 的 颜色-->
         <attr name="alv_center_color" format="color" />
-        <!-- 旋转中心视图为 alv_center_view_type = view 的 视图-->
+        <!-- 中心视图为 alv_center_view_type = view 的 视图-->
         <attr name="alv_center_layout_id" format="reference" />
-        <!-- 旋转中心视图 是否可以旋转-->
+        <!-- 中心视图 是否可以旋转-->
         <attr name="alv_center_view_can_rotate" format="boolean" />
-
-        <!-- 旋转中心视图 在布局的位置-->
+        <!-- 中心视图 centerViewGravity 不为 center 的偏移量-->
+        <attr name="alv_center_view_offset" format="dimension" />
+        <!-- 中心视图 在布局的位置-->
         <attr name="alv_center_view_position" format="enum">
             <enum name="bottom" value="0" />
             <enum name="top" value="1" />
         </attr>
-        <!-- 每一个item 距离中心点的偏移距离 -->
-        <attr name="alv_child_offset_dis_with_center" format="dimension" />
-
         <!-- 中心视图中心点的位置 -->
         <attr name="alv_center_view_gravity" format="enum">
             <enum name="center" value="0" />
@@ -56,6 +54,8 @@
             <enum name="middle_top" value="7" />
             <enum name="middle_bottom" value="8" />
         </attr>
+        <!-- 每一个item 距离中心点的偏移距离 -->
+        <attr name="alv_child_offset_dis_with_center" format="dimension" />
         <!-- 子视图的子view不跟随旋转 -->
         <attr name="alv_item_child_no_rotate" format="boolean" />
     </declare-styleable>
