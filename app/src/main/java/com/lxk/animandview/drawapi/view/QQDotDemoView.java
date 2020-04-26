@@ -12,7 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.lxk.animandview.drawapi.Utils;
+import com.lxk.animandview.utils.DensityUtils;
 
 /**
  * @author https://github.com/103style
@@ -34,7 +34,7 @@ public class QQDotDemoView extends View {
     //因为这边只是测试  所以只写了一个参数的构造方法， 各位按需重写
     public QQDotDemoView(Context context) {
         super(context);
-        fillPaint = Utils.initPaint(context, Paint.Style.FILL);
+        fillPaint = DensityUtils.initPaint(context, Paint.Style.FILL);
         mPath = new Path();
     }
 

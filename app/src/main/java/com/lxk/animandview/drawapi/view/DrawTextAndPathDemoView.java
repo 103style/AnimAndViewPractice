@@ -9,7 +9,7 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.lxk.animandview.drawapi.Utils;
+import com.lxk.animandview.utils.DensityUtils;
 
 /**
  * @author https://github.com/103style
@@ -31,14 +31,14 @@ public class DrawTextAndPathDemoView extends View {
     public DrawTextAndPathDemoView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        fillPaint = Utils.initPaint(context, Paint.Style.FILL);
-        strokePaint = Utils.initPaint(context, Paint.Style.STROKE);
+        fillPaint = DensityUtils.initPaint(context, Paint.Style.FILL);
+        strokePaint = DensityUtils.initPaint(context, Paint.Style.STROKE);
 
-        textPaint = Utils.initPaint(context, Paint.Style.FILL);
+        textPaint = DensityUtils.initPaint(context, Paint.Style.FILL);
         textPaint.setColor(Color.WHITE);
         //设置阴影
         textPaint.setShadowLayer(10, 15, 15, Color.BLACK);
-        textPaint.setTextSize(Utils.dpToPx(context, 14));
+        textPaint.setTextSize(DensityUtils.dpToPx(context, 14));
 
         path = new Path();
     }

@@ -13,6 +13,8 @@ import android.widget.Scroller;
 import androidx.annotation.FloatRange;
 import androidx.annotation.NonNull;
 
+import com.lxk.animandview.utils.ScrollerUtils;
+
 /**
  * @author https://github.com/103style
  * @date 2020/4/24 16:17
@@ -45,8 +47,10 @@ public class ArcSlidingHelper {
     private float mScrollAvailabilityRatio;
     private float mLastScrollOffset;
     private OnSlideFinishListener mSlideFinishListener;
+    private Context mContext;
 
     private ArcSlidingHelper(Context context, int pivotX, int pivotY, OnSlidingListener listener) {
+        mContext = context.getApplicationContext();
         mPivotX = pivotX;
         mPivotY = pivotY;
         mListener = listener;
@@ -221,7 +225,8 @@ public class ArcSlidingHelper {
             case MotionEvent.ACTION_OUTSIDE:
                 if (isInertialSlidingEnable) {
                     mVelocityTracker.computeCurrentVelocity(1000);
-                    mScroller.fling(0, 0, (int) mVelocityTracker.getXVelocity(), (int) mVelocityTracker.getYVelocity(),
+                    mScroller.fling(0, 0, ScrollerUtils.getSplineFlingDistance(mContext, mVelocityTracker.getXVelocity()),
+                            ScrollerUtils.getSplineFlingDistance(mContext, mVelocityTracker.getYVelocity()),
                             Integer.MIN_VALUE, Integer.MAX_VALUE, Integer.MIN_VALUE, Integer.MAX_VALUE);
                     startFling();
                 }

@@ -9,7 +9,7 @@ import android.graphics.Paint;
 import android.view.View;
 
 import com.lxk.animandview.R;
-import com.lxk.animandview.drawapi.Utils;
+import com.lxk.animandview.utils.DensityUtils;
 
 /**
  * @author https://github.com/103style
@@ -24,9 +24,9 @@ public class ShadeLayerDemoView extends View {
     public ShadeLayerDemoView(Context context) {
         super(context);
         setLayerType(LAYER_TYPE_SOFTWARE, null);
-        fillPaint = Utils.initPaint(context, Paint.Style.FILL);
-        textPaint = Utils.initPaint(context, Paint.Style.FILL);
-        textPaint.setTextSize(Utils.dpToPx(getContext(), 12));
+        fillPaint = DensityUtils.initPaint(context, Paint.Style.FILL);
+        textPaint = DensityUtils.initPaint(context, Paint.Style.FILL);
+        textPaint.setTextSize(DensityUtils.dpToPx(getContext(), 12));
         iconBitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
     }
 
@@ -66,8 +66,8 @@ public class ShadeLayerDemoView extends View {
 
 
         canvas.translate(0, gap * 2 + bH);
-        textPaint.setShadowLayer(Utils.dpToPx(getContext(), 2), gap / 2, gap / 2, Color.DKGRAY);
-        textPaint.setTextSize(Utils.dpToPx(getContext(), 16));
+        textPaint.setShadowLayer(DensityUtils.dpToPx(getContext(), 2), gap / 2, gap / 2, Color.DKGRAY);
+        textPaint.setTextSize(DensityUtils.dpToPx(getContext(), 16));
         canvas.drawText("这是文字阴影测试！半径2dp, x y偏移 w/16", 0, gap, textPaint);
     }
 }

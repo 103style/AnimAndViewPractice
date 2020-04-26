@@ -15,7 +15,7 @@ import android.view.animation.LinearInterpolator;
 
 import androidx.annotation.Nullable;
 
-import com.lxk.animandview.drawapi.Utils;
+import com.lxk.animandview.utils.DensityUtils;
 
 import java.util.Arrays;
 
@@ -76,7 +76,7 @@ public class BiliBiliPathView extends View {
         super(context, attrs);
         path = new Path();
 
-        strokePaint = Utils.initPaint(context, Paint.Style.STROKE);
+        strokePaint = DensityUtils.initPaint(context, Paint.Style.STROKE);
 
         //设置线冒 和 连接处 为 圆角
         strokePaint.setStrokeCap(Paint.Cap.ROUND);

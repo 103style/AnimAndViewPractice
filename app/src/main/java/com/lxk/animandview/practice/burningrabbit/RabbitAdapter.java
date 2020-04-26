@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lxk.animandview.R;
-import com.lxk.animandview.drawapi.Utils;
+import com.lxk.animandview.utils.DensityUtils;
 
 /**
  * @author xiaoke.luo@tcl.com 2020/4/21 16:58
@@ -45,26 +45,26 @@ public class RabbitAdapter extends RecyclerView.Adapter<RabbitAdapter.Holder> {
         ViewGroup.LayoutParams lp = holder.itemView.getLayoutParams();
         switch (position % 4) {
             case 0:
-                lp.height = Utils.dpToPx(context, 96);
+                lp.height = DensityUtils.dpToPx(context, 96);
                 color = "#ff00ddff";
                 break;
             case 1:
-                lp.height = Utils.dpToPx(context, 144);
+                lp.height = DensityUtils.dpToPx(context, 144);
                 color = "#ffffbb33";
                 break;
             case 2:
-                lp.height = Utils.dpToPx(context, 224);
+                lp.height = DensityUtils.dpToPx(context, 224);
                 color = "#FF3F51B5";
                 break;
             case 3:
             default:
-                lp.height = Utils.dpToPx(context, 176);
+                lp.height = DensityUtils.dpToPx(context, 176);
                 color = "#ff99cc00";
                 break;
         }
         holder.itemView.setBackgroundColor(Color.parseColor(color));
         if (back) {
-            lp.height = Utils.dpToPx(context, 192);
+            lp.height = DensityUtils.dpToPx(context, 192);
         }
         holder.itemView.setLayoutParams(lp);
         ((TextView) holder.itemView).setText(String.valueOf(position));

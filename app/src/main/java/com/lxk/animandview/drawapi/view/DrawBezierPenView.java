@@ -9,7 +9,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.lxk.animandview.drawapi.Utils;
+import com.lxk.animandview.utils.DensityUtils;
 
 /**
  * @author https://github.com/103style
@@ -30,10 +30,10 @@ public class DrawBezierPenView extends View {
 
     public DrawBezierPenView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        strokePaint = Utils.initPaint(context, Paint.Style.STROKE);
-        strokePaint.setStrokeWidth(Utils.dpToPx(context, 1));
-        textPaint = Utils.initPaint(context, Paint.Style.FILL);
-        textPaint.setTextSize(Utils.dpToPx(context, 16));
+        strokePaint = DensityUtils.initPaint(context, Paint.Style.STROKE);
+        strokePaint.setStrokeWidth(DensityUtils.dpToPx(context, 1));
+        textPaint = DensityUtils.initPaint(context, Paint.Style.FILL);
+        textPaint.setTextSize(DensityUtils.dpToPx(context, 16));
         textPaint.setColor(Color.WHITE);
     }
 

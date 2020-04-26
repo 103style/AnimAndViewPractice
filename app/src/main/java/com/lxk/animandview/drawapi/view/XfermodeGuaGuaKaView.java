@@ -16,7 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.lxk.animandview.R;
-import com.lxk.animandview.drawapi.Utils;
+import com.lxk.animandview.utils.DensityUtils;
 
 /**
  * @author https://github.com/103style
@@ -37,12 +37,12 @@ public class XfermodeGuaGuaKaView extends View {
     public XfermodeGuaGuaKaView(Context context) {
         super(context);
         setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-        fillPaint = Utils.initPaint(context, Paint.Style.FILL);
-        strokePaint = Utils.initPaint(context, Paint.Style.STROKE);
-        strokePaint.setStrokeWidth(Utils.dpToPx(context, 16));
+        fillPaint = DensityUtils.initPaint(context, Paint.Style.FILL);
+        strokePaint = DensityUtils.initPaint(context, Paint.Style.STROKE);
+        strokePaint.setStrokeWidth(DensityUtils.dpToPx(context, 16));
         strokePaint.setColor(Color.WHITE);
-        textPaint = Utils.initPaint(context, Paint.Style.FILL);
-        textPaint.setTextSize(Utils.dpToPx(context, 20));
+        textPaint = DensityUtils.initPaint(context, Paint.Style.FILL);
+        textPaint.setTextSize(DensityUtils.dpToPx(context, 20));
         mPath = new Path();
     }
 
@@ -78,7 +78,7 @@ public class XfermodeGuaGuaKaView extends View {
                     perX = x;
                     perY = y;
                 }
-                if (y > src.getHeight() + Utils.dpToPx(getContext(), 8)) {
+                if (y > src.getHeight() + DensityUtils.dpToPx(getContext(), 8)) {
                     ViewGroup group = (ViewGroup) getParent();
                     group.removeView(this);
                 }

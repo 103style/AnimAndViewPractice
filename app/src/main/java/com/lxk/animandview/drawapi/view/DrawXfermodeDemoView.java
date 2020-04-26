@@ -9,7 +9,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.view.View;
 
-import com.lxk.animandview.drawapi.Utils;
+import com.lxk.animandview.utils.DensityUtils;
 
 /**
  * @author https://github.com/103style
@@ -27,9 +27,9 @@ public class DrawXfermodeDemoView extends View {
     public DrawXfermodeDemoView(Context context) {
         super(context);
         setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-        fillPaint = Utils.initPaint(context, Paint.Style.FILL);
-        textPaint = Utils.initPaint(context, Paint.Style.FILL);
-        textPaint.setTextSize(Utils.dpToPx(context, 12));
+        fillPaint = DensityUtils.initPaint(context, Paint.Style.FILL);
+        textPaint = DensityUtils.initPaint(context, Paint.Style.FILL);
+        textPaint.setTextSize(DensityUtils.dpToPx(context, 12));
         textPaint.setColor(Color.parseColor("#FFF44336"));
     }
 

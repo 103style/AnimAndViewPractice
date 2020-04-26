@@ -7,7 +7,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.View;
 
-import com.lxk.animandview.drawapi.Utils;
+import com.lxk.animandview.utils.DensityUtils;
 
 /**
  * @author https://github.com/103style
@@ -21,9 +21,9 @@ public class BlurMaskFilterDemoView extends View {
     public BlurMaskFilterDemoView(Context context) {
         super(context);
         setLayerType(LAYER_TYPE_SOFTWARE, null);
-        fillPaint = Utils.initPaint(context, Paint.Style.FILL);
-        textPaint = Utils.initPaint(context, Paint.Style.FILL);
-        textPaint.setTextSize(Utils.dpToPx(getContext(), 14));
+        fillPaint = DensityUtils.initPaint(context, Paint.Style.FILL);
+        textPaint = DensityUtils.initPaint(context, Paint.Style.FILL);
+        textPaint.setTextSize(DensityUtils.dpToPx(getContext(), 14));
         textPaint.setColor(Color.WHITE);
     }
 

@@ -7,7 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.view.View;
 
-import com.lxk.animandview.drawapi.Utils;
+import com.lxk.animandview.utils.DensityUtils;
 
 /**
  * @author https://github.com/103style
@@ -20,9 +20,9 @@ public class StrokeCapJoinDemoView extends View {
     //因为这边只是测试  所以只写了一个参数的构造方法， 各位按需重写
     public StrokeCapJoinDemoView(Context context) {
         super(context);
-        fillPaint = Utils.initPaint(context, Paint.Style.FILL);
-        strokePaint = Utils.initPaint(context, Paint.Style.STROKE);
-        int size = Utils.dpToPx(context, 12);
+        fillPaint = DensityUtils.initPaint(context, Paint.Style.FILL);
+        strokePaint = DensityUtils.initPaint(context, Paint.Style.STROKE);
+        int size = DensityUtils.dpToPx(context, 12);
         fillPaint.setStrokeWidth(size);
         fillPaint.setTextSize(size);
         strokePaint.setStrokeWidth(size);

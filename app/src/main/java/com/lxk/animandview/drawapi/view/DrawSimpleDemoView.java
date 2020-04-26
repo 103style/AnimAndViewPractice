@@ -9,7 +9,7 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.lxk.animandview.drawapi.Utils;
+import com.lxk.animandview.utils.DensityUtils;
 
 /**
  * @author https://github.com/103style
@@ -29,8 +29,8 @@ public class DrawSimpleDemoView extends View {
 
     public DrawSimpleDemoView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        fillPaint = Utils.initPaint(context, Paint.Style.FILL);
-        strokePaint = Utils.initPaint(context, Paint.Style.STROKE);
+        fillPaint = DensityUtils.initPaint(context, Paint.Style.FILL);
+        strokePaint = DensityUtils.initPaint(context, Paint.Style.STROKE);
     }
 
 

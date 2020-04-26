@@ -13,7 +13,7 @@ import android.graphics.Rect;
 import android.view.View;
 
 import com.lxk.animandview.R;
-import com.lxk.animandview.drawapi.Utils;
+import com.lxk.animandview.utils.DensityUtils;
 
 /**
  * @author https://github.com/103style
@@ -27,10 +27,10 @@ public class DrawColorFilterDemoView extends View {
     //因为这边只是测试  所以只写了一个参数的构造方法， 各位按需重写
     public DrawColorFilterDemoView(Context context) {
         super(context);
-        fillPaint = Utils.initPaint(context, Paint.Style.FILL);
-        fillPaint.setStrokeWidth(Utils.dpToPx(context, 2));
-        textPaint = Utils.initPaint(context, Paint.Style.FILL);
-        textPaint.setTextSize(Utils.dpToPx(context, 12));
+        fillPaint = DensityUtils.initPaint(context, Paint.Style.FILL);
+        fillPaint.setStrokeWidth(DensityUtils.dpToPx(context, 2));
+        textPaint = DensityUtils.initPaint(context, Paint.Style.FILL);
+        textPaint.setTextSize(DensityUtils.dpToPx(context, 12));
         textPaint.setColor(Color.WHITE);
         bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
     }

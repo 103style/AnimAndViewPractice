@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
 
-import com.lxk.animandview.drawapi.Utils;
+import com.lxk.animandview.utils.DensityUtils;
 
 /**
  * @author https://github.com/103style
@@ -28,10 +28,10 @@ public class DrawBezierWaterView extends View {
     //因为这边只是测试  所以只写了一个参数的构造方法， 各位按需重写
     public DrawBezierWaterView(Context context) {
         super(context);
-        fillPaint = Utils.initPaint(context, Paint.Style.FILL);
+        fillPaint = DensityUtils.initPaint(context, Paint.Style.FILL);
         //设置画笔颜色
         fillPaint.setColor(Color.LTGRAY);
-        amplitude = Utils.dpToPx(context, amplitude);
+        amplitude = DensityUtils.dpToPx(context, amplitude);
     }
 
     @Override

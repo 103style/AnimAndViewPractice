@@ -16,7 +16,7 @@ import android.widget.Scroller;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lxk.animandview.R;
-import com.lxk.animandview.drawapi.Utils;
+import com.lxk.animandview.utils.DensityUtils;
 import com.lxk.animandview.viewgroup.MarginLayoutParamsViewGroup;
 
 /**
@@ -107,7 +107,7 @@ public class ImitateBurningRabbitView extends MarginLayoutParamsViewGroup {
 
     private void initAttrs(Context context, AttributeSet attrs) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ImitateBurningRabbitView);
-        pulloutOffsetThreshold = typedArray.getDimensionPixelOffset(R.styleable.ImitateBurningRabbitView_ibr_pull_out_threshold, Utils.dpToPx(context, 32));
+        pulloutOffsetThreshold = typedArray.getDimensionPixelOffset(R.styleable.ImitateBurningRabbitView_ibr_pull_out_threshold, DensityUtils.dpToPx(context, 32));
         middleViewColor = typedArray.getColor(R.styleable.ImitateBurningRabbitView_ibr_middle_view_color, Color.WHITE);
         topBarView = getInflaterView(typedArray, R.styleable.ImitateBurningRabbitView_ibr_top_bar_view);
         topChildView = getInflaterView(typedArray, R.styleable.ImitateBurningRabbitView_ibr_top_view);

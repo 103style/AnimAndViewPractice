@@ -1,4 +1,4 @@
-package com.lxk.animandview.drawapi;
+package com.lxk.animandview.utils;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -8,7 +8,7 @@ import android.graphics.Paint;
  * @author https://github.com/103style
  * @date 2020/4/7 13:48
  */
-public class Utils {
+public class DensityUtils {
 
     public static Paint initPaint(Context context, Paint.Style style) {
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);

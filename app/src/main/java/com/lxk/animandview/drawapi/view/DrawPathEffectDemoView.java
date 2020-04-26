@@ -13,7 +13,7 @@ import android.graphics.PathDashPathEffect;
 import android.graphics.SumPathEffect;
 import android.view.View;
 
-import com.lxk.animandview.drawapi.Utils;
+import com.lxk.animandview.utils.DensityUtils;
 
 /**
  * @author https://github.com/103style
@@ -27,11 +27,11 @@ public class DrawPathEffectDemoView extends View {
     //因为这边只是测试  所以只写了一个参数的构造方法， 各位按需重写
     public DrawPathEffectDemoView(Context context) {
         super(context);
-        strokePaint = Utils.initPaint(context, Paint.Style.STROKE);
-        strokePaint.setStrokeWidth(Utils.dpToPx(context, 2));
-        textPaint = Utils.initPaint(context, Paint.Style.FILL);
+        strokePaint = DensityUtils.initPaint(context, Paint.Style.STROKE);
+        strokePaint.setStrokeWidth(DensityUtils.dpToPx(context, 2));
+        textPaint = DensityUtils.initPaint(context, Paint.Style.FILL);
         textPaint.setStrokeWidth(1);
-        textPaint.setTextSize(Utils.dpToPx(context, 12));
+        textPaint.setTextSize(DensityUtils.dpToPx(context, 12));
         textPaint.setColor(Color.WHITE);
         path = new Path();
     }
@@ -60,10 +60,10 @@ public class DrawPathEffectDemoView extends View {
 
         // CornerPathEffect 在转角处 转化为配置半径对应的圆角
         strokePaint.setColor(Color.BLUE);
-        strokePaint.setPathEffect(new CornerPathEffect(Utils.dpToPx(getContext(), 32)));
+        strokePaint.setPathEffect(new CornerPathEffect(DensityUtils.dpToPx(getContext(), 32)));
         canvas.drawPath(path, strokePaint);
         strokePaint.setColor(Color.YELLOW);
-        strokePaint.setPathEffect(new CornerPathEffect(Utils.dpToPx(getContext(), 64)));
+        strokePaint.setPathEffect(new CornerPathEffect(DensityUtils.dpToPx(getContext(), 64)));
         canvas.drawPath(path, strokePaint);
 
 

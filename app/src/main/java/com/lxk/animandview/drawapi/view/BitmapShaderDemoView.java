@@ -13,7 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.lxk.animandview.R;
-import com.lxk.animandview.drawapi.Utils;
+import com.lxk.animandview.utils.DensityUtils;
 
 /**
  * @author https://github.com/103style
@@ -31,8 +31,8 @@ public class BitmapShaderDemoView extends View {
     //因为这边只是测试  所以只写了一个参数的构造方法， 各位按需重写
     public BitmapShaderDemoView(Context context) {
         super(context);
-        fillPaint = Utils.initPaint(context, Paint.Style.FILL);
-        radius = Utils.dpToPx(context, 96);
+        fillPaint = DensityUtils.initPaint(context, Paint.Style.FILL);
+        radius = DensityUtils.dpToPx(context, 96);
     }
 
     @Override

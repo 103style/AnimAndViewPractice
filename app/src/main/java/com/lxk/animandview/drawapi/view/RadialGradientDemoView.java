@@ -12,7 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 
-import com.lxk.animandview.drawapi.Utils;
+import com.lxk.animandview.utils.DensityUtils;
 
 /**
  * @author https://github.com/103style
@@ -28,10 +28,10 @@ public class RadialGradientDemoView extends View {
     //因为这边只是测试  所以只写了一个参数的构造方法， 各位按需重写
     public RadialGradientDemoView(Context context) {
         super(context);
-        fillPaint = Utils.initPaint(context, Paint.Style.FILL);
-        textPaint = Utils.initPaint(context, Paint.Style.FILL);
+        fillPaint = DensityUtils.initPaint(context, Paint.Style.FILL);
+        textPaint = DensityUtils.initPaint(context, Paint.Style.FILL);
         textPaint.setColor(Color.WHITE);
-        textPaint.setTextSize(Utils.dpToPx(context, 20));
+        textPaint.setTextSize(DensityUtils.dpToPx(context, 20));
     }
 
     @Override
