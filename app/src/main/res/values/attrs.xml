@@ -44,6 +44,20 @@
         <!-- 每一个item 距离中心点的偏移距离 -->
         <attr name="alv_child_offset_dis_with_center" format="dimension" />
 
+        <!-- 中心视图中心点的位置 -->
+        <attr name="alv_center_view_gravity" format="enum">
+            <enum name="center" value="0" />
+            <enum name="left_center" value="1" />
+            <enum name="left_top" value="2" />
+            <enum name="left_bottom" value="3" />
+            <enum name="right_center" value="4" />
+            <enum name="right_top" value="5" />
+            <enum name="right_bottom" value="6" />
+            <enum name="middle_top" value="7" />
+            <enum name="middle_bottom" value="8" />
+        </attr>
+        <!-- 子视图的子view不跟随旋转 -->
+        <attr name="alv_item_child_no_rotate" format="boolean" />
     </declare-styleable>
 
 </resources>

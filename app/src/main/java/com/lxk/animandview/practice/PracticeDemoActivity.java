@@ -69,7 +69,11 @@ public class PracticeDemoActivity extends BaseClickActivity {
     private void addTestView(ViewGroup group) {
         for (int i = 0; i < 10; i++) {
             Button button = new Button(this);
-            button.setText("ArcLayout Test Item " + i);
+            button.setText("Click to change Gravity " + i);
+            button.setOnClickListener(v -> {
+                ArcLayoutView layoutView = (ArcLayoutView) group;
+                layoutView.setCenterViewGravity((layoutView.getCenterViewGravity() + 1) % 9);
+            });
             group.addView(button);
         }
     }

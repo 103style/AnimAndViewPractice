@@ -40,6 +40,19 @@ public class ArcLayoutView extends ViewGroup implements ArcSlidingHelper.OnSlidi
     public static final int TYPE_VIEW = 0;
     public static final int TYPE_COLOR = 1;
     /**
+     * 中心视图的位置
+     * 中心/左中/左上/左下/右中/右上/右下/中上/中下
+     */
+    public static final int GRAVITY_CENTER = 0;
+    public static final int GRAVITY_LEFT_CENTER = 1;
+    public static final int GRAVITY_LEFT_TOP = 2;
+    public static final int GRAVITY_LEFT_BOTTOM = 3;
+    public static final int GRAVITY_RIGHT_CENTER = 4;
+    public static final int GRAVITY_RIGHT_TOP = 5;
+    public static final int GRAVITY_RIGHT_BOTTOM = 6;
+    public static final int GRAVITY_MIDDLE_TOP = 7;
+    public static final int GRAVITY_MIDDLE_BOTTOM = 8;
+    /**
      * 计算旋转的辅助类
      */
     private ArcSlidingHelper arcSlidingHelper;
@@ -94,9 +107,17 @@ public class ArcLayoutView extends ViewGroup implements ArcSlidingHelper.OnSlidi
      */
     private int childOffsetDisWithCenter;
     /**
+     * 中心视图的位置
+     */
+    private int centerViewGravity;
+    /**
+     * 子view的子view不跟随旋转
+     */
+    private boolean itemChildNoRotate;
+    /**
      * 布局中心点坐标
      */
-    private int centerX, centerY;
+    private int mPivotX, mPivotY;
 
     public ArcLayoutView(Context context) {
         this(context, null);
@@ -116,6 +137,8 @@ public class ArcLayoutView extends ViewGroup implements ArcSlidingHelper.OnSlidi
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.ArcLayoutView);
         int pos = ta.getInt(R.styleable.ArcLayoutView_alv_center_view_position, POS_BOTTOM);
         centerViewInBottom = pos == POS_BOTTOM;
+        itemChildNoRotate = ta.getBoolean(R.styleable.ArcLayoutView_alv_item_child_no_rotate, false);
+        centerViewGravity = ta.getInt(R.styleable.ArcLayoutView_alv_center_view_gravity, GRAVITY_CENTER);
         centerViewRadius = ta.getDimensionPixelOffset(R.styleable.ArcLayoutView_alv_center_radius, DensityUtils.dpToPx(context, 32));
         centerViewType = ta.getInt(R.styleable.ArcLayoutView_alv_center_view_type, TYPE_COLOR);
         centerViewColor = ta.getColor(R.styleable.ArcLayoutView_alv_center_color, Color.CYAN);
@@ -161,6 +184,30 @@ public class ArcLayoutView extends ViewGroup implements ArcSlidingHelper.OnSlidi
         return centerViewCanRotate;
     }
 
+    /**
+     * 获取中心视图的对齐方式
+     */
+    public int getCenterViewGravity() {
+        return centerViewGravity;
+    }
+
+    /**
+     * 设置中心视图的对齐方式
+     */
+    public void setCenterViewGravity(@CenterViewGravity int centerViewGravity) {
+        this.centerViewGravity = centerViewGravity;
+        requestLayout();
+    }
+
+    /**
+     * 中心点是否在右边
+     */
+    private boolean gravityInRight() {
+        return centerViewGravity == GRAVITY_RIGHT_CENTER
+                || centerViewGravity == GRAVITY_RIGHT_TOP
+                || centerViewGravity == GRAVITY_RIGHT_BOTTOM;
+    }
+
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         measureChildren(widthMeasureSpec, heightMeasureSpec);
@@ -189,10 +236,13 @@ public class ArcLayoutView extends ViewGroup implements ArcSlidingHelper.OnSlidi
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        int[] pos = getPosWithGravity();
+        mPivotX = pos[0];
+        mPivotY = pos[1];
+        //更新SlidingHelper的旋转点
+        updateSlidingHelperPivot();
 
-        centerX = getMeasuredWidth() / 2;
-        centerY = getMeasuredHeight() / 2;
-        int startIndex = layoutCenterView(centerX, centerY);
+        int startIndex = layoutCenterView(mPivotX, mPivotY);
 
         int count = getChildCount();
         int angle = 360 / (count - startIndex);
@@ -202,30 +252,74 @@ public class ArcLayoutView extends ViewGroup implements ArcSlidingHelper.OnSlidi
                 continue;
             }
             int halfH = child.getMeasuredHeight() / 2;
-            int left = centerX + centerViewRadius + childOffsetDisWithCenter;
-            child.layout(left, centerY - halfH,
-                    left + child.getMeasuredWidth(), centerY + halfH);
+            int cWidth = child.getMeasuredWidth();
+            int left, cPivotX;
+            if (gravityInRight()) {
+                left = mPivotX - centerViewRadius - childOffsetDisWithCenter - cWidth;
+                cPivotX = cWidth + centerViewRadius + childOffsetDisWithCenter;
+            } else {
+                left = mPivotX + centerViewRadius + childOffsetDisWithCenter;
+                cPivotX = -centerViewRadius - childOffsetDisWithCenter;
+            }
+            child.layout(left, mPivotY - halfH, left + cWidth, mPivotY + halfH);
             //更新旋转的中心点
-            child.setPivotX(-centerViewRadius - childOffsetDisWithCenter);
+            child.setPivotX(cPivotX);
             child.setPivotY(halfH);
-
             //配置旋转角度 如果中心视图在底部的话 我们索引则减掉1
             int index = isCenterViewInBottom() && !centerViewTypeIsColor() ? i - 1 : i;
             child.setRotation(angle * index);
         }
     }
 
+    private int[] getPosWithGravity() {
+        int x = 0, y = 0;
+        switch (centerViewGravity) {
+            case GRAVITY_LEFT_CENTER:
+                y = getMeasuredHeight() / 2;
+                break;
+            case GRAVITY_LEFT_TOP:
+                break;
+            case GRAVITY_LEFT_BOTTOM:
+                y = getMeasuredHeight();
+                break;
+            case GRAVITY_RIGHT_CENTER:
+                x = getMeasuredWidth();
+                y = getMeasuredHeight() / 2;
+                break;
+            case GRAVITY_RIGHT_TOP:
+                x = getMeasuredWidth();
+                break;
+            case GRAVITY_RIGHT_BOTTOM:
+                x = getMeasuredWidth();
+                y = getMeasuredHeight();
+                break;
+            case GRAVITY_MIDDLE_TOP:
+                x = getMeasuredWidth() / 2;
+                break;
+            case GRAVITY_MIDDLE_BOTTOM:
+                x = getMeasuredWidth() / 2;
+                y = getMeasuredHeight();
+                break;
+            case GRAVITY_CENTER:
+            default:
+                x = getMeasuredWidth() / 2;
+                y = getMeasuredHeight() / 2;
+                break;
+        }
+        return new int[]{x, y};
+    }
+
     /**
      * 中心视图的布局
      */
-    private int layoutCenterView(int centerX, int centerY) {
+    private int layoutCenterView(int mPivotX, int mPivotY) {
         if (centerViewTypeIsColor()) {
             return 0;
         }
         int halfW = centerView.getMeasuredWidth() / 2;
         int halfH = centerView.getMeasuredHeight() / 2;
         //轴承放在旋转中心点上
-        centerView.layout(centerX - halfW, centerY - halfH, centerX + halfW, centerY + halfH);
+        centerView.layout(mPivotX - halfW, mPivotY - halfH, mPivotX + halfW, mPivotY + halfH);
         return 1;
     }
 
@@ -234,7 +328,7 @@ public class ArcLayoutView extends ViewGroup implements ArcSlidingHelper.OnSlidi
     protected void onDraw(Canvas canvas) {
         //必须不是View类型，并且是在底部才draw
         if (centerViewTypeIsColor() && isCenterViewInBottom()) {
-            canvas.drawCircle(centerX, centerY, centerViewRadius, mPaint);
+            canvas.drawCircle(mPivotX, mPivotY, centerViewRadius, mPaint);
         }
     }
 
@@ -242,7 +336,7 @@ public class ArcLayoutView extends ViewGroup implements ArcSlidingHelper.OnSlidi
     public void onDrawForeground(Canvas canvas) {
         //必须不是View类型，并且是在顶部才draw
         if (centerViewTypeIsColor() && !isCenterViewInBottom()) {
-            canvas.drawCircle(centerX, centerY, centerViewRadius, mPaint);
+            canvas.drawCircle(mPivotX, mPivotY, centerViewRadius, mPaint);
         }
     }
 
@@ -275,9 +369,17 @@ public class ArcLayoutView extends ViewGroup implements ArcSlidingHelper.OnSlidi
         if (arcSlidingHelper == null) {
             arcSlidingHelper = ArcSlidingHelper.create(this, this);
             arcSlidingHelper.enableInertialSliding(true);
-        } else {
-            arcSlidingHelper.updatePivotX(w / 2);
-            arcSlidingHelper.updatePivotY(h / 2);
+        }
+        updateSlidingHelperPivot();
+    }
+
+    /**
+     * 更新SlidingHelper的旋转点
+     */
+    private void updateSlidingHelperPivot() {
+        if (arcSlidingHelper != null) {
+            arcSlidingHelper.updatePivotX(mPivotX);
+            arcSlidingHelper.updatePivotY(mPivotY);
         }
     }
 
@@ -290,8 +392,22 @@ public class ArcLayoutView extends ViewGroup implements ArcSlidingHelper.OnSlidi
                 continue;
             }
             child.setRotation(child.getRotation() + angele);
+            makeItemChildNoRotate(child);
         }
     }
+
+    /**
+     * 处理子view的子view不旋转
+     */
+    private void makeItemChildNoRotate(View child) {
+        if (child instanceof ViewGroup && itemChildNoRotate && child != centerView) {
+            ViewGroup group = (ViewGroup) child;
+            for (int i = 0; i < group.getChildCount(); i++) {
+                group.getChildAt(i).setRotation(-group.getRotation());
+            }
+        }
+    }
+
 
     @Override
     protected void onDetachedFromWindow() {
@@ -359,6 +475,13 @@ public class ArcLayoutView extends ViewGroup implements ArcSlidingHelper.OnSlidi
     @IntDef({TYPE_VIEW, TYPE_COLOR})
     @Retention(RetentionPolicy.SOURCE)
     public @interface CenterViewType {
+    }
+
+    @IntDef({GRAVITY_CENTER, GRAVITY_LEFT_CENTER, GRAVITY_LEFT_TOP, GRAVITY_LEFT_BOTTOM,
+            GRAVITY_RIGHT_CENTER, GRAVITY_RIGHT_TOP, GRAVITY_RIGHT_BOTTOM,
+            GRAVITY_MIDDLE_TOP, GRAVITY_MIDDLE_BOTTOM})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface CenterViewGravity {
     }
 
 }
