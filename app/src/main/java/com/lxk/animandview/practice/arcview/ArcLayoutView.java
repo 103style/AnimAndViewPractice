@@ -1,5 +1,6 @@
 package com.lxk.animandview.practice.arcview;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -11,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
 
 import androidx.annotation.IntDef;
 
@@ -28,7 +30,7 @@ import java.lang.annotation.RetentionPolicy;
  * <p>
  * 参考：https://blog.csdn.net/u011387817/article/details/80788704
  */
-public class ArcLayoutView extends ViewGroup implements ArcSlidingHelper.OnSlidingListener {
+public class ArcLayoutView extends ViewGroup implements ArcSlidingHelper.OnSlidingListener, ArcSlidingHelper.OnSlideFinishListener {
     /**
      * 中心视图的位置  在 底部 还是 顶部
      */
@@ -53,6 +55,10 @@ public class ArcLayoutView extends ViewGroup implements ArcSlidingHelper.OnSlidi
     public static final int GRAVITY_MIDDLE_TOP = 7;
     public static final int GRAVITY_MIDDLE_BOTTOM = 8;
     /**
+     * 偏移角度为90度自动对齐的动画时间
+     */
+    private final long ALIGN_DEGREE_DURATION = 500;
+    /**
      * 计算旋转的辅助类
      */
     private ArcSlidingHelper arcSlidingHelper;
@@ -76,7 +82,6 @@ public class ArcLayoutView extends ViewGroup implements ArcSlidingHelper.OnSlidi
      * 中心视图
      */
     private View centerView;
-
     /**
      * 中心视图是否在底部
      */
@@ -101,7 +106,6 @@ public class ArcLayoutView extends ViewGroup implements ArcSlidingHelper.OnSlidi
      * 中心视图类型是否能旋转
      */
     private boolean centerViewCanRotate;
-
     /**
      * 子view距离中心的偏移量
      */
@@ -122,6 +126,14 @@ public class ArcLayoutView extends ViewGroup implements ArcSlidingHelper.OnSlidi
      * 布局中心点坐标
      */
     private int mPivotX, mPivotY;
+    /**
+     * 自动对齐的属性动画
+     */
+    private ValueAnimator alignDegreeAnimator;
+    /**
+     * 记录属性动画以及完成的值
+     */
+    private float preAlignDegreeAnimValue;
 
     public ArcLayoutView(Context context) {
         this(context, null);
@@ -143,7 +155,7 @@ public class ArcLayoutView extends ViewGroup implements ArcSlidingHelper.OnSlidi
         centerViewInBottom = pos == POS_BOTTOM;
         itemChildNoRotate = ta.getBoolean(R.styleable.ArcLayoutView_alv_item_child_no_rotate, false);
         centerViewGravity = ta.getInt(R.styleable.ArcLayoutView_alv_center_view_gravity, GRAVITY_CENTER);
-        centerViewOffset = ta.getDimensionPixelOffset(R.styleable.ArcLayoutView_alv_center_view_offset, DensityUtils.dpToPx(context, 32));
+        centerViewOffset = ta.getDimensionPixelOffset(R.styleable.ArcLayoutView_alv_center_view_offset, 0);
         centerViewRadius = ta.getDimensionPixelOffset(R.styleable.ArcLayoutView_alv_center_radius, DensityUtils.dpToPx(context, 32));
         centerViewType = ta.getInt(R.styleable.ArcLayoutView_alv_center_view_type, TYPE_COLOR);
         centerViewColor = ta.getColor(R.styleable.ArcLayoutView_alv_center_color, Color.CYAN);
@@ -276,6 +288,9 @@ public class ArcLayoutView extends ViewGroup implements ArcSlidingHelper.OnSlidi
         }
     }
 
+    /**
+     * 获取对应对齐方式的中心坐标
+     */
     private int[] getPosWithGravity() {
         int x = 0, y = 0;
         switch (centerViewGravity) {
@@ -340,7 +355,6 @@ public class ArcLayoutView extends ViewGroup implements ArcSlidingHelper.OnSlidi
         return 1;
     }
 
-
     @Override
     protected void onDraw(Canvas canvas) {
         //必须不是View类型，并且是在底部才draw
@@ -356,7 +370,6 @@ public class ArcLayoutView extends ViewGroup implements ArcSlidingHelper.OnSlidi
             canvas.drawCircle(mPivotX, mPivotY, centerViewRadius, mPaint);
         }
     }
-
 
     /**
      * 重写addview方法 解决centerView在顶部时添加子view会导致 centerView不在顶部的问题
@@ -386,6 +399,7 @@ public class ArcLayoutView extends ViewGroup implements ArcSlidingHelper.OnSlidi
         if (arcSlidingHelper == null) {
             arcSlidingHelper = ArcSlidingHelper.create(this, this);
             arcSlidingHelper.enableInertialSliding(true);
+            arcSlidingHelper.setSlideFinishListener(this);
         }
         updateSlidingHelperPivot();
     }
@@ -425,6 +439,93 @@ public class ArcLayoutView extends ViewGroup implements ArcSlidingHelper.OnSlidi
         }
     }
 
+    /**
+     * 创建自动对齐角度的动画
+     */
+    private ValueAnimator getAlignDegreeAnimator(float degree) {
+        if (degree > 180) {
+            degree = 360 - degree;
+        }
+        preAlignDegreeAnimValue = 0;
+        alignDegreeAnimator = ValueAnimator.ofFloat(0, degree);
+        alignDegreeAnimator.setInterpolator(new AccelerateInterpolator());
+        //计算偏移角度对应的时间  90度为1s
+        alignDegreeAnimator.setDuration(ALIGN_DEGREE_DURATION);
+        alignDegreeAnimator.addUpdateListener(animation -> {
+            float value = (Float) animation.getAnimatedValue();
+            onSliding(value - preAlignDegreeAnimValue);
+            preAlignDegreeAnimValue = value;
+        });
+        return alignDegreeAnimator;
+    }
+
+    private void abortAlignDegreeAnimator() {
+        if (alignDegreeAnimator != null) {
+            alignDegreeAnimator.cancel();
+        }
+    }
+
+    @Override
+    public void onSlideFinished() {
+        //arcSlidingHelper 惯性滑动完的回调
+        int alignDegree = getGravityAlignDegree();
+        getAlignDegreeAnimator(findMakeAlignDegree(alignDegree)).start();
+    }
+
+    /**
+     * 获取对应对齐方式的对齐角度
+     */
+    private int getGravityAlignDegree() {
+        int degree = 0;
+        switch (centerViewGravity) {
+            case GRAVITY_RIGHT_CENTER:
+                degree = 180;
+                break;
+            case GRAVITY_MIDDLE_TOP:
+                degree = 90;
+                break;
+            case GRAVITY_MIDDLE_BOTTOM:
+                degree = 270;
+                break;
+            default:
+                break;
+        }
+        return degree;
+    }
+
+    /**
+     * 找到与对齐角度最接近的值
+     */
+    private float findMakeAlignDegree(int alignDegree) {
+        float gap = 360;
+        float degree = 360;
+        for (int i = 0; i < getChildCount(); i++) {
+            View child = getChildAt(i);
+            if (child == centerView) {
+                continue;
+            }
+            float d = fixAngle(child.getRotation());
+            float g = Math.abs(alignDegree - d);
+            if (g > 180) {
+                g = 360 - g;
+                d = d - 360;
+            }
+            if (g < gap) {
+                gap = g;
+                degree = d;
+            }
+        }
+        return alignDegree - degree;
+    }
+
+    private float fixAngle(float rotation) {
+        float angle = 360F;
+        rotation %= angle;
+        if (rotation < 0) {
+            rotation += angle;
+        }
+        return rotation;
+    }
 
     @Override
     protected void onDetachedFromWindow() {
@@ -450,6 +551,8 @@ public class ArcLayoutView extends ViewGroup implements ArcSlidingHelper.OnSlidi
             case MotionEvent.ACTION_DOWN:
                 //当手指按下时，停止惯性滚动
                 arcSlidingHelper.abortAnimation();
+                //当手指按下时，停止对齐角度的惯性滚动
+                abortAlignDegreeAnimator();
                 //记录按下的坐标
                 mPreX = x;
                 mPreY = y;

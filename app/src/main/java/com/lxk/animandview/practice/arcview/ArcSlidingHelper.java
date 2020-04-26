@@ -321,11 +321,9 @@ public class ArcSlidingHelper {
      */
     private float fixAngle(float rotation) {
         float angle = 360F;
+        rotation %= angle;
         if (rotation < 0) {
             rotation += angle;
-        }
-        if (rotation > angle) {
-            rotation = rotation % angle;
         }
         return rotation;
     }
