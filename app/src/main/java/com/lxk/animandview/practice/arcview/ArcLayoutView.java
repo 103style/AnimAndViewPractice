@@ -170,8 +170,8 @@ public class ArcLayoutView extends ViewGroup implements ArcSlidingHelper.OnSlidi
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.ArcLayoutView);
         int pos = ta.getInt(R.styleable.ArcLayoutView_alv_center_view_position, POS_BOTTOM);
         centerViewInBottom = pos == POS_BOTTOM;
-        degreeMode = ta.getInt(R.styleable.ArcLayoutView_alv_degree_mode, DEGREE_DESIGNED);
-        designedDegree = ta.getFloat(R.styleable.ArcLayoutView_alv_designed_degree, 60);
+        degreeMode = ta.getInt(R.styleable.ArcLayoutView_alv_degree_mode, DEGREE_AVERAGE);
+        designedDegree = ta.getFloat(R.styleable.ArcLayoutView_alv_designed_degree, -1);
         if (!isAverageDegree() && designedDegree == -1) {
             throw new IllegalArgumentException("when degreeMode is DEGREE_DESIGNED, you must set \"alv_designed_degree\"");
         }
