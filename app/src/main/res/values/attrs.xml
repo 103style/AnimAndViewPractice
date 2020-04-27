@@ -58,6 +58,16 @@
         <attr name="alv_child_offset_dis_with_center" format="dimension" />
         <!-- 子视图的子view不跟随旋转 -->
         <attr name="alv_item_child_no_rotate" format="boolean" />
+
+        <!-- 子View 间的角度模式 -->
+        <attr name="alv_degree_mode" format="enum">
+            <!-- 平分 -->
+            <enum name="average" value="0" />
+            <!-- 指定 -->
+            <enum name="designed" value="1" />
+        </attr>
+        <!-- 子View 间的角度模式为指定角度时 的值 -->
+        <attr name="alv_designed_degree" format="float" />
     </declare-styleable>
 
 </resources>

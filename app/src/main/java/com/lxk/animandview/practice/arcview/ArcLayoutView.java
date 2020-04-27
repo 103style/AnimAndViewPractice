@@ -42,6 +42,11 @@ public class ArcLayoutView extends ViewGroup implements ArcSlidingHelper.OnSlidi
     public static final int TYPE_VIEW = 0;
     public static final int TYPE_COLOR = 1;
     /**
+     * 子view的角度模式
+     */
+    public static final int DEGREE_AVERAGE = 0;
+    public static final int DEGREE_DESIGNED = 1;
+    /**
      * 中心视图的位置
      * 中心/左中/左上/左下/右中/右上/右下/中上/中下
      */
@@ -123,6 +128,18 @@ public class ArcLayoutView extends ViewGroup implements ArcSlidingHelper.OnSlidi
      */
     private boolean itemChildNoRotate;
     /**
+     * 子view的角度的模式
+     */
+    private int degreeMode;
+    /**
+     * 子view的角度的模式为DEGREE_DESIGNED时 指定的间隔角度值
+     */
+    private float designedDegree;
+    /**
+     * 当前旋转的总角度  在指定间隔角度时只显示固定的视图
+     */
+    private float rotateCount = 0;
+    /**
      * 布局中心点坐标
      */
     private int mPivotX, mPivotY;
@@ -153,6 +170,11 @@ public class ArcLayoutView extends ViewGroup implements ArcSlidingHelper.OnSlidi
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.ArcLayoutView);
         int pos = ta.getInt(R.styleable.ArcLayoutView_alv_center_view_position, POS_BOTTOM);
         centerViewInBottom = pos == POS_BOTTOM;
+        degreeMode = ta.getInt(R.styleable.ArcLayoutView_alv_degree_mode, DEGREE_DESIGNED);
+        designedDegree = ta.getFloat(R.styleable.ArcLayoutView_alv_designed_degree, 60);
+        if (!isAverageDegree() && designedDegree == -1) {
+            throw new IllegalArgumentException("when degreeMode is DEGREE_DESIGNED, you must set \"alv_designed_degree\"");
+        }
         itemChildNoRotate = ta.getBoolean(R.styleable.ArcLayoutView_alv_item_child_no_rotate, false);
         centerViewGravity = ta.getInt(R.styleable.ArcLayoutView_alv_center_view_gravity, GRAVITY_CENTER);
         centerViewOffset = ta.getDimensionPixelOffset(R.styleable.ArcLayoutView_alv_center_view_offset, 0);
@@ -202,6 +224,20 @@ public class ArcLayoutView extends ViewGroup implements ArcSlidingHelper.OnSlidi
     }
 
     /**
+     * 设置中心视图能否旋转
+     */
+    public void setCenterViewCanRotate(boolean centerViewCanRotate) {
+        this.centerViewCanRotate = centerViewCanRotate;
+    }
+
+    /**
+     * 是否时角度平分模式
+     */
+    public boolean isAverageDegree() {
+        return degreeMode == DEGREE_AVERAGE;
+    }
+
+    /**
      * 获取中心视图的对齐方式
      */
     public int getCenterViewGravity() {
@@ -223,6 +259,34 @@ public class ArcLayoutView extends ViewGroup implements ArcSlidingHelper.OnSlidi
         return centerViewGravity == GRAVITY_RIGHT_CENTER
                 || centerViewGravity == GRAVITY_RIGHT_TOP
                 || centerViewGravity == GRAVITY_RIGHT_BOTTOM;
+    }
+
+    /**
+     * 获取子view角度模式
+     */
+    public int getDegreeMode() {
+        return degreeMode;
+    }
+
+    /**
+     * 设置子view角度模式
+     */
+    public void setDegreeMode(@DegreeMode int degreeMode) {
+        this.degreeMode = degreeMode;
+    }
+
+    /**
+     * 获取子view角度模式为DEGREE_DESIGNED 时的 指定角度
+     */
+    public float getDesignedDegree() {
+        return designedDegree;
+    }
+
+    /**
+     * 设置子view角度模式为DEGREE_DESIGNED 时的 角度
+     */
+    public void setDesignedDegree(float designedDegree) {
+        this.designedDegree = designedDegree;
     }
 
     @Override
@@ -262,7 +326,12 @@ public class ArcLayoutView extends ViewGroup implements ArcSlidingHelper.OnSlidi
         int startIndex = layoutCenterView(mPivotX, mPivotY);
 
         int count = getChildCount();
-        int angle = 360 / (count - startIndex);
+        //根据角度模式获取对应的角度
+        float angle = isAverageDegree() ? 360F / (count - startIndex) : designedDegree;
+        layoutItems(angle);
+    }
+
+    private void layoutItems(float angle) {
         for (int i = 0; i < getChildCount(); i++) {
             View child = getChildAt(i);
             if (child == centerView) {
@@ -284,8 +353,34 @@ public class ArcLayoutView extends ViewGroup implements ArcSlidingHelper.OnSlidi
             child.setPivotY(halfH);
             //配置旋转角度 如果中心视图在底部的话 我们索引则减掉1
             int index = isCenterViewInBottom() && !centerViewTypeIsColor() ? i - 1 : i;
-            child.setRotation(angle * index);
+            float childRotate = angle * index;
+            child.setRotation(childRotate);
+            updateChildVisible(child, index);
         }
+    }
+
+    /**
+     * 更新子View的可见状态
+     */
+    private void updateChildVisible(View view, int index) {
+        // TODO: 2020/4/27  隐藏不应该展示的视图
+//        if (isAverageDegree() || getChildCount() <= 1 || centerViewGravity == GRAVITY_CENTER) {
+//            return;
+//        }
+//        int childCount = getChildCount();
+//        //所有子View所在的角度
+//        float childDegreeCount = childCount * designedDegree;
+//        if (!centerViewTypeIsColor()) {
+//            childDegreeCount = (childCount - 1) * designedDegree;
+//        }
+//        //缩减到一圈内
+//        float degree = rotateCount % childDegreeCount;
+//        if (isCenterViewInBottom() && !centerViewTypeIsColor()) {
+//            index--;
+//        }
+//        degree = (index * designedDegree + degree) % childDegreeCount;
+//        boolean show = true;
+//        view.setVisibility(show ? VISIBLE : GONE);
     }
 
     /**
@@ -416,14 +511,17 @@ public class ArcLayoutView extends ViewGroup implements ArcSlidingHelper.OnSlidi
 
     @Override
     public void onSliding(float angele) {
+        rotateCount += angele;
         for (int i = 0; i < getChildCount(); i++) {
             View child = getChildAt(i);
             if (child == centerView && !centerViewTypeIsColor() && !centerViewCanRotate()) {
                 //配置了中心视图不旋转
                 continue;
             }
-            child.setRotation(child.getRotation() + angele);
+            float rotate = child.getRotation() + angele;
+            child.setRotation(rotate);
             makeItemChildNoRotate(child);
+            updateChildVisible(child, i);
         }
     }
 
@@ -596,6 +694,12 @@ public class ArcLayoutView extends ViewGroup implements ArcSlidingHelper.OnSlidi
     @Retention(RetentionPolicy.SOURCE)
     public @interface CenterViewType {
     }
+
+    @IntDef({DEGREE_AVERAGE, DEGREE_DESIGNED})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface DegreeMode {
+    }
+
 
     @IntDef({GRAVITY_CENTER, GRAVITY_LEFT_CENTER, GRAVITY_LEFT_TOP, GRAVITY_LEFT_BOTTOM,
             GRAVITY_RIGHT_CENTER, GRAVITY_RIGHT_TOP, GRAVITY_RIGHT_BOTTOM,
