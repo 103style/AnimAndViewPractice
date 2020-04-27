@@ -3,6 +3,8 @@ package com.lxk.animandview.utils;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.view.View;
+import android.view.ViewParent;
 
 /**
  * @author https://github.com/103style
@@ -24,5 +26,27 @@ public class DensityUtils {
     public static int dpToPx(Context context, int value) {
         float scale = context.getResources().getDisplayMetrics().density;
         return (int) (value * scale + 0.5f);
+    }
+
+
+    /**
+     * 获取当前视图的x 的绝对坐标
+     */
+    public static float getAbsoluteX(View targetView) {
+        float res = targetView.getX();
+        ViewParent parent = targetView.getParent();
+        if (parent instanceof View) {
+            res += getAbsoluteX((View) parent);
+        }
+        return res;
+    }
+
+    public static float getAbsoluteY(View targetView) {
+        float res = targetView.getY();
+        ViewParent parent = targetView.getParent();
+        if (parent instanceof View) {
+            res += getAbsoluteY((View) parent);
+        }
+        return res;
     }
 }

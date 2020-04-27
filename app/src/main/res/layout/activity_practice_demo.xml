@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <com.lxk.animandview.viewgroup.FlowAlignLayout
+        android:id="@+id/button_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:align_type="SAME_GAP">
@@ -28,6 +30,11 @@
             android:id="@+id/arc_layout"
             style="@style/item_style"
             android:text="圆弧布局" />
+
+        <Button
+            android:id="@+id/ku_an_theme_update_anim"
+            style="@style/item_style"
+            android:text="仿酷安主题更新动画" />
 
     </com.lxk.animandview.viewgroup.FlowAlignLayout>
 

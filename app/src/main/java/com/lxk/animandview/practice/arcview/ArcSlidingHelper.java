@@ -7,12 +7,12 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
-import android.view.ViewParent;
 import android.widget.Scroller;
 
 import androidx.annotation.FloatRange;
 import androidx.annotation.NonNull;
 
+import com.lxk.animandview.utils.DensityUtils;
 import com.lxk.animandview.utils.ScrollerUtils;
 
 /**
@@ -80,35 +80,11 @@ public class ArcSlidingHelper {
         int centerX = width / 2;
         int centerY = height / 2;
         //获取view在屏幕根布局的 左上点的绝对坐标
-        int left = (int) getAbsoluteX(targetView);
-        int top = (int) getAbsoluteY(targetView);
+        int left = (int) DensityUtils.getAbsoluteX(targetView);
+        int top = (int) DensityUtils.getAbsoluteY(targetView);
         int[] res = new int[2];
         res[0] = left + centerX;
         res[1] = top + centerY;
-        return res;
-    }
-
-    /**
-     * 获取当前视图的x 的绝对坐标
-     *
-     * @param targetView
-     * @return
-     */
-    private static float getAbsoluteX(View targetView) {
-        float res = targetView.getX();
-        ViewParent parent = targetView.getParent();
-        if (parent instanceof View) {
-            res += getAbsoluteX((View) parent);
-        }
-        return res;
-    }
-
-    private static float getAbsoluteY(View targetView) {
-        float res = targetView.getY();
-        ViewParent parent = targetView.getParent();
-        if (parent instanceof View) {
-            res += getAbsoluteY((View) parent);
-        }
         return res;
     }
 

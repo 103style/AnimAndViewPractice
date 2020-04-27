@@ -1,17 +1,22 @@
 package com.lxk.animandview.practice;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
+import androidx.appcompat.app.ActionBar;
+
 import com.lxk.animandview.BaseClickActivity;
 import com.lxk.animandview.R;
 import com.lxk.animandview.practice.arcview.ArcLayoutView;
 import com.lxk.animandview.practice.arcview.ArcSlidingTestView;
 import com.lxk.animandview.practice.burningrabbit.BurningRabbitActivity;
+import com.lxk.animandview.practice.kuAn.ThemeUpdateAnimationView;
 import com.lxk.animandview.practice.view.BiliBiliPathView;
 
 /**
@@ -20,20 +25,32 @@ import com.lxk.animandview.practice.view.BiliBiliPathView;
  */
 public class PracticeDemoActivity extends BaseClickActivity {
 
-    private final String TAG = PracticeDemoActivity.class.getSimpleName();
-
     private FrameLayout group;
+    private View rootView;
+    private ViewGroup buttonGroup;
+
+    /**
+     * 视图颜色切换相关的颜色
+     */
+    private int[] BgColor = {Color.WHITE, Color.DKGRAY};
+    private int[] actionBarColor = {Color.parseColor("#008577"), Color.DKGRAY};
+    private int[] buttonBgColor = {Color.parseColor("#D81B60"), Color.DKGRAY};
+    private int[] buttonTextColor = {Color.parseColor("#FFFFFF"), Color.GRAY};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_practice_demo);
+        rootView = findViewById(R.id.root_view);
+        rootView.setBackgroundColor(Color.WHITE);
+        buttonGroup = findViewById(R.id.button_group);
         group = findViewById(R.id.group);
         setClickListener(
                 R.id.bilibili_path,
                 R.id.bruning_rabbit,
                 R.id.arc_sliding,
                 R.id.arc_layout,
+                R.id.ku_an_theme_update_anim,
                 R.id.group
         );
     }
@@ -55,6 +72,10 @@ public class PracticeDemoActivity extends BaseClickActivity {
                 view = new ArcLayoutView(this);
                 addTestView((ViewGroup) view);
                 break;
+            case R.id.ku_an_theme_update_anim:
+                ThemeUpdateAnimationView.create(v).startAnim();
+                updateTheme();
+                return;
             case R.id.group:
                 clean();
                 break;
@@ -79,7 +100,6 @@ public class PracticeDemoActivity extends BaseClickActivity {
         }
     }
 
-
     private void showView(View view) {
         group.addView(view);
         group.setVisibility(View.VISIBLE);
@@ -96,6 +116,26 @@ public class PracticeDemoActivity extends BaseClickActivity {
             clean();
         } else {
             super.onBackPressed();
+        }
+    }
+
+    /**
+     * 更新视图颜色
+     */
+    private void updateTheme() {
+        ColorDrawable colorDrawable = (ColorDrawable) rootView.getBackground();
+        int index = colorDrawable.getColor() == Color.WHITE ? 1 : 0;
+        rootView.setBackgroundColor(BgColor[index]);
+        for (int i = 0; i < buttonGroup.getChildCount(); i++) {
+            View child = buttonGroup.getChildAt(i);
+            child.setBackgroundColor(buttonBgColor[index]);
+            if (child instanceof Button) {
+                ((Button) child).setTextColor(buttonTextColor[index]);
+            }
+        }
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setBackgroundDrawable(new ColorDrawable(actionBarColor[index]));
         }
     }
 }
