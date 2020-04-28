@@ -65,6 +65,10 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <activity
+            android:name=".practice.path.PathLayoutManagerActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name=".recyclerview.RecyclerViewActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
 

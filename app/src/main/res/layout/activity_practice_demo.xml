@@ -36,6 +36,11 @@
             style="@style/item_style"
             android:text="仿酷安主题更新动画" />
 
+        <Button
+            android:id="@+id/path_layout_manager"
+            style="@style/item_style"
+            android:text="PathLayoutManager" />
+
     </com.lxk.animandview.viewgroup.FlowAlignLayout>
 
 
