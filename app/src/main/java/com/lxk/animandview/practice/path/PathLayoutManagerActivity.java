@@ -44,15 +44,11 @@ public class PathLayoutManagerActivity extends BaseClickActivity {
 
     private PathLayoutManager getPathLayoutManager() {
         Path path = new Path();
-        int rvW = rv.getWidth();
-        int rvH = rv.getHeight();
-        path.moveTo(rv.getLeft(), rv.getTop());
-        path.lineTo(rv.getLeft() + rvW, rv.getTop());
-        path.lineTo(rv.getLeft(), rv.getTop() + rvH / 2);
-        path.lineTo(rv.getLeft() + rvW, rv.getTop() + rvH / 2);
-        path.lineTo(rv.getLeft(), rv.getTop() + rvH);
-        path.lineTo(rv.getLeft() + rvW, rv.getTop() + rvH);
-        return new PathLayoutManager(path, rvW / 6);
+        int offset = rv.getWidth() / 6;
+        path.moveTo(rv.getLeft() + offset, rv.getTop() + offset);
+        path.quadTo(rv.getRight() - offset, rv.getTop() - offset,
+                rv.getRight() - offset, rv.getBottom() - offset);
+        return new PathLayoutManager(path, offset);
     }
 
     @Override

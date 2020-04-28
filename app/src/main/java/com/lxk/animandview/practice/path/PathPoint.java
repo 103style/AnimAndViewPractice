@@ -46,7 +46,7 @@ public class PathPoint extends PointF {
     }
 
     public float getChildAngle() {
-        return angle - 90f;
+        return angle;
     }
 
     @Override
