@@ -12,9 +12,9 @@ import androidx.annotation.FloatRange;
  */
 public class PathKeyFrame {
     /**
-     * 进度值
+     * 精度值  越大点越少
      */
-    private static final int PRECISION = 1;
+    private static final float PRECISION = 0.5F;
     /**
      * 路径上点的 x y 坐标
      */
