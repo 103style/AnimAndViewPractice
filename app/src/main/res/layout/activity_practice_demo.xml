@@ -41,6 +41,11 @@
             style="@style/item_style"
             android:text="PathLayoutManager" />
 
+        <Button
+            android:id="@+id/qq_zone"
+            style="@style/item_style"
+            android:text="仿QQ空间动画" />
+
     </com.lxk.animandview.viewgroup.FlowAlignLayout>
 
 

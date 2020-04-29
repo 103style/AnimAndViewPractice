@@ -69,6 +69,10 @@
             android:screenOrientation="portrait" />
 
         <activity
+            android:name=".practice.qqzone.QQZoneActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name=".recyclerview.RecyclerViewActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
 

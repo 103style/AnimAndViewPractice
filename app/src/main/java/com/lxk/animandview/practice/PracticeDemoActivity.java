@@ -18,6 +18,7 @@ import com.lxk.animandview.practice.arcview.ArcSlidingTestView;
 import com.lxk.animandview.practice.burningrabbit.BurningRabbitActivity;
 import com.lxk.animandview.practice.kuAn.ThemeUpdateAnimationView;
 import com.lxk.animandview.practice.path.PathLayoutManagerActivity;
+import com.lxk.animandview.practice.qqzone.QQZoneActivity;
 import com.lxk.animandview.practice.view.BiliBiliPathView;
 
 /**
@@ -53,6 +54,7 @@ public class PracticeDemoActivity extends BaseClickActivity {
                 R.id.arc_layout,
                 R.id.ku_an_theme_update_anim,
                 R.id.path_layout_manager,
+                R.id.qq_zone,
                 R.id.group
         );
     }
@@ -80,6 +82,9 @@ public class PracticeDemoActivity extends BaseClickActivity {
                 return;
             case R.id.path_layout_manager:
                 startActivity(new Intent(this, PathLayoutManagerActivity.class));
+                return;
+            case R.id.qq_zone:
+                startActivity(new Intent(this, QQZoneActivity.class));
                 return;
             case R.id.group:
                 clean();
