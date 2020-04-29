@@ -4,13 +4,13 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.graphics.Region;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.widget.Scroller;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,7 +39,7 @@ public class ImitateBurningRabbitView extends MarginLayoutParamsViewGroup {
     /**
      * 之前触摸事件的Y坐标
      */
-    private int preY;
+    private int preX, preY;
     /**
      * 当前视图的状态
      */
@@ -93,16 +93,18 @@ public class ImitateBurningRabbitView extends MarginLayoutParamsViewGroup {
      */
     private boolean isNewScroll;
     private boolean isScrolling;
-
-    private boolean bottomClicked;
-
-    private OnClickListener onClickListener;
+    /**
+     * 最短滑动距离
+     */
+    private int touchSlop;
+    private boolean interceptEvent;
 
     public ImitateBurningRabbitView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initAttrs(context, attrs);
         mVelocityTracker = VelocityTracker.obtain();
         mScroller = new Scroller(context);
+        touchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
     }
 
     private void initAttrs(Context context, AttributeSet attrs) {
@@ -282,7 +284,34 @@ public class ImitateBurningRabbitView extends MarginLayoutParamsViewGroup {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        return true;
+        if (isScrolling) {
+            return true;
+        }
+        if (ev.getAction() == MotionEvent.ACTION_MOVE && interceptEvent) {
+            return true;
+        }
+        int x = (int) ev.getX();
+        int y = (int) ev.getY();
+        //拦截move事件
+        switch (ev.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                //记录按下的坐标
+                preX = x;
+                preY = y;
+                break;
+            case MotionEvent.ACTION_MOVE:
+                if (Math.abs(x - preX) > touchSlop
+                        || Math.abs(y - preY) > touchSlop) {
+                    interceptEvent = true;
+                }
+                break;
+            case MotionEvent.ACTION_CANCEL:
+            case MotionEvent.ACTION_OUTSIDE:
+            case MotionEvent.ACTION_UP:
+                interceptEvent = false;
+                break;
+        }
+        return interceptEvent;
     }
 
     @Override
@@ -295,7 +324,6 @@ public class ImitateBurningRabbitView extends MarginLayoutParamsViewGroup {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 preY = y;
-                updateBottomClicked(event);
                 break;
             case MotionEvent.ACTION_MOVE:
                 if (isNormalState()) {
@@ -308,7 +336,6 @@ public class ImitateBurningRabbitView extends MarginLayoutParamsViewGroup {
                 changeTopBarState();
                 break;
             case MotionEvent.ACTION_UP:
-                updateBottomClicked(event);
             case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_OUTSIDE:
                 boolean isHandle = false;
@@ -324,6 +351,7 @@ public class ImitateBurningRabbitView extends MarginLayoutParamsViewGroup {
 //                }
                 //标记状态
                 isBeingDragged = false;
+                interceptEvent = false;
                 break;
             default:
                 break;
@@ -567,39 +595,6 @@ public class ImitateBurningRabbitView extends MarginLayoutParamsViewGroup {
         view.setAlpha(1F);
     }
 
-    private void updateBottomClicked(MotionEvent event) {
-        View view = null;
-        Region region = null;
-        if (isNormalState()) {
-            view = bottomBarView;
-            region = new Region(view.getLeft(), view.getTop() - getTop(),
-                    view.getRight(), view.getBottom() - getTop());
-        } else if (isPullOutState()) {
-            view = pullOutBottomView;
-            region = new Region(view.getLeft(), view.getTop() - getTop() - getViewSpaceHeight(view),
-                    view.getRight(), view.getBottom() - getTop() - getViewSpaceHeight(view));
-        }
-        if (view == null) {
-            return;
-        }
-        boolean res = region.contains((int) event.getX(), (int) event.getY());
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            bottomClicked = res;
-        } else if (event.getAction() == MotionEvent.ACTION_UP && bottomClicked) {
-            if (onClickListener != null && res) {
-                if (isPullOutState()) {
-                    onClickListener.pullOutViewClicked();
-                } else {
-                    onClickListener.bottomBarViewClicked();
-                }
-            }
-        }
-    }
-
-    public void setOnClickListener(OnClickListener onClickListener) {
-        this.onClickListener = onClickListener;
-    }
-
     /**
      * 打断滚动动画
      */
@@ -651,19 +646,5 @@ public class ImitateBurningRabbitView extends MarginLayoutParamsViewGroup {
                 isScrolling = false;
             }
         }
-    }
-
-    public void goFrontBottom() {
-        hideTopViewAnim();
-        if (frontChildView != null) {
-            mFrontViewOffset = -mTopViewHeight;
-            frontChildView.offsetTopAndBottom(mFrontViewOffset);
-        }
-    }
-
-    public interface OnClickListener {
-        void pullOutViewClicked();
-
-        void bottomBarViewClicked();
     }
 }

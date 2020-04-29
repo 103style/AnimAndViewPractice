@@ -33,18 +33,12 @@ public class BurningRabbitActivity extends BaseClickActivity {
         rvBack.setAdapter(new RabbitAdapter(this, true));
         rvFront.setAdapter(new RabbitAdapter(this, false));
 
-        imitateBurningRabbit.setOnClickListener(
-                new ImitateBurningRabbitView.OnClickListener() {
-                    @Override
-                    public void pullOutViewClicked() {
-                        imitateBurningRabbit.doBackNormal();
-                    }
-
-                    @Override
-                    public void bottomBarViewClicked() {
-                        imitateBurningRabbit.goFrontBottom();
-                    }
-                });
+        imitateBurningRabbit.getPullOutBottomView().setOnClickListener(v -> {
+            imitateBurningRabbit.doBackNormal();
+        });
+        imitateBurningRabbit.getBottomBarView().setOnClickListener(v -> {
+            rvFront.scrollToPosition(rvFront.getLayoutManager().getItemCount() - 1);
+        });
     }
 
     @Override

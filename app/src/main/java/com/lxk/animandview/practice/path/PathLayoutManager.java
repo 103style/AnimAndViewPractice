@@ -13,6 +13,7 @@ import java.util.List;
 /**
  * @author https://github.com/103style
  * @date 2020/4/27 20:19
+ * 参考doc: https://blog.csdn.net/u011387817/article/details/81875021
  */
 public class PathLayoutManager extends RecyclerView.LayoutManager {
 
