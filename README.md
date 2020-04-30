@@ -1,4 +1,4 @@
-# AnimAndViewPratice
+# AnimAndViewPractice
 
 Android Anim and View practice Demo  以及  实战练习
 
