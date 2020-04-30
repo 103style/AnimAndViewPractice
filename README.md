@@ -11,6 +11,8 @@ Android Anim and View practice Demo  以及  实战练习
 
 * [DrawApi](https://github.com/103style/AnimAndCustomViewDemo/blob/master/drawapi.md)
 
+* [Practice](https://github.com/103style/AnimAndCustomViewDemo/blob/master/practice.md)
+
 ### Home
 ![home.jpg](https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/home.jpg)
 

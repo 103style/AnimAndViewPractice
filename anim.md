@@ -7,7 +7,7 @@
 
 [AnimationXmlActivity.java](https://github.com/103style/AnimAndCustomViewDemo/tree/master/app/src/main/java/com/lxk/animandcustomviewdemo/anim/AnimationXmlActivity.java)
 
-<img src="https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/anim_xml/alpha.gif"  height="246" width="158"> <img src="https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/anim_xml/anim_set_xml.gif"  height="246" width="158"> <img src="https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/anim_xml/roration.gif"  height="246" width="158"> <img src="https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/anim_xml/scale.gif"  height="246" width="158"> <img src="https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/anim_xml/translation.gif"  height="246" width="158"> 
+<img src="https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/anim_xml/alpha.gif"  height="246" width="158"> <img src="https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/anim_xml/anim_set_xml.gif"  height="246" width="158"> <img src="https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/anim_xml/rotation.gif"  height="246" width="158"> <img src="https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/anim_xml/scale.gif"  height="246" width="158"> <img src="https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/anim_xml/translation.gif"  height="246" width="158"> 
 
 ---
 

@@ -73,6 +73,7 @@
             android:screenOrientation="portrait" />
 
         <activity
+            android:screenOrientation="portrait"
             android:name=".recyclerview.RecyclerViewActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
 

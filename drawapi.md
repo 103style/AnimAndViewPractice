@@ -11,6 +11,7 @@
 * ColorFilter
 * Xfermode
 * QQ消息红点拖拽
+* ShaderLayer BlurMaskFilter
 * BitmapShader
 * LinearGradient
 * RodialGradient
@@ -130,6 +131,17 @@
 
 ---
 
+### ShaderLayer BlurMaskFilter
+[ShadeLayerDemoView.java](https://github.com/103style/AnimAndCustomViewDemo/blob/master/app/src/main/java/com/lxk/animandcustomviewdemo/drawapi/view/ShadeLayerDemoView.java)
+
+[BlurMaskFilterDemoView.java](https://github.com/103style/AnimAndCustomViewDemo/blob/master/app/src/main/java/com/lxk/animandcustomviewdemo/drawapi/view/BlurMaskFilterDemoView.java)
+
+![shadelayer.jpg](https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/drawapi/shadelayer.jpg)
+
+![blurmaskfilter.jpg](https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/drawapi/blurmaskfilter.jpg)
+
+
+---
 
 ### BitmapShader
 [BitmapShaderModeDemoView.java](https://github.com/103style/AnimAndCustomViewDemo/blob/master/app/src/main/java/com/lxk/animandcustomviewdemo/drawapi/view/BitmapShaderModeDemoView.java)
