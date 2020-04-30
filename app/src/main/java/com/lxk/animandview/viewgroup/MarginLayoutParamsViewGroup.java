@@ -12,11 +12,11 @@ import android.view.ViewGroup;
 public abstract class MarginLayoutParamsViewGroup extends ViewGroup {
 
     public MarginLayoutParamsViewGroup(Context context) {
-        super(context);
+        this(context, null);
     }
 
     public MarginLayoutParamsViewGroup(Context context, AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs, 0);
     }
 
     public MarginLayoutParamsViewGroup(Context context, AttributeSet attrs, int defStyleAttr) {

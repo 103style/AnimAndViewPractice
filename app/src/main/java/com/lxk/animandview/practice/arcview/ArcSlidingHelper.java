@@ -13,7 +13,6 @@ import androidx.annotation.FloatRange;
 import androidx.annotation.NonNull;
 
 import com.lxk.animandview.utils.DensityUtils;
-import com.lxk.animandview.utils.ScrollerUtils;
 
 /**
  * @author https://github.com/103style
@@ -201,8 +200,9 @@ public class ArcSlidingHelper {
             case MotionEvent.ACTION_OUTSIDE:
                 if (isInertialSlidingEnable) {
                     mVelocityTracker.computeCurrentVelocity(1000);
-                    mScroller.fling(0, 0, ScrollerUtils.getSplineFlingDistance(mContext, mVelocityTracker.getXVelocity()),
-                            ScrollerUtils.getSplineFlingDistance(mContext, mVelocityTracker.getYVelocity()),
+                    mScroller.fling(0, 0,
+                            (int) mVelocityTracker.getXVelocity(),
+                            (int) mVelocityTracker.getYVelocity(),
                             Integer.MIN_VALUE, Integer.MAX_VALUE, Integer.MIN_VALUE, Integer.MAX_VALUE);
                     startFling();
                 }

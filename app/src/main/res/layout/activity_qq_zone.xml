@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.lxk.animandview.practice.qqzone.RandomDragLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.lxk.animandview.practice.qqzone.RandomDragLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="32dp">
 
-</com.lxk.animandview.practice.qqzone.RandomDragLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:background="@color/colorAccent"
+            android:gravity="center"
+            android:text="QQZone Card Test"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </com.lxk.animandview.practice.qqzone.RandomDragLayout>
+</FrameLayout>
