@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.PointF;
+import android.graphics.Region;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -30,11 +31,11 @@ public class RandomDragLayout extends MarginLayoutParamsViewGroup {
     /**
      * 松开手之后的动画时长
      */
-    private final long ANIMATOR_DURATION = 1000;
+    private final long ANIMATOR_DURATION = 1500;
     /**
      * 触发惯性滑动的最低速度
      */
-    private final int ScrollerVelocityMIN = 1000;
+    private final int ScrollerVelocityMIN = 3000;
     /**
      * 自定义Evaluator，使ValueAnimator支持PointF
      */
@@ -96,6 +97,15 @@ public class RandomDragLayout extends MarginLayoutParamsViewGroup {
      */
     private boolean isFling;
 
+    /**
+     * 可触发拖动的区域
+     */
+    private Region childRegion;
+    /**
+     * down事件是否在 childRegion 内
+     */
+    private boolean touchInTheRegion;
+
     public RandomDragLayout(Context context) {
         this(context, null);
     }
@@ -110,6 +120,7 @@ public class RandomDragLayout extends MarginLayoutParamsViewGroup {
         touchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
         mScroller = new Scroller(context);
         mRootView = ActivityUtils.getRootView(context);
+        childRegion = new Region();
     }
 
     /**
@@ -130,7 +141,7 @@ public class RandomDragLayout extends MarginLayoutParamsViewGroup {
             throw new IllegalArgumentException("RandomDragLayout must have one child!");
         }
         measureChild(mChild, widthMeasureSpec, heightMeasureSpec);
-
+        childRegion.set(mChild.getLeft(), mChild.getTop(), mChild.getRight(), mChild.getBottom());
         int widthSize = MeasureSpec.getSize(widthMeasureSpec);
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         int heightSize = MeasureSpec.getSize(heightMeasureSpec);
@@ -195,6 +206,7 @@ public class RandomDragLayout extends MarginLayoutParamsViewGroup {
         float x = ev.getX(), y = ev.getY();
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
+                touchInTheRegion = childRegion.contains((int) x, (int) y);
                 mPreX = x;
                 mPreY = y;
                 break;
@@ -206,7 +218,7 @@ public class RandomDragLayout extends MarginLayoutParamsViewGroup {
                     mPreX = x;
                     mPreY = y;
                     //标记已经开始拖拽
-                    isDragged = true;
+                    isDragged = touchInTheRegion;
                 }
                 break;
             case MotionEvent.ACTION_UP:
@@ -214,6 +226,7 @@ public class RandomDragLayout extends MarginLayoutParamsViewGroup {
             case MotionEvent.ACTION_OUTSIDE:
                 //手指松开后，要重置拖拽状态
                 isDragged = false;
+                touchInTheRegion = false;
                 break;
             default:
                 break;
@@ -231,6 +244,9 @@ public class RandomDragLayout extends MarginLayoutParamsViewGroup {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        if (!touchInTheRegion) {
+            return false;
+        }
         if (isAnimRunning()) {
             return true;
         }
@@ -303,6 +319,7 @@ public class RandomDragLayout extends MarginLayoutParamsViewGroup {
     public void reset() {
         abortAnimation();
         isFling = false;
+        touchInTheRegion = false;
         isDragged = false;
         mChild.setVisibility(VISIBLE);
         if (mRootView != null) {

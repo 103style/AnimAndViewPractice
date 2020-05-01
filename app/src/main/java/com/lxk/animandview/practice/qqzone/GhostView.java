@@ -113,8 +113,8 @@ public class GhostView extends View {
         //计算出Bitmap的Left值和Top值
         float l = mCurrentRawX - mDownX, t = mCurrentRawY - mDownY;
         //根据Bitmap的Left和Top分别得出Bitmap的中心点位置
-        mBitmapCenterX = l + bitmap.getWidth() / 2F;
-        mBitmapCenterY = t + bitmap.getHeight() / 2F;
+        mBitmapCenterX = l + childW / 2F;
+        mBitmapCenterY = t + childH / 2F;
         //根据手指当前位置与Bitmap中心点位置计算出旋转角度
         mStartAngle = getRotationAngle(mBitmapCenterX, mBitmapCenterY, mCurrentRawX, mCurrentRawY);
         //Bitmap宽度的一半
@@ -146,9 +146,9 @@ public class GhostView extends View {
             canvas.setMatrix(mMatrix);
             //画出内容
             canvas.drawBitmap(mBitmap, l, t, null);
-
             //绘制当前的状态
             canvas.setMatrix(null);
+            canvas.drawCircle(mBitmapCenterX, mBitmapCenterY, DensityUtils.dpToPx(getContext(), 4), mPaint);
             canvas.drawLine(mBitmapCenterX, 0, mBitmapCenterX, getMeasuredHeight(), mPaint);
             canvas.drawLine(0, mBitmapCenterY, getMeasuredWidth(), mBitmapCenterY, mPaint);
             canvas.drawLine(mBitmapCenterX, mBitmapCenterY, mCurrentRawX, mCurrentRawY, mPaint);
@@ -287,7 +287,7 @@ public class GhostView extends View {
         float max = Math.max(Math.max(leftPercent, rightPercent), Math.max(topPercent, bottomPercent));
 
         //反正一移动出屏幕就会移除View并中断动画，并且我们需要在任何地方的移动速度都不变，所以我们的距离可以指定为屏幕高度 + View高度
-        int maxBitmapLength = (int) Math.max(mBitmapRect.width(), mBitmapRect.height());
+        int maxBitmapLength = Math.max(childW, childH);
 
         float distance = Math.max(getWidth(), getHeight()) + maxBitmapLength;
 
