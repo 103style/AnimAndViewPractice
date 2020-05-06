@@ -35,7 +35,7 @@ public class RandomDragLayout extends MarginLayoutParamsViewGroup {
     /**
      * 触发惯性滑动的最低速度
      */
-    private final int ScrollerVelocityMIN = 3000;
+    private final int ScrollerVelocityMIN = 1500;
     /**
      * 自定义Evaluator，使ValueAnimator支持PointF
      */
@@ -206,7 +206,7 @@ public class RandomDragLayout extends MarginLayoutParamsViewGroup {
         float x = ev.getX(), y = ev.getY();
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                touchInTheRegion = childRegion.contains((int) x, (int) y);
+//                touchInTheRegion = childRegion.contains((int) x, (int) y);
                 mPreX = x;
                 mPreY = y;
                 break;
@@ -218,7 +218,8 @@ public class RandomDragLayout extends MarginLayoutParamsViewGroup {
                     mPreX = x;
                     mPreY = y;
                     //标记已经开始拖拽
-                    isDragged = touchInTheRegion;
+//                    isDragged = touchInTheRegion;
+                    isDragged = true;
                 }
                 break;
             case MotionEvent.ACTION_UP:
@@ -226,7 +227,7 @@ public class RandomDragLayout extends MarginLayoutParamsViewGroup {
             case MotionEvent.ACTION_OUTSIDE:
                 //手指松开后，要重置拖拽状态
                 isDragged = false;
-                touchInTheRegion = false;
+//                touchInTheRegion = false;
                 break;
             default:
                 break;
@@ -244,9 +245,9 @@ public class RandomDragLayout extends MarginLayoutParamsViewGroup {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (!touchInTheRegion) {
-            return false;
-        }
+//        if (!touchInTheRegion) {
+//            return false;
+//        }
         if (isAnimRunning()) {
             return true;
         }

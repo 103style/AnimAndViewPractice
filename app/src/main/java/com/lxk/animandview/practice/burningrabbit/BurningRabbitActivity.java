@@ -37,7 +37,7 @@ public class BurningRabbitActivity extends BaseClickActivity {
             imitateBurningRabbit.doBackNormal();
         });
         imitateBurningRabbit.getBottomBarView().setOnClickListener(v -> {
-            rvFront.scrollToPosition(rvFront.getLayoutManager().getItemCount() - 1);
+//            rvFront.scrollToPosition(rvFront.getLayoutManager().getItemCount() - 1);
         });
     }
 
