@@ -62,9 +62,9 @@
 
 
 ### Bezier
-[DrawBezierPenView.java](https://github.com/103style/AnimAndCustomViewDemo/blob/master/app/src/main/java/com/lxk/animandview/drawapi/view/CanvasChangeDemo.java)
+[DrawBezierPenView.java](https://github.com/103style/AnimAndCustomViewDemo/blob/master/app/src/main/java/com/lxk/animandview/drawapi/view/DrawBezierPenView.java)
 
-[DrawBezierWaterView.java](https://github.com/103style/AnimAndCustomViewDemo/blob/master/app/src/main/java/com/lxk/animandview/drawapi/view/CanvasChangeDemo.java)
+[DrawBezierWaterView.java](https://github.com/103style/AnimAndViewPractice/blob/master/app/src/main/java/com/lxk/animandview/drawapi/view/DrawBezierWaterView.java)
 
 ![bezeirPen.gif](https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/drawapi/bezeirPen.gif)
 
