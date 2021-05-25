@@ -173,9 +173,9 @@
 
 
 ### RodialGradient
-[RadialGradientModeView.java](https://github.com/103style/AnimAndCustomViewDemo/blob/master/app/src/main/java/com/lxk/animandview/drawapi/view/BitmapShaderModeDemoView.java)
+[RadialGradientModeView.java](https://github.com/103style/AnimAndCustomViewDemo/blob/master/app/src/main/java/com/lxk/animandview/drawapi/view/RadialGradientModeView.java)
 
-[RadialGradientDemoView.java](https://github.com/103style/AnimAndCustomViewDemo/blob/master/app/src/main/java/com/lxk/animandview/drawapi/view/BitmapShaderDemoView.java)
+[RadialGradientDemoView.java](https://github.com/103style/AnimAndCustomViewDemo/blob/master/app/src/main/java/com/lxk/animandview/drawapi/view/RadialGradientDemoView.java)
 
 ![radialgradientmode.jpg](https://github.com/103style/AnimAndCustomViewDemo/blob/master/gif/drawapi/radialgradientmode.jpg)
 
